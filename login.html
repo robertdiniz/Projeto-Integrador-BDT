@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco de Talentos - Nadic</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/footer.css">
+    <link rel="stylesheet" href="styles/main-home.css">
+    <link rel="stylesheet" href="styles/login.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;700&family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    
+    <header>
+        <div class="header-container">
+            <nav>
+                <a href="index.html"><img src="./img/nadic.BDT.svg" alt="Logo" class="logo"></a>
+                <img src="./img/menu-burguer.svg" alt="Menu" class="menu-burger" onclick="toggleMenu()">
+                <div class="pages">
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                    </ul>
+                </div>
+                <div class="sessao">
+                    <img src="./img/Vector.svg" alt="ícone de perfil">
+                    <ul>
+                        <li><a href="login.html">Entrar</a></li>
+                        <li><a href="register.html" class="register">Registrar-se</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-login">
+        <div class="main-container-login">
+            <h1>Entrar</h1>
+            <div class="login-container">
+                <img src="./img/aluno.svg" alt="Imagem ilustrativa de aluno">
+                <div class="login">
+                    <form action="#" class="login-form">
+                        <div class="input-container">
+                            <label for="email">Digite seu e-mail</label>
+                            <img src="./img/email-icon.svg" alt="">
+                            <input type="email" name="email" id="email" placeholder="Seu endereço de e-mail..." autocomplete="off">
+                        </div>
+                        <div class="input-container">
+                            <label for="senha">Digite sua senha</label>
+                            <img src="./img/password-icon.svg" alt="">
+                            <input type="password" name="email" id="email" placeholder="Sua senha..." autocomplete="off">
+                        </div>
+                        <button class="btn-login">Entrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="./scripts/button.js"></script>
+
+</body>
+</html>

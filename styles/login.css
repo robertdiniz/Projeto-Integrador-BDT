@@ -1,0 +1,115 @@
+.main-login {
+    padding: 4rem 0;
+    margin: 0 auto;
+}
+
+.main-container-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3em;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem;
+    padding-bottom: 0;
+    border-radius: 1rem;
+    width: 90vw;
+    height: 700px;
+    position: relative;
+}
+
+.main-container-login {
+    background-color: #202024;
+}
+
+.main-container-login h1 {
+    font-size: 2em;
+    text-transform: uppercase;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2em;
+}
+
+.login-container label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.login {
+    font-size: 1rem;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    position: relative;
+}
+
+.input-container input {
+    background-color: #121214;
+    color: white;
+    padding: 1rem 4rem;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+}
+
+.input-container input:focus{
+    /* border: 1px solid #9779FB; */
+    outline: 1px solid #9779FB;
+}
+
+.input-container img {
+    position: absolute;
+    left: 1em;
+    bottom: 1em;
+    width: 24px;
+}
+
+.input-container:nth-child(2) img {
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+    width: 20px;
+}
+
+.btn-login {
+    margin-top: 1rem;
+    background-color: #9779FB;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.btn-login:hover {
+    box-shadow: 4px 4px 4px #121214;
+    transition: 0.6s;
+    transform: translate(0px, -2px);
+}
+
+@media (max-width: 425px) {
+    .main-container-login {
+        max-width: 425px;
+    }
+
+    .input-container input {
+        padding: 1rem 1rem 1rem 3rem;
+    }
+}
+

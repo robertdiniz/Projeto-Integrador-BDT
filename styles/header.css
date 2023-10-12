@@ -1,0 +1,137 @@
+/* Header CSS - Desktop */
+header {
+    background-color: #202024;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+     rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    height: 60px;
+}
+
+.header-container{
+    margin: 0 auto;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    padding: 1rem 5rem;
+}
+
+nav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+
+.pages ul li {
+    list-style: none;
+}
+
+.pages ul li a {
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.pages ul li a:hover {
+    color: #9779FB;
+    transition: .6s;
+}
+
+.sessao {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.sessao ul {
+    display: flex;
+    gap: 1rem;
+}
+
+.sessao ul li {
+    list-style: none;
+}
+
+.sessao ul li a {
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.sessao ul li a:hover {
+    color: #9779FB;
+    transition: 0.5s;
+}
+
+.register {
+    color: #9779FB;
+}
+
+.menu-burger {
+    display: none;
+}
+
+/* Medias Queries */
+
+@media (max-width: 660px) {
+
+    header {
+        padding: 1rem 2rem;
+    }
+
+    .header-container {
+        padding: 0rem 1rem;
+    }
+
+    .register {
+        color: #fff;
+    }
+
+    .menu-burger {
+        display: block;
+        cursor: pointer;
+    }
+
+    .pages {
+        display: none;
+    }
+
+    .sessao {
+        display: none;
+        width: 100%;
+        padding: 0 1rem;
+        background-color: #202024;
+        position: absolute;
+        top: 60px;
+        right: 0px;
+        transition: .6s;
+        height: calc(100vh - 60px);
+        z-index: 1000;
+    }
+
+    .sessao ul {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .sessao ul li {
+        border-bottom: 1px solid #4D4D56;
+    }
+
+    .sessao ul li:hover {
+        background-color: #4D4D56;
+    }
+
+    .sessao ul li a {
+        display: block;
+        padding: 1rem;
+    }
+
+    .sessao-active {
+        display: block;
+    }
+
+    .sessao img{
+        display: none;
+    }
+
+}

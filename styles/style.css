@@ -1,0 +1,17 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    color: white;
+    box-sizing: border-box;
+}
+
+/* FONTS 
+font-family: 'Jost', sans-serif;
+font-family: 'Open Sans', sans-serif;
+*/
+body {
+    background-color: #121314;
+    font-family: 'Open Sans', sans-serif;
+}
+

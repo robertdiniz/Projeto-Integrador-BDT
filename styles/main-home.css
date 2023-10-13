@@ -1,6 +1,10 @@
 .main-home {
     padding: 4rem 0;
     margin: 0 auto;
+    /* disable text selection */
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
 }
 
 .main-container {
@@ -53,8 +57,14 @@
     padding: 1rem 2rem;
     border-radius: 8px;
     font-weight: bold;
+    transition: 0.6s;
 }
 
+.main-invite .btn-main-home:hover {
+    box-shadow: 4px 4px 4px #121214;
+    transition: 0.6s;
+    transform: translate(0px, -2px);
+}
 
 .main-container img {
     display: block;

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco de Talentos - Nadic</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/trilhas.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;700&family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    
+    <header>
+        <div class="header-container">
+            <nav>
+                <a href="index.html"><img src="./img/nadic.BDT.svg" alt="Logo" class="logo"></a>
+                <img src="./img/menu-burguer.svg" alt="Menu" class="menu-burger" onclick="toggleMenu()">
+                <div class="pages">
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                    </ul>
+                </div>
+                <div class="sessao">
+                    <img src="./img/perfil-icon.svg" alt="ícone de perfil">
+                    <ul>
+                        <li><a href="login.html">Entrar</a></li>
+                        <li><a href="register.html" class="register">Registrar-se</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-trilhas">
+        <div class="main-trilhas-container">
+            <h1>Seja bem vindo, Aluno(a)!</h1>
+            <p>Escolha uma trilha de estudos que você deseja fazer...</p>
+            <div class="trilhas-container">
+                <button class="btn-trilhas" onclick="escolherTrilha()">
+                    <div class="trilha-card">
+                        <img src="./img/backend-icon.svg" alt="">
+                        <p>TRILHA BACK-END</p>
+                    </div>
+                </button>
+                <button class="btn-trilhas" onclick="escolherTrilha()">
+                    <div class="trilha-card">
+                        <img src="./img/React-SVG.svg" alt="">
+                        <p>TRILHA FRONT-END</p>
+                    </div>
+                </button>
+                <button class="btn-trilhas" onclick="escolherTrilha()">
+                    <div class="trilha-card">
+                        <img src="./img/mobile-icon.svg" alt="">
+                        <p>TRILHA MOBILE</p>
+                    </div>
+                </button>
+                <button class="btn-trilhas" onclick="escolherTrilha()">
+                    <div class="trilha-card">
+                        <img src="./img/design-system-icon.svg" alt="">
+                        <p>TRILHA DESIGN SYSTEM</p>
+                    </div>
+                </button>
+            </div>
+        </div>
+        <div class="fade"></div>
+        <div class="modal">
+            <div id="modal-container">
+                <img src="./img/warning-icon.svg" alt="Imagem de aviso">
+                <span class="text-modal">
+                    <h1>Atenção!</h1>
+                    <p>Só é possível realizar uma trilha por vez, então se optar por outra seu progresso pode ser perdido.</p>
+                </span>
+                <span class="modal-btn">
+                    <button onclick="escolherTrilha()">Fazer trilha</button>
+                    <button onclick="escolherTrilha()">Cancelar</button>
+                </span>
+            </div>
+        </div>
+    </main>
+
+    <script src="./scripts/button.js"></script>
+    <script src="./scripts/modal-trilha.js"></script>
+
+</body>
+</html>

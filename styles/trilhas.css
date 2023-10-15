@@ -192,6 +192,10 @@
         width: 60%;
     }
 
+    .btn-trilhas {
+        opacity: 1;
+    }
+
 }
 
 @media (max-width: 675px) {

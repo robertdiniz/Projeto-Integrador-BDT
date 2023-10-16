@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Theme Color Meta -->
+    <meta name="theme-color" content="#9779FB" />
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#9779FB" />
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Banco de Talentos - Nadic</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/perfil.css">
+    <link rel="stylesheet" href="styles/edit-perfil.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;700&family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    
+    <header>
+        <div class="header-container">
+            <nav>
+                <a href="index.html"><img src="./img/nadic.BDT.svg" alt="Logo" class="logo"></a>
+                <img src="./img/menu-burguer.svg" alt="Menu" class="menu-burger" onclick="toggleMenu()">
+                <div class="pages">
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                    </ul>
+                </div>
+                <div class="sessao">
+                    <img src="./img/perfil-icon.svg" alt="ícone de perfil">
+                    <ul>
+                        <li><a href="login.html">Entrar</a></li>
+                        <li><a href="register.html" class="register">Registrar-se</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-perfil">
+        <div class="main-container-perfil">
+            <div class="perfil-header">
+                <span class="foto-dados">
+                    <span class="image-edit">
+                        <button onclick="fadeTrocarImagem()">
+                            <div class="fade-trocar-imagem">Trocar imagem</div>
+                            <img src="./img/aluno-normal.svg" alt="" >
+                        </button>
+                    </span>
+                    <span class="aluno-dados">
+                        <h1>NOME DO ALUNO COMPLETO</h1>
+                        <p>Back-end</p>
+                        <p>Nível 1 - Back-End</p>
+                        <div class="progresso">
+                            <div class="level"></div>
+                        </div>
+                    </span>
+                </span>
+                <span class="aluno-redes">
+                    <a href="edit.html" class="btn-edit-perfil">Editar perfil</a>
+                    <span class="btn-edit-confirm-container">
+                        <img src="./img/pencil-icon.svg" alt="" class="pencil-icon">
+                        <a href="perfil.html" class="btn-edit-confirm">Salvar alterações</a>
+                    </span>
+                    
+                    <ul onclick="mostrarModal()">
+                        <li><a href="#"><img src="./img/linkedin-normal.svg" alt=""></a></li>
+                        <li><a href="#"><img src="./img/github-normal.svg" alt=""></a></li>
+                        <li><a href="#"><img src="./img/discord-normal.svg" alt=""></a></li>
+                        <li><a href="#"><img src="./img/instagram-normal.svg" alt=""></a></li>
+                        <li><a href="#"><img src="./img/wpp-normal.svg" alt=""></a></li>
+                    </ul>
+                </span>
+            </div>
+            <div class="perfil-bio">
+                <h2>Sobre mim</h2>
+                <form action="#" class="form-bio">
+                    <textarea name="bio" id="bio" cols="30" rows="8" value="" maxlength="250">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore suscipit amet quaerat maiores consectetur facere, cumque est dolore impedit dignissimos libero autem saepe hic corporis ipsam earum aliquam vero. Sed?</textarea>
+                </form>
+            </div>
+            <div class="perfil-selos">
+                <h2>Selos</h2>
+                <div class="perfil-selos-container">
+                    <img src="./img/git-locked.svg" alt="">
+                    <img src="./img/github-locked.svg" alt="">
+                    <img src="./img/mysql-locked.svg" alt="">
+                    <img src="./img/postgre-locked.svg" alt="">
+                    <img src="./img/python-locked.svg" alt="">
+                    <img src="./img/git-locked.svg" alt="">
+                    <img src="./img/github-locked.svg" alt="">
+                    <img src="./img/mysql-locked.svg" alt="">
+                    <img src="./img/postgre-locked.svg" alt="">
+                    <img src="./img/python-locked.svg" alt="">
+                    <img src="./img/git-locked.svg" alt="">
+                    <img src="./img/github-locked.svg" alt="">
+                    <img src="./img/mysql-locked.svg" alt="">
+                    <img src="./img/postgre-locked.svg" alt="">
+                    <img src="./img/python-locked.svg" alt="">
+                </div>
+            </div>
+            <div class="perfil-trilhas">
+                <h2>Trilhas realizadas</h2>
+                <div class="trilhas-container">
+                    <div class="trilha-card">
+                        <span>
+                        <img src="./img/backend-icon.svg" alt="">
+                        <p>Trilha back-end</p>    
+                        </span>
+                        <p class="trilha-status">Em progresso...</p>
+                    </div>
+                    <div class="trilha-card">
+                        <span>
+                        <img src="./img/front-locked.svg" alt="">
+                        <p>Trilha front-end</p>    
+                        </span>
+                        <p class="trilha-status">Em progresso...</p>
+                    </div>
+                    <div class="trilha-card">
+                        <span>
+                        <img src="./img/mobile-locked.svg" alt="">
+                        <p>Trilha front-end</p>    
+                        </span>
+                        <p class="trilha-status">Em progresso...</p>
+                    </div>
+                    <div class="trilha-card">
+                        <span>
+                        <img src="./img/design-locked.svg" alt="">
+                        <p>Trilha front-end</p>    
+                        </span>
+                        <p class="trilha-status">Em progresso...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modals -->
+        <div class="fade"></div>
+        <div class="modal">
+            <div id="modal-container-form">
+                <h2>Redes Sociais</h2>
+                <form action="" class="form-redes">
+                    <div class="input-social">
+                        <img src="./img/linkedin-normal.svg" alt="ícone linkedin">
+                        <input type="url" name="linkedin" id="linkedin" placeholder="Insira a URL do seu Linkedin...">
+                    </div>
+                    <div class="input-social">
+                        <img src="./img/github-normal.svg" alt="ícone github">
+                        <input type="url" name="github" id="github" placeholder="Insira a URL do seu Github...">
+                    </div>
+                    <div class="input-social">
+                        <img src="./img/discord-normal.svg" alt="ícone discord">
+                        <input type="url" name="discord" id="discord" placeholder="Insira seu Discord...">
+                    </div>
+                    <div class="input-social">
+                        <img src="./img/instagram-normal.svg" alt="ícone instagram">
+                        <input type="url" name="instagram" id="instagram" placeholder="Insira a URL do seu Instagram...">
+                    </div>
+                    <div class="input-social">
+                        <img src="./img/wpp-normal.svg" alt="ícone whatsapp">
+                        <input type="url" name="whatsapp" id="whatsapp" placeholder="Insira a URL do seu Whatsapp...">
+                    </div>
+                    <div class="btn-social">
+                        <a class="btn-social-confirm" onclick="mostrarModal()">Salvar</a>
+                        <a class="btn-social-cancel" onclick="mostrarModal()">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="./scripts/button.js"></script>
+    <script src="./scripts/fadeTrocarImagem.js"></script>
+    <script src="./scripts/modalSociais.js"></script>
+
+</body>
+</html>
+

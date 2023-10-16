@@ -1,0 +1,235 @@
+.image-edit {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fade-trocar-imagem {
+    width: 123px;
+    height: 123px;
+    background-color: rgba(128, 128, 128, 0.712);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: visible;
+    font-weight: bold;
+    
+}
+
+.image-edit button {
+    border: none;
+    display: flex;
+    background: none;
+    cursor: pointer;
+    border-radius: 5rem;
+}
+
+.fade-trocar-imagem-active {
+    visibility: visible;
+    transition: 0.6s;
+}
+
+
+
+.aluno-redes {
+    gap: 0.5rem;
+}
+
+.btn-edit-confirm-container {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    width: 100%;
+    justify-content: flex-end;
+    font-style: italic;
+}
+
+.btn-edit-confirm-container a:hover {
+    outline: 1px solid #9779FB;
+    transition: 0.6s;
+    transform: scale(1.1);
+}
+
+.btn-edit-confirm-container img{
+    background-color: rgba(0,0,0,0);
+    padding: 0;
+    border-radius: 0;
+    display: none;
+}
+
+.btn-edit-confirm-container a {
+    font-size: 0.9rem;
+}
+
+.aluno-redes {
+    gap: 1rem;
+}
+
+.btn-edit-perfil {
+    display: none;
+}
+
+.btn-edit-confirm {
+    background-color: #121314;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    align-self: flex-end;
+}
+
+.aluno-redes ul {
+    background-color: #121314;
+    padding: 0.8rem;
+    border-radius: 1rem;
+}
+
+.perfil-bio {
+    width: 100%;
+}
+
+.form-bio {
+    width: 90%;
+    height: 90%;
+}
+
+.aluno-redes ul li a img {
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 0;
+}
+
+.form-bio textarea {
+    background-color: #121314;
+    border: none;
+    width: 100%;
+    height: 90%;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    resize: none;
+}
+
+.form-bio textarea:focus {
+    outline: 1px solid #9779FB;
+}
+
+.fade {
+    background-color: rgba(0,0,0,0.6);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    visibility: hidden;
+}
+
+.modal {
+    max-width: 90%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #202024;
+    height: auto;
+    border-radius: 0.5rem;
+    z-index: 6;
+    padding: 2rem;
+    visibility: hidden;
+    width: 90%;
+}
+
+.modal-active {
+    visibility: visible;
+}
+
+#modal-container-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+#modal-container-form h2 {
+    font-size: 1.5rem;
+}
+
+.form-redes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.input-social {
+    position: relative;
+    width: 100%;
+}
+
+.input-social input{
+    padding: 0.7rem 0.7rem 0.7rem 2.2rem;
+    border: none;
+    background-color: #121314;
+    border-radius: 0.5rem;
+    color: white;
+    width: 100%;
+    font-size: 0.8rem;
+}
+
+.input-social input:focus{
+    outline: 1px solid #9779FB;
+}
+
+.input-social input::placeholder{
+    font-size: 0.8rem;
+    color: #4D4D56;
+    font-weight: bold;
+}
+
+.input-social img {
+    position: absolute;
+    top: 50%;
+    left: 1.1rem;
+    transform: translate(-50%, -50%);
+}
+
+.btn-social {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-items: flex-end;
+    gap: 3rem;
+}
+
+.btn-social-confirm {
+    margin-top: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 0.8rem;
+    cursor: pointer;
+}
+
+.btn-social-cancel {
+    font-weight: bold;
+    text-decoration: none;
+    background-color: #9779FB;
+    padding: 0.8rem;
+    border-radius: 0.8rem;
+    cursor: pointer;
+}
+
+@media (min-width: 760px) {
+    
+}

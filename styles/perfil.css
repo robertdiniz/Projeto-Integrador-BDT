@@ -125,7 +125,6 @@
     font-weight: bold;
     font-style: italic;
     text-decoration: none;
-    width: 100%;
 }
 
 .btn-edit-perfil:hover {
@@ -277,6 +276,7 @@
         grid-column: 1 / 3;
         height: 15em;
         justify-content: flex-start;
+        width: 100%;
     }
 
     .perfil-bio h2 {

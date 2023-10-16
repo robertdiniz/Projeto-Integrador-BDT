@@ -1,0 +1,49 @@
+.main-settings {
+    padding: 4rem 0;
+    margin: 0 auto;
+    /* disable text selection */
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+
+.main-container-settings {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 4rem;
+    padding-bottom: 0;
+    border-radius: 1rem;
+    width: 90vw;
+    height: 700px;
+    position: relative;
+    background-color: #202024;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-container-settings img {
+    padding: 0.7rem;
+    background-color: #121314;
+    border-radius: 5rem;
+}
+
+.settings-email {
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-senha {
+    display: flex;
+    flex-direction: column;
+}
+
+.private-perfil {
+    display: flex;
+    flex-direction: column;
+}
+
+.trilha-select {
+    display: flex;
+    flex-direction: column;
+}

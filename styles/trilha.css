@@ -1,0 +1,67 @@
+.main-trilha {
+    padding: 4rem 0;
+    margin: 0 auto;
+    /* disable text selection */
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+
+.main-trilha-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 4rem;
+    padding-bottom: 0;
+    border-radius: 1rem;
+    width: 90vw;
+    height: 1000px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* checklist trilha */
+.checklist-trilha {
+    width: 90vw;
+
+}
+
+.trilha-header {
+    background-color: #202024;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.selos {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* checklista-trilha tasks */
+.trilha-tasks {
+    background-color: #1D1D20;
+    padding: 1rem;
+}
+
+.task {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.task span {
+    font-weight: bold;
+}
+
+/* trilha submit */
+.trilha-submit {
+    background-color: #141516;
+}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Theme Color Meta -->
+    <meta name="theme-color" content="#9779FB" />
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#9779FB" />
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Banco de Talentos - Nadic</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/perfil.css">
+    <link rel="stylesheet" href="styles/edit-perfil.css">
+    <link rel="stylesheet" href="styles/trilha.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;700&family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    
+    <header>
+        <div class="header-container">
+            <nav>
+                <a href="index.html"><img src="./img/nadic.BDT.svg" alt="Logo" class="logo"></a>
+                <img src="./img/menu-burguer.svg" alt="Menu" class="menu-burger" onclick="toggleMenu()">
+                <div class="pages">
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                    </ul>
+                </div>
+                <div class="sessao">
+                    <img src="./img/perfil-icon.svg" alt="ícone de perfil">
+                    <ul>
+                        <li><a href="login.html">Entrar</a></li>
+                        <li><a href="register.html" class="register">Registrar-se</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-trilha">
+        <div class="main-trilha-container">
+            <div class="checklist-trilha">
+                <div class="trilha-header">
+                    <h1>Parte 1 - Git/Github</h1>
+                    <div class="selos">
+                        <img src="./img/git-locked.svg" alt="">
+                        <img src="./img/github-locked.svg" alt="">
+                    </div>
+                </div>
+                <div class="trilha-tasks">
+                    <form action="?">
+                        <label for="task1">
+                            <div class="task">
+                                <input type="checkbox" name="task1" id="task1">
+                                <span>1 - Clone de Repositório</span>
+                            </div>
+                        </label>
+                        <label for="task2">
+                            <div class="task">
+                                <input type="checkbox" name="task2" id="task2">
+                                <span>2 - Criação de Repositório</span>
+                            </div>
+                        </label>
+                    </form>
+                </div>
+                <div class="trilha-submit">
+                    <a href="#" onclick="enviarRepositorio()">Enviar Repositório</a>
+                </div>
+            </div>
+        </div>
+        <div class="fade"></div>
+        <div class="modal">
+            <div id="modal-container-form">
+                <h2>Enviar Repositório</h2>
+                <form action="?" class="form-submit-rep">
+                    <label for="submit">
+                        <div class="submit-url">
+                            <img src="./img/github-normal.svg" alt="">
+                            <input type="url" for="submit-rep" id="submit-rep" placeholder="Insira a URL do repositório..." onclick="enviarRepositorio()">
+                        </div>
+                        <div class="submit">
+                            <input type="submit" value="">
+                            <a href="#" onclick="enviarRepositorio()">Enviar</a>
+                        </div>
+                    </label>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="./scripts/button.js"></script>
+    <script src="/scripts/enviarRepositorio.js"></script>
+
+</body>
+</html>

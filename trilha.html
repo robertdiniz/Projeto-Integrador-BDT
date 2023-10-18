@@ -67,21 +67,41 @@
                                 <span>1 - Clone de Repositório</span>
                             </div>
                         </label>
+                        <label for="task2">
+                            <div class="task">
+                                <input type="checkbox" name="task2" id="task2">
+                                <span>2 - Criação de Repositório</span>
+                            </div>
+                        </label>
                     </form>
                 </div>
                 <div class="trilha-submit">
-                    <form action="?">
-                        
-                        <input type="url" name="repositorio" id="repositorio">
-                    </form>
+                    <a href="#" onclick="enviarRepositorio()">Enviar Repositório</a>
                 </div>
+            </div>
+        </div>
+        <div class="fade"></div>
+        <div class="modal">
+            <div id="modal-container-form">
+                <h2>Enviar Repositório</h2>
+                <form action="?" class="form-submit-rep">
+                    <label for="submit">
+                        <div class="submit-url">
+                            <img src="./img/github-normal.svg" alt="">
+                            <input type="url" for="submit-rep" id="submit-rep" placeholder="Insira a URL do repositório..." onclick="enviarRepositorio()">
+                        </div>
+                        <div class="submit">
+                            <input type="submit" value="">
+                            <a href="#" onclick="enviarRepositorio()">Enviar</a>
+                        </div>
+                    </label>
+                </form>
             </div>
         </div>
     </main>
 
     <script src="./scripts/button.js"></script>
-    <script src="./scripts/fadeTrocarImagem.js"></script>
-    <script src="./scripts/modalSociais.js"></script>
+    <script src="/scripts/enviarRepositorio.js"></script>
 
 </body>
 </html>

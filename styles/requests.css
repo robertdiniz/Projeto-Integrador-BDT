@@ -1,9 +1,9 @@
 .fade {
-    visibility: visible;
+    visibility: hidden;
 }
 
 .modal {
-    max-width: 90%;
+    max-width: 600px;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -13,8 +13,8 @@
     border-radius: 0.5rem;
     z-index: 6;
     padding: 4rem 2rem;
-    width: 90vw;
-    visibility: visible;
+    width: 50%;
+    visibility: hidden;
 }
 
 #modal-container-aluno {
@@ -22,6 +22,12 @@
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
+}
+
+.btn-mostrar-aluno {
+    border: none;
+    background: none;
+    cursor: pointer;
 }
 
 #modal-container-aluno span {
@@ -44,7 +50,15 @@
     font-weight: bold;
     background: #9779FB;
     border-radius: 0.5rem;
-    padding: 0.5rem 3rem;
+    padding: 0.7rem 3rem;
+}
+
+.modal-active {
+    visibility: visible;
+}
+
+.aluno-data {
+    align-items: flex-start;
 }
 
 .matricula {
@@ -58,3 +72,38 @@
     transform: translate(-50%, -50%);
 }
 
+.confirm-account {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.confirm-account label div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #9779FB;
+    padding: 0.8rem 1rem;
+    cursor: pointer;
+    border-radius: 0.5rem;
+}
+
+.confirm-account label div img {
+    width: 20px;
+    height: 20px;
+}
+
+
+@media (max-width: 768px) {
+    .modal {
+        width: 90vw;
+    }
+
+    .card-aluno {
+        width: 90vw;
+    }
+
+
+}

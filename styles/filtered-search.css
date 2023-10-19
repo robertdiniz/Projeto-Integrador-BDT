@@ -1,0 +1,40 @@
+.form-filtered-search {
+    background-color: #202024;
+    max-width: 1024px;
+    width: 50vw;
+    padding: 1rem 1rem 2rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-direction: row;
+}
+
+.form-filtered-search label {
+    font-weight: bold;
+}
+
+.form-filtered-search input {
+    background-color: #121314;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    width: 10vw;
+}
+
+.form-filtered-search select {
+    background-color: #121314;
+    font-weight: bold;
+    padding: 0.5rem;
+    border: none;
+    width: 40%;
+    border-radius: 0.5rem;
+}
+
+.form-filtered-search #nivel {
+    width: auto;
+}
+
+.form-filtered-search #trilha {
+    width: auto;
+}

@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="styles/edit-perfil.css">
     <link rel="stylesheet" href="styles/search.css">
     <link rel="stylesheet" href="styles/requests.css">
+    <link rel="stylesheet" href="styles/filtered-search.css">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,7 +53,28 @@
 
     <main class="main-search">
         <div class="main-search-container">
-            <h1>Pedidos de Registros</h1>
+            <div class="filter-search-container">
+                <h1>Busca filtrada</h1>
+                <form action="?" class="form-filtered-search">
+                    <label for="nome">Nome:</label>
+                    <input type="text" name="nome" id="nome" autocomplete="off">
+                    <label for="nivel">Nível:</label>
+                    <select name="nivel" id="nivel">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <label for="trilha">Trilha:</label>
+                    <select name="trilha" id="trilha">
+                        <option value="backend">Back-end</option>
+                        <option value="frontend">Front-end</option>
+                        <option value="mobile">Mobile</option>
+                        <option value="design">Design System</option>
+                    </select>
+                </form>
+            </div>
             <button class="btn-mostrar-aluno" onclick="mostrarDadosAluno()">
                 <div class="card-aluno">
                     <img src="./img/aluno-normal.svg" alt="">

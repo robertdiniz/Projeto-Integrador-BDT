@@ -51,6 +51,38 @@
 
     <main class="main-trilha">
         <div class="main-trilha-container">
+            <span class="span-trilha-container">
+                <h1>Trilha Back-End</h1>
+                <p>Quando finalizar alguma tarefa marque como feito e ganhe selos exclusivos para seu perfil!</p>
+            </span>
+            <div class="checklist-trilha">
+                <div class="trilha-header">
+                    <h1>Parte 1 - Git/Github</h1>
+                    <div class="selos">
+                        <img src="./img/git-locked.svg" alt="">
+                        <img src="./img/github-locked.svg" alt="">
+                    </div>
+                </div>
+                <div class="trilha-tasks">
+                    <form action="?">
+                        <label for="task1">
+                            <div class="task">
+                                <input type="checkbox" name="task1" id="task1">
+                                <span>1 - Clone de Repositório</span>
+                            </div>
+                        </label>
+                        <label for="task2">
+                            <div class="task">
+                                <input type="checkbox" name="task2" id="task2">
+                                <span>2 - Criação de Repositório</span>
+                            </div>
+                        </label>
+                    </form>
+                </div>
+                <div class="trilha-submit">
+                    <a href="#" onclick="enviarRepositorio()">Enviar Repositório</a>
+                </div>
+            </div>
             <div class="checklist-trilha">
                 <div class="trilha-header">
                     <h1>Parte 1 - Git/Github</h1>
@@ -80,7 +112,7 @@
                 </div>
             </div>
         </div>
-        <div class="fade"></div>
+        <div class="fade" onclick="enviarRepositorio()"></div>
         <div class="modal">
             <div id="modal-container-form">
                 <h2>Enviar Repositório</h2>
@@ -88,11 +120,12 @@
                     <label for="submit">
                         <div class="submit-url">
                             <img src="./img/github-normal.svg" alt="">
-                            <input type="url" for="submit-rep" id="submit-rep" placeholder="Insira a URL do repositório..." onclick="enviarRepositorio()">
+                            <input type="url" for="submit-rep" id="submit-rep" placeholder="Insira a URL do repositório...">
                         </div>
                         <div class="submit">
                             <input type="submit" value="">
                             <a href="#" onclick="enviarRepositorio()">Enviar</a>
+                            <a href="#" onclick="enviarRepositorio()">Cancelar</a>
                         </div>
                     </label>
                 </form>

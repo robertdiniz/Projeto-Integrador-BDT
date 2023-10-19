@@ -256,4 +256,12 @@
         gap: 1em;
     }
 
+    .main-trilhas-container h1 {
+        font-size: 2rem;
+    }
+
+    .main-trilhas-container p {
+        font-size: 1rem;
+    }
+
 }

@@ -1,5 +1,5 @@
 .main-trilha {
-    padding: 4rem 0;
+    padding: 0;
     margin: 0 auto;
     /* disable text selection */
     -webkit-user-select: none; /* Safari */
@@ -22,10 +22,32 @@
     gap: 1.5rem;
 }
 
+.span-trilha-container {
+    width: 90vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 1rem;
+}
+
+.main-trilha-container h1 {
+    width: 90vw;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.main-trilha-container p {
+    width: 50vw;
+    text-align: center;
+    color: #4D4D56;
+    font-weight: bold;
+}
+
 /* checklist trilha */
 .checklist-trilha {
-    width: 90vw;
-
+    width: 50vw;
 }
 
 .trilha-header {
@@ -42,6 +64,8 @@
 
 .trilha-header h1 {
     color: #9779FB;
+    font-size: 1.3rem;
+    text-align: left;
 }
 
 .selos {
@@ -56,8 +80,7 @@
 /* checklista-trilha tasks */
 .trilha-tasks {
     background-color: #1D1D20;
-    padding: 1rem 2rem;
-
+    padding: 1rem;
 }
 
 .trilha-tasks label {
@@ -67,6 +90,7 @@
 .trilha-tasks form {
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
 }
 
 .task {
@@ -76,32 +100,36 @@
 }
 
 .task span {
-    font-weight: bold;
+    font-size: 0.9rem;
 }
 
 /* trilha submit */
 .trilha-submit {
-    background-color: #141516;
+    background-color: #202024;
     border-radius: 0.5rem;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    padding: 1rem;
+    padding: 0.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+/* incomplete tasks */
 .trilha-submit a {
     text-decoration: none;
     border: none;
-    padding: 0.5rem;
-    background-color: #141516;
+    padding: 0.4rem;
+    background-color: #9779FB;
     outline: 1px solid #9779FB;
     border-radius: 0.5rem;
     text-align: center;
     font-weight: bold;
-    color: #9779FB;
+    color: #ffffff;
     font-size: 0.9rem;
+    /* opacity: 0.5; */
+    /* pointer-events: none; */
+    /* background-color: #9779FB; */
 }
 
 .trilha-submit a:hover {
@@ -134,7 +162,7 @@
     z-index: 6;
     padding: 2rem;
     visibility: hidden;
-    width: 90%;
+    width: 30vw;
 }
 
 .modal-active {
@@ -191,24 +219,58 @@
 .submit-url input::placeholder {
     font-weight: bold;
     color: #4D4D56;
+    font-size: 0.9rem;
 }
 
 .submit {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     padding: 1rem;
+
 }
 
 .submit input {
     display: none;
 }
 
-.submit a {
+.submit a{
     text-decoration: none;
-    background-color: #9779FB;
-    border-radius: 0.5rem;
     padding: 0.5rem 1rem;
     font-weight: bold;
+}
+
+.submit a:nth-child(3) {
+    background-color: #9779FB;
+    border-radius: 0.5rem;
     color: #ffffff;
+}
+
+@media (max-width: 768px){
+    .main-trilha-container p {
+        width: 90vw;
+    }
+
+    .checklist-trilha {
+        width: 90vw;
+    }
+
+    .modal {
+        width: 50%;
+    }
+}
+
+@media (max-width: 660px){
+    .modal {
+        width: 90%;
+    }
+}
+
+@media (max-width: 320px){
+    .submit {
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
 }

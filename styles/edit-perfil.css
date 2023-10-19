@@ -144,7 +144,7 @@
     z-index: 6;
     padding: 2rem;
     visibility: hidden;
-    width: 90%;
+    width: 30vw;
 }
 
 .modal-active {
@@ -230,6 +230,8 @@
     cursor: pointer;
 }
 
-@media (min-width: 760px) {
-    
+@media (max-width: 800px) {
+    .modal {
+        width: 90vw;
+    }
 }

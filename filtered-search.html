@@ -56,26 +56,29 @@
             <div class="filter-search-container">
                 <h1>Busca filtrada</h1>
                 <form action="?" class="form-filtered-search">
-                    <label for="nome">Nome:</label>
-                    <input type="text" name="nome" id="nome" autocomplete="off">
-                    <label for="nivel">Nível:</label>
-                    <select name="nivel" id="nivel">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                    <label for="trilha">Trilha:</label>
-                    <select name="trilha" id="trilha">
-                        <option value="backend">Back-end</option>
-                        <option value="frontend">Front-end</option>
-                        <option value="mobile">Mobile</option>
-                        <option value="design">Design System</option>
-                    </select>
+                    <div class="form">
+                        <label for="nome">Nome:</label>
+                        <input type="text" name="nome" id="nome" autocomplete="off">
+                        <label for="nivel">Nível:</label>
+                        <select name="nivel" id="nivel">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <label for="trilha">Trilha:</label>
+                        <select name="trilha" id="trilha">
+                            <option value="backend">Back-end</option>
+                            <option value="frontend">Front-end</option>
+                            <option value="mobile">Mobile</option>
+                            <option value="design">Design System</option>
+                        </select>
+                    </div>
+                    <button class="search-btn">Buscar</button>
                 </form>
             </div>
-            <button class="btn-mostrar-aluno" onclick="mostrarDadosAluno()">
+            <a class="btn-mostrar-aluno" href="perfil.html">
                 <div class="card-aluno">
                     <img src="./img/aluno-normal.svg" alt="">
                     <div class="aluno-data">
@@ -87,8 +90,8 @@
                         </div>
                     </div>
                 </div>
-            </button>
-            <button class="btn-mostrar-aluno" onclick="mostrarDadosAluno()">
+            </a>
+            <a class="btn-mostrar-aluno" href="perfil.html">
                 <div class="card-aluno">
                     <img src="./img/aluno-normal.svg" alt="">
                     <div class="aluno-data">
@@ -100,8 +103,8 @@
                         </div>
                     </div>
                 </div>
-            </button>
-            <button class="btn-mostrar-aluno" onclick="mostrarDadosAluno()">
+            </a>
+            <a class="btn-mostrar-aluno" href="perfil.html">
                 <div class="card-aluno">
                     <img src="./img/aluno-normal.svg" alt="">
                     <div class="aluno-data">
@@ -113,8 +116,8 @@
                         </div>
                     </div>
                 </div>
-            </button>
-            <button class="btn-mostrar-aluno" onclick="mostrarDadosAluno()">
+            </a>
+            <a class="btn-mostrar-aluno" href="perfil.html">
                 <div class="card-aluno">
                     <img src="./img/aluno-normal.svg" alt="">
                     <div class="aluno-data">
@@ -126,8 +129,8 @@
                         </div>
                     </div>
                 </div>
-            </button>
-            <button class="btn-mostrar-aluno" onclick="mostrarDadosAluno()">
+            </a>
+            <a class="btn-mostrar-aluno" href="perfil.html">
                 <div class="card-aluno">
                     <img src="./img/aluno-normal.svg" alt="">
                     <div class="aluno-data">
@@ -139,8 +142,8 @@
                         </div>
                     </div>
                 </div>
-            </button>
-            <button class="btn-mostrar-aluno" onclick="mostrarDadosAluno()">
+            </a>
+            <a class="btn-mostrar-aluno" href="perfil.html">
                 <div class="card-aluno">
                     <img src="./img/aluno-normal.svg" alt="">
                     <div class="aluno-data">
@@ -152,7 +155,7 @@
                         </div>
                     </div>
                 </div>
-            </button>
+            </a>
         </div>
         <div class="fade" onclick="mostrarDadosAluno()"></div>
         <div class="modal">

@@ -105,5 +105,12 @@
         width: 90vw;
     }
 
+    .aluno-data {
+        gap: 0.5rem;
+    }
+
+    .aluno-data h2 {
+        text-align: left;
+    }
 
 }

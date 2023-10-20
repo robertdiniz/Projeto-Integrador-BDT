@@ -95,6 +95,7 @@
     cursor: pointer;
     font-weight: bold;
     text-transform: uppercase;
+    text-decoration: none;
 }
 
 .btn-login:hover {

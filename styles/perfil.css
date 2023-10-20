@@ -105,8 +105,11 @@
 }
 
 .aluno-redes ul li a img {
+    background: none;
+    border-radius: 0;
     padding: 0;
-    border-radius: auto;
+    width: 24px;
+    height: 24px;
 }
 
 .aluno-redes ul li a img:hover {
@@ -330,9 +333,8 @@
     }
 
     .btn-edit-perfil {
-        padding: 0.5rem 0.5rem;
+        padding: 0.5rem 1rem;
         text-align: center;
-        width: 70%;
         align-self: flex-end;
     }
     

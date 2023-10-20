@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Theme Color Meta -->
+    <meta name="theme-color" content="#9779FB" />
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#9779FB" />
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Banco de Talentos - Nadic</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/perfil.css">
+    <link rel="stylesheet" href="styles/edit-perfil.css">
+    <link rel="stylesheet" href="styles/search.css">
+    <link rel="stylesheet" href="styles/requests.css">
+    <link rel="stylesheet" href="styles/filtered-search.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;700&family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    
+    <header>
+        <div class="header-container">
+            <nav>
+                <a href="index.html"><img src="./img/nadic.BDT.svg" alt="Logo" class="logo"></a>
+                <img src="./img/menu-burguer.svg" alt="Menu" class="menu-burger" onclick="toggleMenu()">
+                <div class="pages">
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                    </ul>
+                </div>
+                <div class="sessao">
+                    <img src="./img/perfil-icon.svg" alt="ícone de perfil">
+                    <ul>
+                        <li><a href="login.html">Entrar</a></li>
+                        <li><a href="register.html" class="register">Registrar-se</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-search">
+        <div class="main-search-container">
+            <div class="filter-search-container">
+                <h1>Busca filtrada</h1>
+                <form action="?" class="form-filtered-search">
+                    <div class="form">
+                        <label for="nome">Nome:</label>
+                        <input type="text" name="nome" id="nome" autocomplete="off">
+                        <label for="nivel">Nível:</label>
+                        <select name="nivel" id="nivel">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <label for="trilha">Trilha:</label>
+                        <select name="trilha" id="trilha">
+                            <option value="backend">Back-end</option>
+                            <option value="frontend">Front-end</option>
+                            <option value="mobile">Mobile</option>
+                            <option value="design">Design System</option>
+                        </select>
+                    </div>
+                    <button class="search-btn">Buscar</button>
+                </form>
+            </div>
+            <a class="btn-mostrar-aluno" href="perfil.html">
+                <div class="card-aluno">
+                    <img src="./img/aluno-normal.svg" alt="">
+                    <div class="aluno-data">
+                        <h2>NOME COMPLETO DO ALUNO</h2>
+                        <p>Back-end</p>
+                        <p>Nível 1 - Back-end</p>
+                        <div class="progresso">
+                            <div class="level"></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a class="btn-mostrar-aluno" href="perfil.html">
+                <div class="card-aluno">
+                    <img src="./img/aluno-normal.svg" alt="">
+                    <div class="aluno-data">
+                        <h2>NOME COMPLETO DO ALUNO</h2>
+                        <p>Back-end</p>
+                        <p>Nível 1 - Back-end</p>
+                        <div class="progresso">
+                            <div class="level"></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a class="btn-mostrar-aluno" href="perfil.html">
+                <div class="card-aluno">
+                    <img src="./img/aluno-normal.svg" alt="">
+                    <div class="aluno-data">
+                        <h2>NOME COMPLETO DO ALUNO</h2>
+                        <p>Back-end</p>
+                        <p>Nível 1 - Back-end</p>
+                        <div class="progresso">
+                            <div class="level"></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a class="btn-mostrar-aluno" href="perfil.html">
+                <div class="card-aluno">
+                    <img src="./img/aluno-normal.svg" alt="">
+                    <div class="aluno-data">
+                        <h2>NOME COMPLETO DO ALUNO</h2>
+                        <p>Back-end</p>
+                        <p>Nível 1 - Back-end</p>
+                        <div class="progresso">
+                            <div class="level"></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a class="btn-mostrar-aluno" href="perfil.html">
+                <div class="card-aluno">
+                    <img src="./img/aluno-normal.svg" alt="">
+                    <div class="aluno-data">
+                        <h2>NOME COMPLETO DO ALUNO</h2>
+                        <p>Back-end</p>
+                        <p>Nível 1 - Back-end</p>
+                        <div class="progresso">
+                            <div class="level"></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a class="btn-mostrar-aluno" href="perfil.html">
+                <div class="card-aluno">
+                    <img src="./img/aluno-normal.svg" alt="">
+                    <div class="aluno-data">
+                        <h2>NOME COMPLETO DO ALUNO</h2>
+                        <p>Back-end</p>
+                        <p>Nível 1 - Back-end</p>
+                        <div class="progresso">
+                            <div class="level"></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="fade" onclick="mostrarDadosAluno()"></div>
+        <div class="modal">
+            <div id="modal-container-aluno">
+                <img src="./img/aluno-normal.svg" alt="">
+                <h1>Informações do Aluno</h1>
+                <span>
+                    <h2>Nome completo do Aluno</h2>
+                    <p>John Doe Teixeira Almeida Oliveira Pereira</p>
+                    <h2>Email</h2>
+                    <p>johndoe@gmail.com</p>
+                    <h2>Matrícula do Aluno</h2>
+                    <span class="matricula">
+                        <img src="./img/download-icon.svg" alt="" width="24px" height="24px">
+                        <a href="./img/aluno-normal.svg" download>Download da matrícula</a>
+                    </span>
+                </span>
+                <form action="?" class="confirm-account">
+                    <label for="accept">
+                        <div class="accept-container" onclick="mostrarDadosAluno()">
+                            <img src="./img/accept-icon.svg" alt="">
+                        </div>
+                    </label>
+                    <label for="reject">
+                        <div class="reject" onclick="mostrarDadosAluno()">
+                            <img src="./img/reject.svg" alt="">
+                        </div>
+                    </label>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="./scripts/button.js"></script>
+    <script src="./scripts/mostrarDadosAluno.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+.main-search {
+    padding: 0 0 8rem 0;
+    margin: 0 auto;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.main-search-container {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 4rem;
+    padding-bottom: 0;
+    border-radius: 1rem;
+    width: 90vw;
+    height: 1000px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.main-search-container a {
+    text-decoration: none;
+}
+
+.main-search-container h1 {
+    max-width: 1024px;
+    background-color: #202024;
+    width: 50vw;
+    text-align: center;
+    font-size: 2rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+/* Card Aluno */
+.card-aluno {
+    max-width: 1024px;
+    background-color: #202024;
+    width: 50vw;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.card-aluno img {
+    width: 6rem;
+}
+
+.aluno-data {
+    display: flex;
+    flex-direction: column;
+}
+
+.aluno-data p {
+    font-weight: bold;
+}
+
+.aluno-data p:nth-child(2) {
+    color: #9779FB;
+}
+
+.aluno-data p:nth-child(3) {
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px){
+    .main-search-container h1 {
+        width: 90vw;
+    }
+
+    .main-search-container a .card-aluno{
+        width: 90vw;
+    }
+
+}
+
+@media (max-width: 375px) {
+    .card-aluno {
+        flex-direction: column;
+    }
+    .aluno-data {
+        align-items: center;
+    }
+}

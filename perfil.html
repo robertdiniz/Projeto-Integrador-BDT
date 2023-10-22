@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/header.css">
     <link rel="stylesheet" href="styles/perfil.css">
+    <link rel="stylesheet" href="styles/header-login.css">
+
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,13 +36,27 @@
                 <div class="pages">
                     <ul>
                         <li><a href="index.html">Início</a></li>
+                        <li><a href="trilha.html">Trilha</a></li>
                     </ul>
                 </div>
                 <div class="sessao">
+                    <div class="search-container">
+                        <form action="filtered-search.html">
+                            <div class="search">
+                                <input type="text" name="search-value" id="search-value">
+                                <img src="./img/search-icon.svg" alt="">
+                            </div>
+                        </form>
+                    </div>
                     <img src="./img/perfil-icon.svg" alt="ícone de perfil">
                     <ul>
                         <li><a href="login.html">Entrar</a></li>
                         <li><a href="register.html" class="register">Registrar-se</a></li>
+                        <li><a href="trilha.html">Trilha</a></li>
+                        <li><a href="filtered-search.html">Buscar</a></li>
+                        <li><a href="perfil.html">Meu perfil</a></li>
+                        <li><a href="settings.html">Configurações</a></li>
+                        <li><a href="index.html">Sair</a></li>
                     </ul>
                 </div>
             </nav>
@@ -51,7 +67,7 @@
         <div class="main-container-perfil">
             <div class="perfil-header">
                 <span class="foto-dados">
-                    <img src="./img/aluno-normal.svg" alt="">
+                    <img src="./img/aluno-normal.svg" alt="" width="146px" height="146px">
                     <span class="aluno-dados">
                         <h1>NOME DO ALUNO COMPLETO</h1>
                         <p>Back-end</p>
@@ -63,12 +79,13 @@
                 </span>
                 <span class="aluno-redes">
                     <a href="edit.html" class="btn-edit-perfil">Editar perfil</a>
+                    <a href="settings.html" class="btn-edit-perfil">Configurar Conta</a>
                     <ul>
-                        <li><a href="#"><img src="./img/linkedin-normal.svg" alt=""></a></li>
-                        <li><a href="#"><img src="./img/github-normal.svg" alt=""></a></li>
-                        <li><a href="#"><img src="./img/discord-normal.svg" alt=""></a></li>
-                        <li><a href="#"><img src="./img/instagram-normal.svg" alt=""></a></li>
-                        <li><a href="#"><img src="./img/wpp-normal.svg" alt=""></a></li>
+                        <li><a href="#"><img src="./img/linkedin.svg" alt="ícone linkedin" width="24px" height="24px"></a></li>
+                        <li><a href="#"><img src="./img/github.svg" alt="ícone github" width="24px" height="24px"></a></li>
+                        <li><a href="#"><img src="./img/discord-normal.svg" alt="ícone discord" width="24px" height="24px"></a></li>
+                        <li><a href="#"><img src="./img/instagram-normal.svg" alt="ícone instagram" width="24px" height="24px"></a></li>
+                        <li><a href="#"><img src="./img/wpp-normal.svg" alt="ícone whatsapp" width="24px" height="24px"></a></li>
                     </ul>
                 </span>
             </div>
@@ -79,21 +96,21 @@
             <div class="perfil-selos">
                 <h2>Selos</h2>
                 <div class="perfil-selos-container">
-                    <img src="./img/git-locked.svg" alt="">
-                    <img src="./img/github-locked.svg" alt="">
-                    <img src="./img/mysql-locked.svg" alt="">
-                    <img src="./img/postgre-locked.svg" alt="">
-                    <img src="./img/python-locked.svg" alt="">
-                    <img src="./img/git-locked.svg" alt="">
-                    <img src="./img/github-locked.svg" alt="">
-                    <img src="./img/mysql-locked.svg" alt="">
-                    <img src="./img/postgre-locked.svg" alt="">
-                    <img src="./img/python-locked.svg" alt="">
-                    <img src="./img/git-locked.svg" alt="">
-                    <img src="./img/github-locked.svg" alt="">
-                    <img src="./img/mysql-locked.svg" alt="">
-                    <img src="./img/postgre-locked.svg" alt="">
-                    <img src="./img/python-locked.svg" alt="">
+                    <img src="./img/git.svg" alt="" width="32px" height="32px">
+                    <img src="./img/github.svg" alt="" width="32px" height="32px">
+                    <img src="./img/mysql-locked.svg" alt="" width="32px" height="32px">
+                    <img src="./img/postgre-locked.svg" alt="" width="32px" height="32px">
+                    <img src="./img/python-locked.svg" alt="" width="32px" height="32px">
+                    <img src="./img/git-locked.svg" alt="" width="32px" height="32px">
+                    <img src="./img/github-locked.svg" alt="" width="32px" height="32px">
+                    <img src="./img/mysql-locked.svg" alt="" width="32px" height="32px">
+                    <img src="./img/postgre-locked.svg" alt="" width="32px" height="32px"> 
+                    <img src="./img/python-locked.svg" alt="" width="32px" height="32px">
+                    <img src="./img/git-locked.svg" alt="" width="32px" height="32px">
+                    <img src="./img/github-locked.svg" alt="" width="32px" height="32px">
+                    <img src="./img/mysql-locked.svg" alt="" width="32px" height="32px">
+                    <img src="./img/postgre-locked.svg" alt="" width="32px" height="32px">
+                    <img src="./img/python-locked.svg" alt="" width="32px" height="32px">
                 </div>
             </div>
             <div class="perfil-trilhas">
@@ -116,14 +133,14 @@
                     <div class="trilha-card">
                         <span>
                         <img src="./img/mobile-locked.svg" alt="">
-                        <p>Trilha front-end</p>    
+                        <p>Trilha Mobile</p>    
                         </span>
                         <p class="trilha-status">Em progresso...</p>
                     </div>
                     <div class="trilha-card">
                         <span>
                         <img src="./img/design-locked.svg" alt="">
-                        <p>Trilha front-end</p>    
+                        <p>Trilha Design System</p>    
                         </span>
                         <p class="trilha-status">Em progresso...</p>
                     </div>

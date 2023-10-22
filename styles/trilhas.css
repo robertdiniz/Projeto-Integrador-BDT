@@ -139,7 +139,12 @@
     justify-content: space-between;
 }
 
-.modal-btn button:nth-child(1){
+.modal-btn a {
+    text-decoration: none;
+    text-align: center;
+}
+
+.modal-btn a:nth-child(1){
     background-color: #202024;
     border: none;
     cursor: pointer;
@@ -147,11 +152,11 @@
     text-transform: uppercase;
 }
 
-.modal-btn button:nth-child(1){
+.modal-btn a:nth-child(1){
     padding: 1em;
 }
 
-.modal-btn button:nth-child(2){
+.modal-btn a:nth-child(2){
     background-color: #9779FB;
     padding: 1em;
     border-radius: 0.5em;

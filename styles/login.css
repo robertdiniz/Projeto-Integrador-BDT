@@ -19,6 +19,8 @@
 }
 
 .main-container-login {
+    max-width: 450px;
+    max-height: 620px;
     background-color: #202024;
 }
 
@@ -67,10 +69,16 @@
     outline: none;
 }
 
+.input-container input::placeholder {
+    font-weight: bold;
+    color: #4D4D56;
+}
+
+
 .input-container input:focus{
-    /* border: 1px solid #9779FB; */
     outline: 1px solid #9779FB;
 }
+
 
 .input-container img {
     position: absolute;
@@ -99,9 +107,15 @@
 }
 
 .btn-login:hover {
-    box-shadow: 4px 4px 4px #121214;
     transition: 0.6s;
     transform: translate(0px, -2px);
+}
+
+@media (max-width: 660px){
+    .main-container-login {
+        width: 90vw;
+        max-width: 90%;
+    }
 }
 
 @media (max-width: 425px) {

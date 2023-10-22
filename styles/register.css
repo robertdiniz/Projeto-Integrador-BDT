@@ -19,6 +19,8 @@
 }
 
 .main-container-register {
+    max-width: 450px;
+    max-height: 750px;
     background-color: #202024;
 }
 
@@ -65,6 +67,11 @@
     border-radius: 8px;
     border: none;
     outline: none;
+}
+
+.input-container input::placeholder {
+    font-weight: bold;
+    color: #4D4D56;
 }
 
 .input-container input:focus{
@@ -146,9 +153,15 @@
 }
 
 .btn-register:hover {
-    box-shadow: 4px 4px 4px #121214;
     transition: 0.6s;
     transform: translate(0px, -2px);
+}
+
+@media (max-width: 660px) {
+    .main-container-register {
+        width: 90%;
+        max-width: 90%;
+    }
 }
 
 @media (max-width: 425px) {

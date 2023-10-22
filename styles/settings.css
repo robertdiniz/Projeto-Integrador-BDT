@@ -9,11 +9,11 @@
 
 .main-container-settings {
     max-width: 900px;
+    width: 50%;
     margin: 0 auto;
     padding: 4rem;
     padding-bottom: 0;
     border-radius: 1rem;
-    width: 90vw;
     height: 1000px;
     position: relative;
     background-color: #202024;
@@ -203,9 +203,16 @@
     border-radius: 0.5rem;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 835px){
+    .main-container-settings {
+        height: 1100px;
+    }
+}
+
+@media (max-width: 768px) {
     /* Main Container */
     .main-container-settings {
+        width: 90%;
         height: 1000px;
     }
 

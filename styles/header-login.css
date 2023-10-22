@@ -78,15 +78,15 @@ nav {
 }
 
 .pages ul li:nth-child(1) {
-    display: block;
+    display: none;
 }
 
 .sessao ul li:nth-child(1) {
-    display: block;
+    display: none;
 }
 
 .sessao ul li:nth-child(2) {
-    display: block;
+    display: none;
 }
 
 .sessao ul li:nth-child(3) {
@@ -102,11 +102,12 @@ nav {
 }
 
 .sessao ul li:nth-child(7) {
-    display: none;
+    display: block;
 }
 
+
 .sessao img {
-    display: block;
+    display: none;
 }
 
 /* Search */
@@ -140,7 +141,7 @@ nav {
 }
 
 /* Medias Queries */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 800px) {
     
     header {
         padding: 1rem 2rem;

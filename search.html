@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="styles/header.css">
     <link rel="stylesheet" href="styles/perfil.css">
     <link rel="stylesheet" href="styles/edit-perfil.css">
-    <link rel="stylesheet" href="styles/search.css">
     <link rel="stylesheet" href="styles/header-login.css">
+    <link rel="stylesheet" href="styles/search.css">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -66,7 +66,18 @@
 
     <main class="main-search">
         <div class="main-search-container">
-            <h1>Resultados</h1>
+            <div class="header-search">
+                <h1>Resultados</h1>
+                <div class="search-container-header">
+                    <form action="search.html">
+                        <div class="search">
+                            <input type="text" name="search-value" id="search-value">
+                            <img src="./img/search-icon.svg" alt="">
+                        </div>
+                        <button class="btn-search">Procurar</button>
+                    </form>
+                </div>
+            </div>
             <a href="perfil.html">
                 <div class="card-aluno">
                     <img src="./img/aluno-normal.svg" alt="">

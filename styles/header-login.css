@@ -115,6 +115,7 @@ nav {
     display: flex;
     align-items: center;
     position: relative;
+    gap: 1rem;
 }
 
 .search input {
@@ -123,6 +124,15 @@ nav {
     padding: 0.3rem 0.3rem 0.3rem 2rem;
     border-radius: 0.5rem;
     color: #fff;
+}
+
+.btn-search {
+    background-color: #9779FB;
+    font-weight: bold;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
 }
 
 .search input:focus {

@@ -1,0 +1,44 @@
+{% load static %}
+<header>
+    <div class="header-container">
+        <nav>
+            <a href="index.html"><img src="{% static './img/nadic.BDT.svg'%} " alt="Logo" class="logo"></a>
+            <img src="{% static './img/menu-burguer.svg'%} " alt="Menu" class="menu-burger" onclick="toggleMenu()">
+            <div class="pages">
+                <ul>
+                    {% if request.user.is_authenticated %}
+                        <li><a href="index.html">Trilha</a></li>
+                    {% else %}
+                        <li><a href="index.html">Início</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="sessao">
+                {% if request.user.is_authenticated %}
+                <div class="search-container">
+                    <form action="search.html">
+                        <div class="search">
+                            <input type="text" name="search-value" id="search-value">
+                            <img src="{% static './img/search-icon.svg'%} " alt="">
+                        </div>
+                    </form>
+                </div>
+                {% else %}
+                    <img src="{% static './img/perfil-icon.svg'%} " alt="ícone de perfil">
+                {% endif %}
+                <ul>
+                    {% if not request.user.is_authenticated %}
+                        <li><a href="login.html">Entrar</a></li>
+                        <li><a href="register.html" class="register">Registrar-se</a></li>
+                    {% else %}
+                        <li class="links-mobile"><a href="trilha.html">Trilha</a></li>
+                        <li class="links-mobile"><a href="search.html">Buscar</a></li>
+                        <li><a href="perfil.html">Meu perfil</a></li>
+                        <li class="links-mobile"><a href="settings.html">Configurações</a></li>
+                        <li><a href="index.html">Sair</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>

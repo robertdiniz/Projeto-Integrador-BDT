@@ -20,13 +20,14 @@
 
 .main-container-register {
     max-width: 450px;
-    max-height: 750px;
+    height: 925px;
     background-color: #202024;
 }
 
 .main-container-register h1 {
     font-size: 2em;
     text-transform: uppercase;
+    text-align: center;
 }
 
 .register-container {
@@ -63,14 +64,15 @@
 .input-container input {
     background-color: #121214;
     color: #4D4D56;
-    padding: 1rem 4rem;
+    padding: 1rem 4rem 1rem 3.5rem;
     border-radius: 8px;
     border: none;
     outline: none;
 }
 
 .input-container input::placeholder {
-    font-weight: bold;
+    font-weight: 500;
+    font-size: 0.9rem;
     color: #4D4D56;
 }
 
@@ -83,18 +85,8 @@
     position: absolute;
     left: 1em;
     bottom: 1em;
-    width: 24px;
-}
-
-.input-container:nth-child(2) img {
-    position: absolute;
-    left: 1rem;
-    bottom: 1rem;
     width: 20px;
-}
-
-.input-container:nth-child(3){
-    width: 100%;
+    height: 20px;
 }
 
 .input-container:nth-child(3) span:nth-child(1){
@@ -107,25 +99,26 @@
     left: 1rem;
     bottom: 1rem;
     width: 20px;
+    height: 20px;
 }
 
-.input-container:nth-child(3) label input {
+.input-container:nth-child(6) label input {
     display: none;
 }
 
-.input-container:nth-child(3) .matricula-register {
+.input-container:nth-child(6) .matricula-register {
     display: flex;
     flex-direction: column;
     width: 100%;
     position: relative;
 }
 
-.input-container:nth-child(3)>.matricula-register span:nth-child(1) {
+.input-container:nth-child(6)>.matricula-register span:nth-child(1) {
     color: #4D4D56;
     font-weight: 400;
 }
 
-.input-container:nth-child(3)>.matricula-register span {
+.input-container:nth-child(6)>.matricula-register span {
     padding: 1rem 4rem;
     border-radius: 8px;
     border: none;
@@ -135,7 +128,7 @@
     font-weight: bold;
 }
 
-.input-container:nth-child(3)>.matricula-register img {
+.input-container:nth-child(6)>.matricula-register img {
     position: absolute;
     
 }
@@ -164,13 +157,19 @@
     }
 }
 
-@media (max-width: 425px) {
+@media (max-width: 475px) {
     .main-container-register {
         max-width: 425px;
-        height: 720px;
+        height: 950px;
+    }
+
+    .input-container {
+        width: 100%;
+        align-items: normal;
     }
 
     .input-container input {
+
         padding: 1rem 1rem 1rem 3rem;
     }
 
@@ -179,5 +178,39 @@
         text-align: right;
     }
 
+    .input-container:nth-child(6) .matricula-register {
+        background-color: #121214;
+        align-items: center;
+        padding: 1rem;
+        gap: 1rem;
+        border-radius: 8px;
+    }
+
+    .input-container:nth-child(6)>.matricula-register img{
+        position: static;
+
+    }
+
+    .input-container:nth-child(6)>.matricula-register span{
+        text-align: center;
+        padding: 0;
+    }
+
+}
+
+@media (max-width: 365px) {
+    .main-container-register {
+        height: 1000px;
+    }
+
+    .register {
+        width: 90%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .register-form {
+        width: 90%;
+    }
 }
 

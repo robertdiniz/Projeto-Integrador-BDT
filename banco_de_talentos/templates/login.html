@@ -1,79 +1,38 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Theme Color Meta -->
-    <meta name="theme-color" content="#9779FB" />
-    <!-- Windows Phone -->
-    <meta name="msapplication-navbutton-color" content="#9779FB" />
-    <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Banco de Talentos - Nadic</title>
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="styles/header.css">
-    <link rel="stylesheet" href="styles/footer.css">
-    <link rel="stylesheet" href="styles/main-home.css">
-    <link rel="stylesheet" href="styles/login.css">
+{% extends 'base.html' %}
+{% load static %}
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;700&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;700&family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/login.css' %}">
+{% endblock %}
 
-</head>
-<body>
-    
-    <header>
-        <div class="header-container">
-            <nav>
-                <a href="index.html"><img src="./img/nadic.BDT.svg" alt="Logo" class="logo"></a>
-                <img src="./img/menu-burguer.svg" alt="Menu" class="menu-burger" onclick="toggleMenu()">
-                <div class="pages">
-                    <ul>
-                        <li><a href="index.html">Início</a></li>
-                    </ul>
-                </div>
-                <div class="sessao">
-                    <img src="./img/perfil-icon.svg" alt="ícone de perfil">
-                    <ul>
-                        <li><a href="login.html">Entrar</a></li>
-                        <li><a href="register.html" class="register">Registrar-se</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </header>
+{% block content %}
 
-    <main class="main-login">
-        <div class="main-container-login">
-            <h1>Entrar</h1>
-            <div class="login-container">
-                <img src="./img/aluno.svg" alt="Imagem ilustrativa de aluno">
-                <div class="login">
-                    <form action="#" class="login-form">
-                        <div class="input-container">
-                            <label for="email">Digite seu e-mail</label>
-                            <img src="./img/email-icon.svg" alt="">
-                            <input type="email" name="email" id="email" placeholder="Seu endereço de e-mail..." autocomplete="off">
-                        </div>
-                        <div class="input-container">
-                            <label for="senha">Digite sua senha</label>
-                            <img src="./img/password-icon.svg" alt="">
-                            <input type="password" name="email" id="email" placeholder="Sua senha..." autocomplete="off">
-                        </div>
-                        <a href="trilhas.html" class="btn-login">Entrar</a>
-                    </form>
-                </div>
+<!-- header -->
+{% include 'header.html' %}
+<!-- end header-->
+<main class="main-login">
+    <div class="main-container-login">
+        <h1>Entrar</h1>
+        <div class="login-container">
+            <img src="{% static './img/aluno.svg' %}" alt="Imagem ilustrativa de aluno">
+            <div class="login">
+                <form action="#" class="login-form">
+                    <div class="input-container">
+                        <label for="email">Digite seu e-mail</label>
+                        <img src="{% static './img/email-icon.svg' %}" alt="">
+                        <input type="email" name="email" id="email" placeholder="Seu endereço de e-mail..." autocomplete="off">
+                    </div>
+                    <div class="input-container">
+                        <label for="senha">Digite sua senha</label>
+                        <img src="{% static './img/password-icon.svg' %}" alt="">
+                        <input type="password" name="email" id="email" placeholder="Sua senha..." autocomplete="off">
+                    </div>
+                    <a href="trilhas.html" class="btn-login">Entrar</a>
+                </form>
             </div>
         </div>
-    </main>
+    </div>
+</main>
 
-    <script src="./scripts/button.js"></script>
-
-</body>
-</html>
+<script src="./scripts/button.js"></script>
+{% endblock %}

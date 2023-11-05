@@ -1,0 +1,32 @@
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Theme Color Meta -->
+    <meta name="theme-color" content="#9779FB" />
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#9779FB" />
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    {% block title %}
+        <title>Banco de Talentos - Nadic</title>
+    {% endblock %}
+
+    <link rel="stylesheet" href="{% static 'styles/style.css'%} ">
+    <link rel="stylesheet" href="{% static 'styles/header.css'%} ">
+
+    {% block css %}
+
+    {% endblock %}
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;700&family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+
+</head>

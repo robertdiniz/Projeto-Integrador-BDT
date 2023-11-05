@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/login.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- header -->
+{% include 'header.html' %}
+<!-- end header-->
+<main class="main-login">
+    <div class="main-container-login">
+        <h1>Entrar</h1>
+        <div class="login-container">
+            <img src="{% static './img/aluno.svg' %}" alt="Imagem ilustrativa de aluno">
+            <div class="login">
+                <form action="#" class="login-form">
+                    <div class="input-container">
+                        <label for="email">Digite seu e-mail</label>
+                        <img src="{% static './img/email-icon.svg' %}" alt="">
+                        <input type="email" name="email" id="email" placeholder="Seu endereço de e-mail..." autocomplete="off">
+                    </div>
+                    <div class="input-container">
+                        <label for="senha">Digite sua senha</label>
+                        <img src="{% static './img/password-icon.svg' %}" alt="">
+                        <input type="password" name="email" id="email" placeholder="Sua senha..." autocomplete="off">
+                    </div>
+                    <a href="trilhas.html" class="btn-login">Entrar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="./scripts/button.js"></script>
+{% endblock %}

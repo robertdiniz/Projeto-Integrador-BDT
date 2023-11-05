@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/register.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- header -->
+{% include 'header.html' %}
+<!-- end header-->
+
+    <main class="main-register">
+        <div class="main-container-register">
+            <h1>Criar Conta</h1>
+            <div class="register-container">
+                <img src="{% static '' %}./img/aluno.svg" alt="Imagem ilustrativa de aluno">
+                <div class="register">
+                    <form action="{% url 'register' %}" method="post" class="register-form" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <div class="input-container">
+                            {{ form.nome_usuario.label_tag }}
+                            <img src="{% static './img/user-register.svg' %}" alt="">
+                            {{ form.nome_usuario }}
+
+                        </div>
+                        <div class="input-container">
+                            {{ form.nome_completo.label_tag }}
+                            <img src="{% static './img/document.svg' %}" alt="">
+                            {{ form.nome_completo }}
+                        </div>
+                        <div class="input-container">
+                            {{ form.email.label_tag }}
+                            <img src="{% static './img/email-icon.svg' %}" alt="">
+                            {{ form.email }}
+                        </div>
+                        <div class="input-container">
+                            {{ form.senha.label_tag }}
+                            <img src="{% static './img/password-icon.svg' %}" alt="">
+                            <input type="password" name="senha" id="senha" placeholder="Insira sua melhor senha...">
+                        </div>
+                        <div class="input-container">
+                            {{ form.matricula.label_tag }}
+                            <label for="matricula" class="matricula-register">
+                                <img src="{% static './img/upload-icon.svg' %}" alt="">
+                                <span>Enviar minha matrícula</span>
+                                <input type="file" name="matricula" id="matricula" accept=".png, .pdf">
+                            </label>
+                        </div>
+                        <button href="trilhas.html" class="btn-register">Criar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="./scripts/button.js"></script>
+
+{% endblock %}

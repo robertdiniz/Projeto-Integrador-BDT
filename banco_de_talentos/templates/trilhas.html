@@ -1,115 +1,61 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Theme Color Meta -->
-    <meta name="theme-color" content="#9779FB" />
-    <!-- Windows Phone -->
-    <meta name="msapplication-navbutton-color" content="#9779FB" />
-    <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Banco de Talentos - Nadic</title>
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="styles/header.css">
-    <link rel="stylesheet" href="styles/trilhas.css">
-    <link rel="stylesheet" href="styles/header-login.css">
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/trilhas.css' %}">
+{% endblock %}
+{% block content %}
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;700&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;700&family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+    <!-- Header -->
+    {% include 'header.html' %}
+    <!-- end header -->
 
-</head>
-<body>
-    
-    <header>
-        <div class="header-container">
-            <nav>
-                <a href="index.html"><img src="./img/nadic.BDT.svg" alt="Logo" class="logo"></a>
-                <img src="./img/menu-burguer.svg" alt="Menu" class="menu-burger" onclick="toggleMenu()">
-                <div class="pages">
-                    <ul>
-                        <li><a href="index.html">Início</a></li>
-                    </ul>
+<main class="main-trilhas">
+    <div class="main-trilhas-container">
+        <h1>Seja bem vindo, Aluno(a)!</h1>
+        <p>Escolha uma trilha de estudos que você deseja fazer...</p>
+        <div class="trilhas-container">
+            <button class="btn-trilhas" onclick="escolherTrilha()">
+                <div class="trilha-card">
+                    <img src="{% static './img/backend-icon.svg' %}" alt="">
+                    <p>TRILHA BACK-END</p>
                 </div>
-                <div class="sessao">
-                    <div class="search-container">
-                        <form action="search.html">
-                            <div class="search">
-                                <input type="text" name="search-value" id="search-value">
-                                <img src="./img/search-icon.svg" alt="">
-                            </div>
-                        </form>
-                    </div>
-                    <img src="./img/perfil-icon.svg" alt="ícone de perfil">
-                    <ul>
-                        <li><a href="login.html">Entrar</a></li>
-                        <li><a href="register.html" class="register">Registrar-se</a></li>
-                        <li><a href="trilha.html">Trilha</a></li>
-                        <li><a href="search.html">Buscar</a></li>
-                        <li><a href="perfil.html">Meu perfil</a></li>
-                        <li><a href="settings.html">Configurações</a></li>
-                        <li><a href="index.html">Sair</a></li>
-                    </ul>
+            </button>
+            <button class="btn-trilhas" onclick="escolherTrilha()">
+                <div class="trilha-card">
+                    <img src="{% static './img/React-SVG.svg' %}" alt="">
+                    <p>TRILHA FRONT-END</p>
                 </div>
-            </nav>
+            </button>
+            <button class="btn-trilhas" onclick="escolherTrilha()">
+                <div class="trilha-card">
+                    <img src="{% static './img/mobile-icon.svg' %}" alt="">
+                    <p>TRILHA MOBILE</p>
+                </div>
+            </button>
+            <button class="btn-trilhas" onclick="escolherTrilha()">
+                <div class="trilha-card">
+                    <img src="{% static './img/design-system-icon.svg' %}" alt="">
+                    <p>TRILHA DESIGN SYSTEM</p>
+                </div>
+            </button>
         </div>
-    </header>
-
-    <main class="main-trilhas">
-        <div class="main-trilhas-container">
-            <h1>Seja bem vindo, Aluno(a)!</h1>
-            <p>Escolha uma trilha de estudos que você deseja fazer...</p>
-            <div class="trilhas-container">
-                <button class="btn-trilhas" onclick="escolherTrilha()">
-                    <div class="trilha-card">
-                        <img src="./img/backend-icon.svg" alt="">
-                        <p>TRILHA BACK-END</p>
-                    </div>
-                </button>
-                <button class="btn-trilhas" onclick="escolherTrilha()">
-                    <div class="trilha-card">
-                        <img src="./img/React-SVG.svg" alt="">
-                        <p>TRILHA FRONT-END</p>
-                    </div>
-                </button>
-                <button class="btn-trilhas" onclick="escolherTrilha()">
-                    <div class="trilha-card">
-                        <img src="./img/mobile-icon.svg" alt="">
-                        <p>TRILHA MOBILE</p>
-                    </div>
-                </button>
-                <button class="btn-trilhas" onclick="escolherTrilha()">
-                    <div class="trilha-card">
-                        <img src="./img/design-system-icon.svg" alt="">
-                        <p>TRILHA DESIGN SYSTEM</p>
-                    </div>
-                </button>
-            </div>
+    </div>
+    <div class="fade"></div>
+    <div class="modal">
+        <div id="modal-container">
+            <img src="{% static './img/warning-icon.svg' %}" alt="Imagem de aviso">
+            <span class="text-modal">
+                <h1>Atenção!</h1>
+                <p>Só é possível realizar uma trilha por vez, então se optar por outra seu progresso pode ser perdido.</p>
+            </span>
+            <span class="modal-btn">
+                <a href="trilha.html" onclick="escolherTrilha()">Fazer trilha</a>
+                <a onclick="escolherTrilha()">Cancelar</a>
+            </span>
         </div>
-        <div class="fade"></div>
-        <div class="modal">
-            <div id="modal-container">
-                <img src="./img/warning-icon.svg" alt="Imagem de aviso">
-                <span class="text-modal">
-                    <h1>Atenção!</h1>
-                    <p>Só é possível realizar uma trilha por vez, então se optar por outra seu progresso pode ser perdido.</p>
-                </span>
-                <span class="modal-btn">
-                    <a href="trilha.html" onclick="escolherTrilha()">Fazer trilha</a>
-                    <a onclick="escolherTrilha()">Cancelar</a>
-                </span>
-            </div>
-        </div>
-    </main>
+    </div>
+</main>
 
-    <script src="./scripts/button.js"></script>
-    <script src="./scripts/modal-trilha.js"></script>
+<script src="{% static './scripts/modal-trilha.js' %}"></script>
 
-</body>
-</html>
+{% endblock %}

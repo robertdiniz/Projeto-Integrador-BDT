@@ -1,73 +1,19 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Theme Color Meta -->
-    <meta name="theme-color" content="#9779FB" />
-    <!-- Windows Phone -->
-    <meta name="msapplication-navbutton-color" content="#9779FB" />
-    <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Banco de Talentos - Nadic</title>
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="styles/header.css">
-    <link rel="stylesheet" href="styles/perfil.css">
-    <link rel="stylesheet" href="styles/header-login.css">
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/perfil.css' %}">
+{% endblock %}
+{% block content %}
 
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;700&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;700&family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
-
-</head>
-<body>
-    
-    <header>
-        <div class="header-container">
-            <nav>
-                <a href="index.html"><img src="./img/nadic.BDT.svg" alt="Logo" class="logo"></a>
-                <img src="./img/menu-burguer.svg" alt="Menu" class="menu-burger" onclick="toggleMenu()">
-                <div class="pages">
-                    <ul>
-                        <li><a href="index.html">Início</a></li>
-                        <li><a href="trilha.html">Trilha</a></li>
-                    </ul>
-                </div>
-                <div class="sessao">
-                    <div class="search-container">
-                        <form action="search.html">
-                            <div class="search">
-                                <input type="text" name="search-value" id="search-value">
-                                <img src="./img/search-icon.svg" alt="">
-                            </div>
-                        </form>
-                    </div>
-                    <img src="./img/perfil-icon.svg" alt="ícone de perfil">
-                    <ul>
-                        <li><a href="login.html">Entrar</a></li>
-                        <li><a href="register.html" class="register">Registrar-se</a></li>
-                        <li><a href="trilha.html">Trilha</a></li>
-                        <li><a href="filtered-search.html">Buscar</a></li>
-                        <li><a href="perfil.html">Meu perfil</a></li>
-                        <li><a href="settings.html">Configurações</a></li>
-                        <li><a href="index.html">Sair</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </header>
+    <!-- Header -->
+    {% include 'header.html' %}
+    <!-- end header -->
 
     <main class="main-perfil">
         <div class="main-container-perfil">
             <div class="perfil-header">
                 <span class="foto-dados">
-                    <img src="./img/aluno-normal.svg" alt="" width="146px" height="146px">
+                    <img src="{% static '' %}./img/aluno-normal.svg" alt="" width="150px" height="150px">
                     <span class="aluno-dados">
                         <h1>NOME DO ALUNO COMPLETO</h1>
                         <p>Back-end</p>
@@ -78,14 +24,14 @@
                     </span>
                 </span>
                 <span class="aluno-redes">
-                    <a href="edit.html" class="btn-edit-perfil">Editar perfil</a>
-                    <a href="settings.html" class="btn-edit-perfil">Configurar Conta</a>
+                    <a href="{% url 'edit' %}" class="btn-edit-perfil">Editar perfil</a>
+                    <a href="{% url 'settings' %}" class="btn-edit-perfil">Configurar Conta</a>
                     <ul>
-                        <li><a href="#"><img src="./img/linkedin.svg" alt="ícone linkedin" width="24px" height="24px"></a></li>
-                        <li><a href="#"><img src="./img/github.svg" alt="ícone github" width="24px" height="24px"></a></li>
-                        <li><a href="#"><img src="./img/discord-normal.svg" alt="ícone discord" width="24px" height="24px"></a></li>
-                        <li><a href="#"><img src="./img/instagram-normal.svg" alt="ícone instagram" width="24px" height="24px"></a></li>
-                        <li><a href="#"><img src="./img/wpp-normal.svg" alt="ícone whatsapp" width="24px" height="24px"></a></li>
+                        <li><a href="#"><img src="{% static './img/linkedin.svg' %}" alt="ícone linkedin" width="24px" height="24px"></a></li>
+                        <li><a href="#"><img src="{% static './img/github.svg' %}" alt="ícone github" width="24px" height="24px"></a></li>
+                        <li><a href="#"><img src="{% static './img/discord-normal.svg' %}" alt="ícone discord" width="24px" height="24px"></a></li>
+                        <li><a href="#"><img src="{% static './img/instagram-normal.svg' %}" alt="ícone instagram" width="24px" height="24px"></a></li>
+                        <li><a href="#"><img src="{% static './img/wpp-normal.svg' %}" alt="ícone whatsapp" width="24px" height="24px"></a></li>
                     </ul>
                 </span>
             </div>
@@ -96,21 +42,21 @@
             <div class="perfil-selos">
                 <h2>Selos</h2>
                 <div class="perfil-selos-container">
-                    <img src="./img/git.svg" alt="" width="32px" height="32px">
-                    <img src="./img/github.svg" alt="" width="32px" height="32px">
-                    <img src="./img/mysql-locked.svg" alt="" width="32px" height="32px">
-                    <img src="./img/postgre-locked.svg" alt="" width="32px" height="32px">
-                    <img src="./img/python-locked.svg" alt="" width="32px" height="32px">
-                    <img src="./img/git-locked.svg" alt="" width="32px" height="32px">
-                    <img src="./img/github-locked.svg" alt="" width="32px" height="32px">
-                    <img src="./img/mysql-locked.svg" alt="" width="32px" height="32px">
-                    <img src="./img/postgre-locked.svg" alt="" width="32px" height="32px"> 
-                    <img src="./img/python-locked.svg" alt="" width="32px" height="32px">
-                    <img src="./img/git-locked.svg" alt="" width="32px" height="32px">
-                    <img src="./img/github-locked.svg" alt="" width="32px" height="32px">
-                    <img src="./img/mysql-locked.svg" alt="" width="32px" height="32px">
-                    <img src="./img/postgre-locked.svg" alt="" width="32px" height="32px">
-                    <img src="./img/python-locked.svg" alt="" width="32px" height="32px">
+                    <img src="{% static './img/git.svg' %}" alt="" width="32px" height="32px">
+                    <img src="{% static './img/github.svg' %}" alt="" width="32px" height="32px">
+                    <img src="{% static './img/mysql-locked.svg' %}" alt="" width="32px" height="32px">
+                    <img src="{% static './img/postgre-locked.svg' %}" alt="" width="32px" height="32px">
+                    <img src="{% static './img/python-locked.svg' %}" alt="" width="32px" height="32px">
+                    <img src="{% static './img/git-locked.svg' %}" alt="" width="32px" height="32px">
+                    <img src="{% static './img/github-locked.svg' %}" alt="" width="32px" height="32px">
+                    <img src="{% static './img/mysql-locked.svg' %}" alt="" width="32px" height="32px">
+                    <img src="{% static './img/postgre-locked.svg' %}" alt="" width="32px" height="32px"> 
+                    <img src="{% static './img/python-locked.svg' %}" alt="" width="32px" height="32px">
+                    <img src="{% static './img/git-locked.svg' %}" alt="" width="32px" height="32px">
+                    <img src="{% static './img/github-locked.svg' %}" alt="" width="32px" height="32px">
+                    <img src="{% static './img/mysql-locked.svg' %}" alt="" width="32px" height="32px">
+                    <img src="{% static './img/postgre-locked.svg' %}" alt="" width="32px" height="32px">
+                    <img src="{% static './img/python-locked.svg' %}" alt="" width="32px" height="32px">
                 </div>
             </div>
             <div class="perfil-trilhas">
@@ -118,28 +64,28 @@
                 <div class="trilhas-container">
                     <div class="trilha-card">
                         <span>
-                        <img src="./img/backend-icon.svg" alt="">
+                        <img src="{% static './img/backend-icon.svg' %}" alt="">
                         <p>Trilha back-end</p>    
                         </span>
                         <p class="trilha-status">Em progresso...</p>
                     </div>
                     <div class="trilha-card">
                         <span>
-                        <img src="./img/front-locked.svg" alt="">
+                        <img src="{% static './img/front-locked.svg' %}" alt="">
                         <p>Trilha front-end</p>    
                         </span>
                         <p class="trilha-status">Em progresso...</p>
                     </div>
                     <div class="trilha-card">
                         <span>
-                        <img src="./img/mobile-locked.svg" alt="">
+                        <img src="{% static './img/mobile-locked.svg' %}" alt="">
                         <p>Trilha Mobile</p>    
                         </span>
                         <p class="trilha-status">Em progresso...</p>
                     </div>
                     <div class="trilha-card">
                         <span>
-                        <img src="./img/design-locked.svg" alt="">
+                        <img src="{% static './img/design-locked.svg' %}" alt="">
                         <p>Trilha Design System</p>    
                         </span>
                         <p class="trilha-status">Em progresso...</p>
@@ -150,7 +96,5 @@
     </main>
 
     <script src="./scripts/button.js"></script>
-
-</body>
-</html>
+{% endblock %}
 

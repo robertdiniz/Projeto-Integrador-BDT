@@ -16,7 +16,8 @@
         <div class="login-container">
             <img src="{% static './img/aluno.svg' %}" alt="Imagem ilustrativa de aluno">
             <div class="login">
-                <form action="#" class="login-form">
+                <form action="{% url 'login' %}" class="login-form" method="post">
+                    {% csrf_token %}
                     <div class="input-container">
                         <label for="email">Digite seu e-mail</label>
                         <img src="{% static './img/email-icon.svg' %}" alt="">
@@ -25,9 +26,9 @@
                     <div class="input-container">
                         <label for="senha">Digite sua senha</label>
                         <img src="{% static './img/password-icon.svg' %}" alt="">
-                        <input type="password" name="email" id="email" placeholder="Sua senha..." autocomplete="off">
+                        <input type="password" name="senha" id="senha" placeholder="Sua senha..." autocomplete="off">
                     </div>
-                    <a href="trilhas.html" class="btn-login">Entrar</a>
+                    <button type="submit" class="btn-login">Entrar</button>
                 </form>
             </div>
         </div>

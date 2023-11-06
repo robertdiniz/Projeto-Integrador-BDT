@@ -103,7 +103,8 @@
 }
 
 .settings-email img{
-    width: 24px;
+    width: 20px;
+    height: 20px;
     padding: 0; 
     background-color: none; 
     border-radius: 0;
@@ -124,6 +125,7 @@
 
 .input-password img {
     width: 20px;
+    height: 20px;
     padding: 0; 
     background-color: none; 
     border-radius: 0;

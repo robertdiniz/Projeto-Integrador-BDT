@@ -1,94 +1,41 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Theme Color Meta -->
-    <meta name="theme-color" content="#9779FB" />
-    <!-- Windows Phone -->
-    <meta name="msapplication-navbutton-color" content="#9779FB" />
-    <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Banco de Talentos - Nadic</title>
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="styles/header.css">
-    <link rel="stylesheet" href="styles/perfil.css">
-    <link rel="stylesheet" href="styles/edit-perfil.css">
-    <link rel="stylesheet" href="styles/settings.css">
-    <link rel="stylesheet" href="styles/header-login.css">
+{% extends 'base.html' %}
+{% load static %}
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;700&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;700&family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/settings.css' %}">
+{% endblock %}
 
-</head>
-<body>
-    
-    <header>
-        <div class="header-container">
-            <nav>
-                <a href="index.html"><img src="./img/nadic.BDT.svg" alt="Logo" class="logo"></a>
-                <img src="./img/menu-burguer.svg" alt="Menu" class="menu-burger" onclick="toggleMenu()">
-                <div class="pages">
-                    <ul>
-                        <li><a href="index.html">Início</a></li>
-                        <li><a href="trilha.html">Trilha</a></li>
-                    </ul>
-                </div>
-                <div class="sessao">
-                    <div class="search-container">
-                        <form action="search.html">
-                            <div class="search">
-                                <input type="text" name="search-value" id="search-value">
-                                <img src="./img/search-icon.svg" alt="">
-                            </div>
-                        </form>
-                    </div>
-                    <img src="./img/perfil-icon.svg" alt="ícone de perfil">
-                    <ul>
-                        <li><a href="login.html">Entrar</a></li>
-                        <li><a href="register.html" class="register">Registrar-se</a></li>
-                        <li><a href="trilha.html">Trilha</a></li>
-                        <li><a href="search.html">Buscar</a></li>
-                        <li><a href="perfil.html">Meu perfil</a></li>
-                        <li><a href="settings.html">Configurações</a></li>
-                        <li><a href="index.html">Sair</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </header>
+{% block content %}
+
+    <!-- Header -->
+    {% include 'header.html' %}
+    <!-- end header -->
 
     <main class="main-settings">
         <div class="main-container-settings">
-            <img src="./img/aluno-normal.svg" alt="">
+            <img src="{% static './img/aluno-normal.svg' %}" alt="">
             <h1>Configurações da conta</h1>
-            <form action="" class="form-settings">
+            <form action="{% url 'settings' %}" method="post" class="form-settings">
                 <div class="settings-email">
                     <label for="email">Alterar e-mail</label>
                     <div class="input-email">
-                        <img src="./img/email-icon.svg" alt="">
+                        <img src="{% static './img/email-icon.svg' %}" alt="">
                         <input type="email" name="email" id="email" placeholder="Insira seu novo-email...">
                     </div>
                 </div>
                 <div class="settings-senha">
                     <label for="senha">Alterar senha</label>
                     <div class="input-password">
-                        <img src="./img/password-icon.svg" alt="">
+                        <img src="{% static './img/password-icon.svg' %}" alt="">
                         <input type="password" name="senha" id="senha" placeholder="Insira sua senha atual...">
                     </div>
                     <div class="input-password">
-                        <img src="./img/password-icon.svg" alt="">
-                        <input type="password" name="n-senha" id="n-senha" placeholder="Insira sua nova senha...">
+                        <img src="{% static './img/password-icon.svg' %}" alt="">
+                        <input type="password1" name="n-senha" id="n-senha" placeholder="Insira sua nova senha...">
                     </div>
                     <div class="input-password">
-                        <img src="./img/password-icon.svg" alt="">
-                        <input type="password" name="r-senha" id="r-senha" placeholder="Repita nova sua nova senha...">
+                        <img src="{% static './img/password-icon.svg' %}" alt="">
+                        <input type="password2" name="r-senha" id="r-senha" placeholder="Repita nova sua nova senha...">
                     </div>
                 </div>
                 <div class="private-perfil">
@@ -113,7 +60,7 @@
                 </div>
                 <div class="submit-settings-container">
                     <div class="submit-settings">
-                        <img src="./img/settings-icon.svg" alt="">
+                        <img src="{% static './img/settings-icon.svg' %}" alt="">
                         <input type="submit" value="Salvar alterações">
                     </div>
                 </div>
@@ -127,8 +74,4 @@
         </div>
     </main>
 
-    <script src="./scripts/button.js"></script>
-
-</body>
-</html>
-
+{% endblock %}

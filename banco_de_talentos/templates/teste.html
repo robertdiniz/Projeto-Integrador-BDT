@@ -1,23 +1,13 @@
-{% extends 'base.html' %}
-{% load static %}
+<form method="post" action="{% url 'teste' %}">
+    {% csrf_token %}
+    <!-- Primeiro formulário -->
+    <input type="text" name="campo1" value="Valor do Campo 1">
+    <button type="submit">Enviar Formulário 1</button>
+</form>
 
-{% block css %}
-    <link rel="stylesheet" href="{% static 'styles/main-home.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/footer.css' %}">
-{% endblock %}
-
-{% block content %}
-
-    <!-- header -->
-    {% include 'header.html' %}
-    <!-- end header -->
-
-    <!-- main homepage content -->
-    {% include 'main-home.html' %}
-    <!-- end of home page content -->
-
-    <!-- footer -->
-    {% include 'footer.html' %}
-    <!-- end footer -->
-
-{% endblock %}
+<form method="post" action="{% url 'teste' %}">
+    {% csrf_token %}
+    <!-- Segundo formulário -->
+    <input type="text" name="campo2" value="Valor do Campo 2">
+    <button type="submit">Enviar Formulário 2</button>
+</form>

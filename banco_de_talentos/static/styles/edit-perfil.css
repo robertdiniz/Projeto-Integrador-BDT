@@ -1,3 +1,24 @@
+.main-container-perfil {
+    display: flex;
+}
+
+.perfil-header {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.perfil-header form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.foto-dados {
+    flex-direction: column;
+    cursor: pointer;
+}
+
 .image-edit {
     position: relative;
     display: flex;
@@ -19,7 +40,6 @@
     justify-content: center;
     visibility: visible;
     font-weight: bold;
-    
 }
 
 .image-edit button {
@@ -50,7 +70,7 @@
     font-style: italic;
 }
 
-.btn-edit-confirm-container a:hover {
+.btn-edit-confirm-container button:hover {
     outline: 1px solid #9779FB;
     transition: 0.6s;
     transform: scale(1.1);
@@ -71,17 +91,18 @@
     gap: 1rem;
 }
 
-.btn-edit-perfil {
-    display: none;
-}
-
 .btn-edit-confirm {
     background-color: #121314;
     text-decoration: none;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     align-self: flex-end;
+    border: none;
+    cursor: pointer;
+
 }
+
+
 
 .aluno-redes ul {
     background-color: #121314;
@@ -96,6 +117,13 @@
 .form-bio {
     width: 90%;
     height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#bio {
+    width: 60%;
 }
 
 .aluno-redes ul li a img {
@@ -105,7 +133,7 @@
     border-radius: 0;
 }
 
-.form-bio textarea {
+.perfil-bio textarea {
     background-color: #121314;
     border: none;
     width: 100%;
@@ -116,7 +144,7 @@
     resize: none;
 }
 
-.form-bio textarea:focus {
+.perfil-bio textarea:focus {
     outline: 1px solid #9779FB;
 }
 
@@ -144,22 +172,45 @@
     z-index: 6;
     padding: 2rem;
     visibility: hidden;
-    width: 30vw;
+    width: 45vw;
 }
 
 .modal-active {
     visibility: visible;
 }
 
-#modal-container-form {
+.modal-bio {
+    max-width: 90%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #202024;
+    height: auto;
+    border-radius: 0.5rem;
+    z-index: 6;
+    padding: 2rem;
+    visibility: hidden;
+    width: 45vw;
+}
+
+.modal-active-bio {
+    visibility: visible;
+}
+
+#modal-container-form-bio {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 2rem;
+    width: 100%;
+    background-color: #202024;
+    padding: 2rem;
+    border-radius: 0.8rem;
 }
 
-#modal-container-form h2 {
+#modal-container-form h1 {
     font-size: 1.5rem;
 }
 
@@ -208,7 +259,6 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
     align-items: flex-end;
     gap: 3rem;
 }
@@ -219,6 +269,8 @@
     text-decoration: none;
     padding: 0.8rem;
     cursor: pointer;
+    background-color: #202024;
+    border: none;
 }
 
 .btn-social-cancel {
@@ -226,12 +278,149 @@
     text-decoration: none;
     background-color: #9779FB;
     padding: 0.8rem;
-    border-radius: 0.8rem;
+    border-radius: 0.5rem;
     cursor: pointer;
+    border: none;
+    text-align: center;
 }
+
+#modal-container-form-bio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+    background-color: #202024;
+    padding: 2rem;
+    border-radius: 1rem;
+}
+
+#modal-container-form-bio form h1 {
+    font-size: 2rem;
+}
+
+#modal-container-form-bio form {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-direction: column;
+}
+
+#modal-container-form-bio h1 {
+    font-size: 1.5rem;
+}
+
+#modal-container-form-bio form textarea{
+    background-color: #121314;
+    border: none;
+    width: 100%;
+    height: 90%;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    resize: none;
+}
+
+#modal-container-form-bio h2 {
+    font-size: 1.5rem;
+}
+
+/* Photo Modal */ 
+.modal-photo {
+    max-width: 90%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #202024;
+    height: auto;
+    border-radius: 0.5rem;
+    z-index: 6;
+    padding: 2rem;
+    visibility: hidden;
+    width: 45vw;
+}
+
+#modal-container-form-photo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+    background-color: #202024;
+    padding: 2rem;
+    border-radius: 1rem;
+}
+
+#modal-container-form-photo form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+}
+
+#modal-container-form-photo img {
+    background-color: #121314;
+    border-radius: 5rem;
+    padding: 0.7rem;
+}
+
+.fade-trocar-imagem-form {
+    width: 123px;
+    height: 123px;
+    background-color: rgba(128, 128, 128, 0.712);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    visibility: hidden;
+}
+
+.fade-trocar-imagem-active {
+    visibility: visible;
+}
+
+.modal-active-photo {
+    visibility: visible;
+}
+
+
 
 @media (max-width: 800px) {
     .modal {
         width: 90vw;
     }
+
+    .modal-bio {
+        width: 90vw;
+        max-width: 90%;
+    }
+
+    .modal-photo {
+        width: 90vw;
+        max-width: 90%;
+    }
+
+    .btn-social {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: normal;
+    }
+
+    .btn-social-confirm {
+        margin-top: 0;
+    }
+
+    #bio {
+        width: 90%;
+    }
+
 }

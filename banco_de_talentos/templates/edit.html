@@ -13,29 +13,13 @@
     <main class="main-perfil">
         <div class="main-container-perfil">
             <div class="perfil-header">
-                <span class="foto-dados">
+                <span class="foto-dados" onclick="modalPhoto()">
                     <span class="image-edit">
-                        <button onclick="fadeTrocarImagem()">
-                            <div class="fade-trocar-imagem">Trocar imagem</div>
-                            <img src="{% static '' %}./img/aluno-normal.svg" alt="" >
-                        </button>
-                    </span>
-                    <span class="aluno-dados">
-                        <h1>NOME DO ALUNO COMPLETO</h1>
-                        <p>Back-end</p>
-                        <p>Nível 1 - Back-End</p>
-                        <div class="progresso">
-                            <div class="level"></div>
-                        </div>
+                        <div class="fade-trocar-imagem">Trocar imagem</div>
+                        <img src="{% static './img/aluno-normal.svg' %}" alt="" >
                     </span>
                 </span>
                 <span class="aluno-redes">
-                    <a href="edit.html" class="btn-edit-perfil">Editar perfil</a>
-                    <span class="btn-edit-confirm-container">
-                        <img src="{% static './img/pencil-icon.svg' %}" alt="" class="pencil-icon">
-                        <a href="perfil.html" class="btn-edit-confirm">Salvar alterações</a>
-                    </span>
-                    
                     <ul onclick="mostrarModal()">
                         <li><a href="#"><img src="{% static './img/linkedin-normal.svg' %}" alt=""></a></li>
                         <li><a href="#"><img src="{% static './img/github-normal.svg' %}" alt=""></a></li>
@@ -47,93 +31,75 @@
             </div>
             <div class="perfil-bio">
                 <h2>Sobre mim</h2>
-                <form action="#" class="form-bio">
-                    <textarea name="bio" id="bio" cols="30" rows="8" value="" maxlength="250">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore suscipit amet quaerat maiores consectetur facere, cumque est dolore impedit dignissimos libero autem saepe hic corporis ipsam earum aliquam vero. Sed?</textarea>
-                </form>
+                <textarea name="bio" id="bio" cols="30" rows="8" maxlength="150" onclick="modalBio()">{{ aluno.bio }}</textarea>
             </div>
-            <div class="perfil-selos">
-                <h2>Selos</h2>
-                <div class="perfil-selos-container">
-                    <img src="{% static './img/git-locked.svg' %}" alt="">
-                    <img src="{% static './img/mysql-locked.svg' %}" alt="">
-                    <img src="{% static './img/mysql-locked.svg' %}" alt="">
-                    <img src="{% static './img/postgre-locked.svg' %}" alt="">
-                    <img src="{% static './img/python-locked.svg' %}" alt="">
-                    <img src="{% static './img/git-locked.svg' %}" alt="">
-                    <img src="{% static './img/mysql-locked.svg' %}" alt="">
-                    <img src="{% static './img/mysql-locked.svg' %}" alt="">
-                    <img src="{% static './img/postgre-locked.svg' %}" alt="">
-                    <img src="{% static './img/python-locked.svg' %}" alt="">
-                    <img src="{% static './img/git-locked.svg' %}" alt="">
-                    <img src="{% static './img/mysql-locked.svg' %}" alt="">
-                    <img src="{% static './img/mysql-locked.svg' %}" alt="">
-                    <img src="{% static './img/postgre-locked.svg' %}" alt="">
-                    <img src="{% static './img/python-locked.svg' %}" alt="">
-                </div>
-            </div>
-            <div class="perfil-trilhas">
-                <h2>Trilhas realizadas</h2>
-                <div class="trilhas-container">
-                    <div class="trilha-card">
-                        <span>
-                        <img src="{% static './img/backend-icon.svg' %}" alt="">
-                        <p>Trilha back-end</p>    
-                        </span>
-                        <p class="trilha-status">Em progresso...</p>
-                    </div>
-                    <div class="trilha-card">
-                        <span>
-                        <img src="{% static './img/front-locked.svg' %}" alt="">
-                        <p>Trilha front-end</p>    
-                        </span>
-                        <p class="trilha-status">Em progresso...</p>
-                    </div>
-                    <div class="trilha-card">
-                        <span>
-                        <img src="{% static './img/mobile-locked.svg' %}" alt="">
-                        <p>Trilha Mobile</p>    
-                        </span>
-                        <p class="trilha-status">Em progresso...</p>
-                    </div>
-                    <div class="trilha-card">
-                        <span>
-                        <img src="{% static './img/design-locked.svg' %}" alt="">
-                        <p>Trilha Design System</p>    
-                        </span>
-                        <p class="trilha-status">Em progresso...</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+            
+        </form>
+            
         <!-- Modals -->
         <div class="fade"></div>
         <div class="modal">
             <div id="modal-container-form">
-                <h2>Redes Sociais</h2>
-                <form action="" class="form-redes">
-                    <div class="input-social">
-                        <img src="{% static './img/linkedin-normal.svg' %}" alt="ícone linkedin">
-                        <input type="url" name="linkedin" id="linkedin" placeholder="Insira a URL do seu Linkedin...">
-                    </div>
-                    <div class="input-social">
-                        <img src="{% static './img/github-normal.svg' %}" alt="ícone github">
-                        <input type="url" name="github" id="github" placeholder="Insira a URL do seu Github...">
-                    </div>
-                    <div class="input-social">
-                        <img src="{% static './img/discord-normal.svg' %}" alt="ícone discord">
-                        <input type="url" name="discord" id="discord" placeholder="Insira seu Discord...">
-                    </div>
-                    <div class="input-social">
-                        <img src="{% static './img/instagram-normal.svg' %}" alt="ícone instagram">
-                        <input type="url" name="instagram" id="instagram" placeholder="Insira a URL do seu Instagram...">
-                    </div>
-                    <div class="input-social">
-                        <img src="{% static './img/wpp-normal.svg' %}" alt="ícone whatsapp">
-                        <input type="url" name="whatsapp" id="whatsapp" placeholder="Insira a URL do seu Whatsapp...">
-                    </div>
+                <form action="{% url 'edit' %}" method="post" class="form-redes">
+                    {% csrf_token %}
+                    <h1>Redes Sociais</h1>
+                        <div class="input-social">
+                            <img src="{% static './img/linkedin-normal.svg' %}" alt="ícone linkedin">
+                            {{ form_rede_social.linkedin }}
+                        </div>
+                        <div class="input-social">
+                            <img src="{% static './img/github-normal.svg' %}" alt="ícone github">
+                            {{ form_rede_social.github }}
+                        </div>
+                        <div class="input-social">
+                            <img src="{% static './img/discord-normal.svg' %}" alt="ícone discord">
+                            {{ form_rede_social.discord }}
+                        </div>
+                        <div class="input-social">
+                            <img src="{% static './img/instagram-normal.svg' %}" alt="ícone instagram">
+                            {{ form_rede_social.instagram }}
+                        </div>
+                        <div class="input-social">
+                            <img src="{% static './img/wpp-normal.svg' %}" alt="ícone whatsapp">
+                            {{ form_rede_social.whatsapp }}
+                        </div>
+                        <div class="btn-social">
+                            <button type="submit" class="btn-social-confirm" >Salvar</button>
+                            <a onclick="mostrarModal()" class="btn-social-cancel" >Cancelar</a>
+                        </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-photo">
+            <div id="modal-container-form-photo">
+                <form action="{% url 'edit' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <h2>Alterar imagem</h2>
+                    <label for="photo">
+                        <span class="foto-dados">
+                            <span class="image-edit" >
+                                <img src="{% static './img/aluno-normal.svg' %}" alt="">
+                                <input type="file" name="photo" id="photo" style="display: none;">
+                            </span>
+                        </span>
+                    </label>
                     <div class="btn-social">
-                        <a class="btn-social-confirm" onclick="mostrarModal()">Salvar</a>
-                        <a class="btn-social-cancel" onclick="mostrarModal()">Cancelar</a>
+                        <button type="submit" class="btn-social-confirm" >Salvar</button>
+                        <a onclick="modalPhoto()" class="btn-social-cancel" >Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-bio">
+            <div id="modal-container-form-bio">
+                <form action="{% url 'edit' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <h2>Alterar Descrição</h2>
+                    <textarea name="bio" id="bio" cols="30" rows="8" maxlength="150">{{ aluno.bio }}</textarea>
+                    <div class="btn-social">
+                        <button type="submit" class="btn-social-confirm" >Salvar</button>
+                        <a onclick="modalBio()" class="btn-social-cancel" >Cancelar</a>
                     </div>
                 </form>
             </div>
@@ -142,6 +108,8 @@
 
     <script src="{% static './scripts/fadeTrocarImagem.js' %}"></script>
     <script src="{% static './scripts/modalSociais.js' %}"></script>
+    <script src="{% static './scripts/modalBio.js' %}"></script>
+    <script src="{% static './scripts/modalPhoto.js' %}"></script>
 
 {% endblock %}
 

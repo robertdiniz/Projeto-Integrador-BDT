@@ -33,7 +33,7 @@
                     {% else %}
                         <li class="links-mobile"><a href="trilha.html">Trilha</a></li>
                         <li class="links-mobile"><a href="search.html">Buscar</a></li>
-                        <li><a href="{% url 'perfil' %}">Meu perfil</a></li>
+                        <li><a href="{% url 'perfil' user.id %}">Meu perfil</a></li>
                         <li class="links-mobile"><a href="settings.html">Configurações</a></li>
                         <li><a href="{% url 'logout' %}">Sair</a></li>
                     {% endif %}

@@ -13,9 +13,9 @@
         <div class="main-container-perfil">
             <div class="perfil-header">
                 <span class="foto-dados">
-                    <img src="{% static '' %}./img/aluno-normal.svg" alt="" width="150px" height="150px">
+                    <img {% if aluno.foto %} src="{{ aluno.foto.url }}" {% else %} src="{% static 'img/aluno-normal.svg' %}" {% endif %} alt="" width="150px" height="150px">
                     <span class="aluno-dados">
-                        <h1>NOME DO ALUNO COMPLETO</h1>
+                        <h1>{{ aluno.nome_completo|upper }}</h1>
                         <p>Back-end</p>
                         <p>Nível 1 - Back-End</p>
                         <div class="progresso">
@@ -27,11 +27,31 @@
                     <a href="{% url 'edit' %}" class="btn-edit-perfil">Editar perfil</a>
                     <a href="{% url 'settings' %}" class="btn-edit-perfil">Configurar Conta</a>
                     <ul>
-                        <li><a href="#"><img src="{% static './img/linkedin.svg' %}" alt="ícone linkedin" width="24px" height="24px"></a></li>
-                        <li><a href="#"><img src="{% static './img/github.svg' %}" alt="ícone github" width="24px" height="24px"></a></li>
-                        <li><a href="#"><img src="{% static './img/discord-normal.svg' %}" alt="ícone discord" width="24px" height="24px"></a></li>
-                        <li><a href="#"><img src="{% static './img/instagram-normal.svg' %}" alt="ícone instagram" width="24px" height="24px"></a></li>
-                        <li><a href="#"><img src="{% static './img/wpp-normal.svg' %}" alt="ícone whatsapp" width="24px" height="24px"></a></li>
+                        <li>
+                            <a {% if aluno.linkedin %} href="{{ aluno.linkedin }}" target="_blank" {% endif %}>
+                                <img src="{% if aluno.linkedin %}{% static './img/linkedin.svg' %}{% else %}{% static './img/linkedin-normal.svg' %}{% endif %}" alt="ícone linkedin" width="24px" height="24px">
+                            </a>
+                        </li>
+                        <li>
+                            <a {% if aluno.github %} href="{{ aluno.github }}"  target="_blank" {% endif %}>
+                                <img src="{% if aluno.github %}{% static './img/github.svg' %}{% else %}{% static './img/github-normal.svg' %}{% endif %}" alt="ícone github" width="24px" height="24px">
+                            </a>
+                        </li>
+                        <li>    
+                            <a {% if aluno.discord %} href="{{ aluno.discord }}" target="_blank" {% endif %}>
+                                <img src="{% if aluno.discord %}{% static './img/discord.svg' %}{% else %}{% static './img/discord-normal.svg' %}{% endif %}" alt="ícone discord" width="24px" height="24px">
+                            </a>
+                        </li>
+                        <li>
+                            <a {% if aluno.instagram %} href="{{ aluno.instagram }}" target="_blank" {% endif %}>
+                                <img src="{% if aluno.instagram %}{% static './img/instagram.svg' %}{% else %}{% static './img/instagram-normal.svg' %}{% endif %}" alt="ícone instagram" width="24px" height="24px">
+                            </a>
+                        </li>
+                        <li>
+                            <a {% if aluno.whatsapp %} href="{{ aluno.wpp }}" target="_blank" {% endif %}>
+                                <img src="{% if aluno.whatsapp %}{% static './img/wpp.svg' %}{% else %}{% static './img/wpp-normal.svg' %}{% endif %}" alt="ícone whatsapp" width="24px" height="24px">
+                            </a>
+                        </li>
                     </ul>
                 </span>
             </div>

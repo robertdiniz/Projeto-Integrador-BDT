@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.models import User
-from .forms import AlunoForm
+from .forms import AlunoForm, AlunoRedesSociaisForm
 from .models import Aluno
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_sistema
@@ -58,10 +58,10 @@ def register(request):
 
 
 def settings(request):
-    
-    
+    user = request.user
 
-    return render(request, "settings.html")
+    context = {"id_atual": user.id}
+    return render(request, "settings.html", context)
 
 
 def tregister(request):
@@ -74,3 +74,34 @@ def tregister(request):
         print(dir(form))
 
     return render(request, "tregister.html", {"form": form})
+
+
+def perfil(request, id):
+    user = request.user
+    aluno = Aluno.objects.get(id=id)
+    print(perfil)
+
+    context = {"perfil": perfil, "aluno": aluno}
+
+    return render(request, "perfil.html", context)
+
+
+def edit(request):
+    user = request.user
+
+    if str(request.method) == "POST":
+        # Se o usuário tiver postado alguma imagem
+        if "photo" in request.FILES:
+            photo = request.FILES["photo"]
+            aluno = Aluno.objects.get(nome_completo=user.aluno.nome_completo)
+            aluno.foto = photo
+            aluno.save()
+        # Processando formulário de redes sociais
+        form_redes_sociais = AlunoRedesSociaisForm(request.POST, instance=user.aluno)
+        if form_redes_sociais.is_valid():
+            form_redes_sociais.save()
+            return redirect("settings")
+    else:
+        form_redes_sociais = AlunoRedesSociaisForm(instance=user.aluno)
+
+        return render(request, "edit.html", {"form_rede_social": form_redes_sociais})

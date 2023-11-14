@@ -1,10 +1,17 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.models import User
-from .forms import AlunoForm, AlunoRedesSociaisForm
+from .forms import (
+    AlunoForm,
+    AlunoRedesSociaisForm,
+    AlunoBioGrafiaForm,
+    AlunoChangeEmailForm,
+    AlunoChangePasswordForm,
+)
 from .models import Aluno
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, update_session_auth_hash
 from django.contrib.auth import login as login_sistema
 from django.contrib.auth import logout as logout_sistema
+from pprint import pprint
 
 
 def login(request):
@@ -57,10 +64,33 @@ def register(request):
     return render(request, "register.html", {"form": form})
 
 
+"""
+    -*-* Settings -*-*
+    - Validar as senhas (?)
+"""
+
+
 def settings(request):
     user = request.user
 
-    context = {"id_atual": user.id}
+    if str(request.method) == "POST":
+        if "email" in request.POST:
+            form_change_email = AlunoChangeEmailForm(request.POST, instance=user)
+            if form_change_email.is_valid():
+                form_change_email.save()
+                return HttpResponse("E-mail alterado com sucesso!")
+        elif "submit_change_password" in request.POST:
+            form_change_password = AlunoChangePasswordForm(request.POST)
+
+            if form_change_password.is_valid():
+                new_password = form_change_password.cleaned_data["new_password"]
+                confirm_password = form_change_password.cleaned_data["confirm_password"]
+                user.set_password(new_password)
+                user.save()
+                update_session_auth_hash(request, user)
+                return HttpResponse("Senha alterada com sucesso!")
+
+    context = {"id_atual": user.id, "form_change_password": AlunoChangePasswordForm()}
     return render(request, "settings.html", context)
 
 
@@ -96,12 +126,27 @@ def edit(request):
             aluno = Aluno.objects.get(nome_completo=user.aluno.nome_completo)
             aluno.foto = photo
             aluno.save()
-        # Processando formulário de redes sociais
-        form_redes_sociais = AlunoRedesSociaisForm(request.POST, instance=user.aluno)
-        if form_redes_sociais.is_valid():
-            form_redes_sociais.save()
-            return redirect("settings")
+        # Verifica qual formulário foi enviado
+        if "submit_redes_sociais" in request.POST:
+            form_redes_sociais = AlunoRedesSociaisForm(
+                request.POST, instance=user.aluno
+            )
+            if form_redes_sociais.is_valid():
+                form_redes_sociais.save()
+                return redirect("settings")
+
+        if "submit_biografia" in request.POST:
+            form_biografia = AlunoBioGrafiaForm(request.POST, instance=user.aluno)
+            if form_biografia.is_valid():
+                form_biografia.save()
+                return redirect("settings")
+
     else:
         form_redes_sociais = AlunoRedesSociaisForm(instance=user.aluno)
+        form_biografia = AlunoBioGrafiaForm(instance=user.aluno)
 
-        return render(request, "edit.html", {"form_rede_social": form_redes_sociais})
+        return render(
+            request,
+            "edit.html",
+            {"form_rede_social": form_redes_sociais, "form_biografia": form_biografia},
+        )

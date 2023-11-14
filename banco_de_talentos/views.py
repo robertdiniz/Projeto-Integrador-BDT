@@ -18,7 +18,6 @@ def teste(request):
         campo1 = request.POST.get("campo1")
         campo2 = request.POST.get("campo2")
 
-
         # Agora você deve obter os dados de ambos os campos
         return HttpResponse(f"Campo 1: {campo1}, Campo 2: {campo2}")
 

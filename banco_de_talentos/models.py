@@ -1,3 +1,36 @@
 from django.db import models
 
-# Create your models here.
+
+class Tarefa(models.Model):
+    nome = models.CharField(
+        "Nome da tarefa:", max_length=50, null=True, blank=True, default=""
+    )
+
+    def __str__(self):
+        return self.nome
+
+
+class Modulo(models.Model):
+    nome = models.CharField(
+        "Nome do módulo:", max_length=50, null=True, blank=True, default=""
+    )
+
+    tarefas = models.ManyToManyField(
+        Tarefa, related_name="modulos", null=True, default="", blank=True
+    )
+
+    def __str__(self):
+        return self.nome
+
+
+class Trilha(models.Model):
+    nome = models.CharField(
+        "Nome da trilha:", max_length=50, null=True, blank=True, default=""
+    )
+
+    modulos = models.ManyToManyField(
+        Modulo, related_name="trilhas", null=True, default="", blank=True
+    )
+
+    def __str__(self):
+        return self.nome

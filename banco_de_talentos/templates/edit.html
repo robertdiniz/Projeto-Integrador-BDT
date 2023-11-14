@@ -16,7 +16,7 @@
                 <span class="foto-dados" onclick="modalPhoto()">
                     <span class="image-edit">
                         <div class="fade-trocar-imagem">Trocar imagem</div>
-                        <img src="{% static './img/aluno-normal.svg' %}" alt="" >
+                        <img {% if user.aluno.foto %} src="{{ user.aluno.foto.url }}" {% else %} src="{% static 'img/aluno-normal.svg' %}" {% endif %} alt="" width="150px" height="150px">
                     </span>
                 </span>
                 <span class="aluno-redes">
@@ -65,7 +65,7 @@
                             {{ form_rede_social.whatsapp }}
                         </div>
                         <div class="btn-social">
-                            <button type="submit" class="btn-social-confirm" >Salvar</button>
+                            <button type="submit" name="submit_redes_sociais" class="btn-social-confirm" >Salvar</button>
                             <a onclick="mostrarModal()" class="btn-social-cancel" >Cancelar</a>
                         </div>
                 </form>
@@ -96,9 +96,9 @@
                 <form action="{% url 'edit' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <h2>Alterar Descrição</h2>
-                    <textarea name="bio" id="bio" cols="30" rows="8" maxlength="150">{{ aluno.bio }}</textarea>
+                    {{ form_biografia.bio }}
                     <div class="btn-social">
-                        <button type="submit" class="btn-social-confirm" >Salvar</button>
+                        <button type="submit" name="submit_biografia" class="btn-social-confirm" >Salvar</button>
                         <a onclick="modalBio()" class="btn-social-cancel" >Cancelar</a>
                     </div>
                 </form>

@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.models import User
 from .models import Aluno
 
 
@@ -52,3 +53,19 @@ class AlunoBioGrafiaForm(forms.ModelForm):
     class Meta:
         model = Aluno
         fields = ["bio"]
+
+
+# Settings
+class AlunoChangeEmailForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ["email"]
+
+
+class AlunoChangePasswordForm(forms.Form):
+    new_password = forms.CharField(
+        widget=forms.PasswordInput(attrs={"placeholder": "Nova senha..."})
+    )
+    confirm_password = forms.CharField(
+        widget=forms.PasswordInput(attrs={"placeholder": "Confirmar senha..."})
+    )

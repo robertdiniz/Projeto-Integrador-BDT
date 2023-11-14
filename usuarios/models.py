@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from banco_de_talentos.models import Trilha
 
 
 class Aluno(models.Model):
@@ -7,7 +8,7 @@ class Aluno(models.Model):
     nome_completo = models.CharField(
         "Nome completo: ", max_length=60, null=False, blank=False
     )
-    bio = models.CharField(
+    bio = models.TextField(
         "Biografia:", max_length=150, null=True, default="", blank=True
     )
     foto = models.ImageField(
@@ -24,14 +25,9 @@ class Aluno(models.Model):
         "Whatsapp:", blank=True, null=True, default="", max_length=10
     )
 
-    def get_redes_sociais(self):
-        return [
-            (self.linkedin, "caminho/para/linkedin.svg"),
-            (self.github, "caminho/para/github.svg"),
-            (self.discord, "caminho/para/discord-normal.svg"),
-            (self.instagram, "caminho/para/instagram-normal.svg"),
-            (self.whatsapp, "caminho/para/wpp-normal.svg"),
-        ]
+    trilhas = models.ManyToManyField(
+        Trilha, related_name="alunos", null=True, default="", blank=True
+    )
 
     def __str__(self):
         return self.nome_completo

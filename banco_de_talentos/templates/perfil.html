@@ -57,7 +57,11 @@
             </div>
             <div class="perfil-bio">
                 <h2>Sobre mim</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore suscipit amet quaerat maiores consectetur facere, cumque est dolore impedit dignissimos libero autem saepe hic corporis ipsam earum aliquam vero. Sed?</p>
+                {% if aluno.bio %}
+                    <p>{{ aluno.bio }}</p>
+                {% else %}
+                <p>Esse usuário não tem descrição!</p>
+                {% endif %}
             </div>
             <div class="perfil-selos">
                 <h2>Selos</h2>

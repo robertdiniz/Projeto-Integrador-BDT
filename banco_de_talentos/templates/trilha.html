@@ -9,15 +9,21 @@
     {% include 'header.html' %}
     <!-- end header -->
 
+    {{ trilha }}
+
+    {{ modulos }}
+
     <main class="main-trilha">
         <div class="main-trilha-container">
             <span class="span-trilha-container">
-                <h1>Trilha Back-End</h1>
+                <h1>Trilha {{ trilha.nome }}</h1>
                 <p>Quando finalizar alguma tarefa marque como feito e ganhe selos exclusivos para seu perfil!</p>
             </span>
+
+            {% for modulo in modulos %}
             <div class="checklist-trilha">
                 <div class="trilha-header">
-                    <h1>Parte 1 - Git/Github</h1>
+                    <h1>{{ modulo.nome }}</h1>
                     <div class="selos">
                         <img src="{% static './img/git-locked.svg' %}" alt="">
                         <img src="{% static './img/github-locked.svg' %}" alt="">
@@ -25,52 +31,23 @@
                 </div>
                 <div class="trilha-tasks">
                     <form action="?">
-                        <label for="task1">
-                            <div class="task">
-                                <input type="checkbox" name="task1" id="task1">
-                                <span>1 - Clone de Repositório</span>
-                            </div>
-                        </label>
-                        <label for="task2">
-                            <div class="task">
-                                <input type="checkbox" name="task2" id="task2">
-                                <span>2 - Criação de Repositório</span>
-                            </div>
-                        </label>
+                        {% csrf_token %}
+                        
+                            {% for tarefa in modulo.tarefas.all %}
+                                <label for="{{ tarefa.id }}">
+                                    <div class="task">
+                                        <input type="checkbox" name="tasks" id="{{ tarefa.id }}">
+                                        <span>{{ tarefa.nome }}</span>
+                                    </div>
+                                </label>
+                            {% endfor %}
                     </form>
                 </div>
                 <div class="trilha-submit">
                     <a onclick="enviarRepositorio()">Enviar Repositório</a>
                 </div>
             </div>
-            <div class="checklist-trilha">
-                <div class="trilha-header">
-                    <h1>Parte 1 - Git/Github</h1>
-                    <div class="selos">
-                        <img src="{% static './img/git-locked.svg' %}" alt="">
-                        <img src="{% static './img/github-locked.svg' %}" alt="">
-                    </div>
-                </div>
-                <div class="trilha-tasks">
-                    <form action="?">
-                        <label for="task1">
-                            <div class="task">
-                                <input type="checkbox" name="task1" id="task1">
-                                <span>1 - Clone de Repositório</span>
-                            </div>
-                        </label>
-                        <label for="task2">
-                            <div class="task">
-                                <input type="checkbox" name="task2" id="task2">
-                                <span>2 - Criação de Repositório</span>
-                            </div>
-                        </label>
-                    </form>
-                </div>
-                <div class="trilha-submit">
-                    <a onclick="enviarRepositorio()">Enviar Repositório</a>
-                </div>
-            </div>
+            {% endfor %}
         </div>
         <div class="fade" onclick="enviarRepositorio()"></div>
         <div class="modal">

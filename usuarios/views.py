@@ -109,7 +109,11 @@ def tregister(request):
 def perfil(request, id):
     user = request.user
     aluno = Aluno.objects.get(id=id)
-    print(perfil)
+
+    busca = request.POST.get("nome")
+
+    if busca:
+        return redirect("buscar")
 
     context = {"perfil": perfil, "aluno": aluno}
 
@@ -120,26 +124,26 @@ def edit(request):
     user = request.user
 
     if str(request.method) == "POST":
-        # Se o usuário tiver postado alguma imagem
         if "photo" in request.FILES:
             photo = request.FILES["photo"]
             aluno = Aluno.objects.get(nome_completo=user.aluno.nome_completo)
             aluno.foto = photo
             aluno.save()
-        # Verifica qual formulário foi enviado
+            return redirect("edit")
+
         if "submit_redes_sociais" in request.POST:
             form_redes_sociais = AlunoRedesSociaisForm(
                 request.POST, instance=user.aluno
             )
             if form_redes_sociais.is_valid():
                 form_redes_sociais.save()
-                return redirect("settings")
+                return redirect("edit")
 
         if "submit_biografia" in request.POST:
             form_biografia = AlunoBioGrafiaForm(request.POST, instance=user.aluno)
             if form_biografia.is_valid():
                 form_biografia.save()
-                return redirect("settings")
+                return redirect("edit")
 
     else:
         form_redes_sociais = AlunoRedesSociaisForm(instance=user.aluno)
@@ -150,3 +154,21 @@ def edit(request):
             "edit.html",
             {"form_rede_social": form_redes_sociais, "form_biografia": form_biografia},
         )
+
+
+def buscar(request):
+    nome = request.GET.get("nome")
+
+    if nome:
+        perfis = Aluno.objects.filter(nome_completo__icontains=nome).all()
+
+        context = {"perfis": perfis}
+
+        return render(request, "search.html", context)
+    else:
+        perfis = Aluno.objects.all()
+
+        context = {"perfis": perfis}
+
+        return render(request, "search.html", context)
+

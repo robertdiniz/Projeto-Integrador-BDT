@@ -1,13 +1,6 @@
-<form method="post" action="{% url 'teste' %}">
+<form action="{% url 'teste' %}" method="post">
     {% csrf_token %}
-    <!-- Primeiro formulário -->
-    <input type="text" name="campo1" value="Valor do Campo 1">
-    <button type="submit">Enviar Formulário 1</button>
-</form>
-
-<form method="post" action="{% url 'teste' %}">
-    {% csrf_token %}
-    <!-- Segundo formulário -->
-    <input type="text" name="campo2" value="Valor do Campo 2">
-    <button type="submit">Enviar Formulário 2</button>
+{% for tarefa in tarefas %}
+<button type="submit" name="submit_tarefa" value="{{ tarefa.id }}" >{{ tarefa.nome }}</button>
+{% endfor %}
 </form>

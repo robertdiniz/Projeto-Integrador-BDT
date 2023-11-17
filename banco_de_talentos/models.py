@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class Tarefa(models.Model):
     nome = models.CharField(
         "Nome da tarefa:", max_length=50, null=True, blank=True, default=""
@@ -16,7 +15,7 @@ class Modulo(models.Model):
     )
 
     tarefas = models.ManyToManyField(
-        Tarefa, related_name="modulos", null=True, default="", blank=True
+        Tarefa, related_name="tarefas", default="", blank=True
     )
 
     def __str__(self):
@@ -28,8 +27,12 @@ class Trilha(models.Model):
         "Nome da trilha:", max_length=50, null=True, blank=True, default=""
     )
 
+    imagem = models.ImageField(
+        "Imagem da trilha", upload_to="trilhas/", null=True, default="", blank=True
+    )
+
     modulos = models.ManyToManyField(
-        Modulo, related_name="trilhas", null=True, default="", blank=True
+        Modulo, related_name="trilhas", default="", blank=True
     )
 
     def __str__(self):

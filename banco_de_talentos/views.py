@@ -1,4 +1,5 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
+from .models import Trilha, Tarefa
 
 
 def index(request):
@@ -6,19 +7,40 @@ def index(request):
 
 
 def trilhas(request):
-    return render(request, "trilhas.html")
+
+    user = request.user
+
+    if request.method == "POST":
+        trilha = request.POST.get("trilha")
+        trilha_escolhida = Trilha.objects.get(nome=trilha)
+        user.aluno.trilhas.add(trilha_escolhida)
+        user.aluno.trilha_atual = trilha_escolhida
+        user.aluno.save()
+        return redirect("trilha")
+    else:
+        trilhas = Trilha.objects.all()
+        return render(request, "trilhas.html", {"trilhas": trilhas})
 
 
 def trilha(request):
-    return render(request, "trilha.html")
+
+    user = request.user
+
+    trilha = user.aluno.trilha_atual
+    modulos = trilha.modulos.all()
+    
+    for modulo in modulos:
+        print(modulo.tarefas.all())
+
+    return render(request, "trilha.html", {'trilha': trilha, 'modulos': modulos})
 
 
 def teste(request):
+    
+    tarefas = Tarefa.objects.all()
+
     if request.method == "POST":
-        campo1 = request.POST.get("campo1")
-        campo2 = request.POST.get("campo2")
+        atv = request.POST.get('submit_tarefa')
+        print(atv)
 
-        # Agora você deve obter os dados de ambos os campos
-        return HttpResponse(f"Campo 1: {campo1}, Campo 2: {campo2}")
-
-    return render(request, "teste.html")
+    return render(request, "teste.html", {'tarefas': tarefas})

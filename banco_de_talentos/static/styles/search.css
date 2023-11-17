@@ -49,7 +49,11 @@
 }
 
 .card-aluno img {
-    width: 6rem;
+    width: 100px;
+    height: 100px;
+    padding: 0.5rem;
+    background-color: #121314;
+    border-radius: 5rem;
 }
 
 .aluno-data {
@@ -73,6 +77,15 @@
     display: none;
 }
 
+.btn-search {
+    background-color: #9779FB;
+    font-weight: bold;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
 @media (max-width: 800px){
     .main-search-container h1 {
         width: 90vw;
@@ -84,6 +97,7 @@
         justify-content: center;
         background-color: #202024;
         padding: 1rem;
+        width: 90vw;
     }
 
     .search-container-header form {

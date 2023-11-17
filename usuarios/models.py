@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from banco_de_talentos.models import Trilha
+from banco_de_talentos.models import Trilha, Modulo
 
 
 class Aluno(models.Model):
@@ -26,8 +26,12 @@ class Aluno(models.Model):
     )
 
     trilhas = models.ManyToManyField(
-        Trilha, related_name="alunos", null=True, default="", blank=True
+        Trilha, related_name="alunos", default="", blank=True
     )
+
+    trilha_atual = models.ForeignKey(Trilha, related_name="alunos_em_andamento", blank=True, null=True, on_delete=models.SET_NULL)
+
+    modulos_concluidos = models.ManyToManyField(Modulo, related_name="modulos_concluidos",  blank=True)
 
     def __str__(self):
         return self.nome_completo

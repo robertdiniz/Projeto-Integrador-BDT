@@ -31,7 +31,7 @@
             </div>
             <div class="perfil-bio">
                 <h2>Sobre mim</h2>
-                <textarea name="bio" id="bio" cols="30" rows="8" maxlength="150" onclick="modalBio()">{{ aluno.bio }}</textarea>
+                <textarea name="bio" id="bio" cols="30" rows="8" maxlength="150" onclick="modalBio()">{{ user.aluno.bio }}</textarea>
             </div>
 
             
@@ -79,7 +79,7 @@
                     <label for="photo">
                         <span class="foto-dados">
                             <span class="image-edit" >
-                                <img src="{% static './img/aluno-normal.svg' %}" alt="">
+                                <img {% if user.aluno.foto %} src="{{ user.aluno.foto.url }}" {% else %} src="{% static 'img/aluno-normal.svg' %}" {% endif %} alt="" width="150px" height="150px">
                                 <input type="file" name="photo" id="photo" style="display: none;">
                             </span>
                         </span>

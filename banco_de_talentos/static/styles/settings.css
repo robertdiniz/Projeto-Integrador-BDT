@@ -374,24 +374,16 @@
     visibility: visible;
 }
 
-@media (max-width: 835px){
-    .main-container-settings {
-        height: 1100px;
-    }
-
-}
-
 @media (max-width: 768px) {
     /* Main Container */
     .main-container-settings {
         width: 90%;
-        height: 1000px;
     }
 }
 
 @media (max-width: 456px) {
     .main-container-settings {
-        height: 1120px;
+        height: 750px;
     }
 
     .modal-email {

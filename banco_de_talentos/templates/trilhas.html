@@ -11,33 +11,22 @@
 
 <main class="main-trilhas">
     <div class="main-trilhas-container">
-        <h1>Seja bem vindo, Aluno(a)!</h1>
+        <h1>Seja bem vindo, {{ user.username|upper }}!</h1>
         <p>Escolha uma trilha de estudos que você deseja fazer...</p>
         <div class="trilhas-container">
-            <button class="btn-trilhas" onclick="escolherTrilha()">
+            {% for trilha in trilhas %}
+            <button class="btn-trilhas" onclick="escolherTrilha('{{ trilha.nome }}')">
                 <div class="trilha-card">
-                    <img src="{% static './img/backend-icon.svg' %}" alt="">
-                    <p>TRILHA BACK-END</p>
+                    <img {% if trilha.imagem %} 
+                        src="{{ trilha.imagem.url }}" 
+                    {% else %} 
+                        src="{% static 'img/dev.svg' %}" 
+                    {% endif %}
+                    alt="Imagem da trilha {{ trilha.nome }}" width="64px" height="64px">
+                    <p>{{ trilha.nome }}</p>
                 </div>
             </button>
-            <button class="btn-trilhas" onclick="escolherTrilha()">
-                <div class="trilha-card">
-                    <img src="{% static './img/React-SVG.svg' %}" alt="">
-                    <p>TRILHA FRONT-END</p>
-                </div>
-            </button>
-            <button class="btn-trilhas" onclick="escolherTrilha()">
-                <div class="trilha-card">
-                    <img src="{% static './img/mobile-icon.svg' %}" alt="">
-                    <p>TRILHA MOBILE</p>
-                </div>
-            </button>
-            <button class="btn-trilhas" onclick="escolherTrilha()">
-                <div class="trilha-card">
-                    <img src="{% static './img/design-system-icon.svg' %}" alt="">
-                    <p>TRILHA DESIGN SYSTEM</p>
-                </div>
-            </button>
+            {% endfor %}
         </div>
     </div>
     <div class="fade"></div>
@@ -49,8 +38,12 @@
                 <p>Só é possível realizar uma trilha por vez, então se optar por outra seu progresso pode ser perdido.</p>
             </span>
             <span class="modal-btn">
-                <a href="trilha.html" onclick="escolherTrilha()">Fazer trilha</a>
-                <a onclick="escolherTrilha()">Cancelar</a>
+                <form action="{% url 'trilhas' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" id="trilha_selecionada" name="trilha" value="">
+                    <button type="submit" id="fazer-trilha">Fazer trilha</button>
+                </form>
+                <a onclick="exibirModalTrilha()">Cancelar</a>
             </span>
         </div>
     </div>

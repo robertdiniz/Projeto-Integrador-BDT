@@ -17,6 +17,7 @@
 }
 
 .main-trilhas-container h1 {
+    text-align: center;
     font-size: 3rem;
 }
 
@@ -27,13 +28,13 @@
 }
 
 .trilhas-container {
-    width: 90vw;
+    max-width: 90%;
+    width: 900px;
     margin-top: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 200px);
     gap: 1rem;
+    justify-content: center;
 }
 
 .btn-trilhas {
@@ -52,15 +53,17 @@
 
 /* Trilha CARD */
 .trilha-card {
+    max-width: 200px;
+    max-height: 180px;
+    height: 180px;
+    width: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
     padding: 2rem 1rem;
     background-color: #202024;
-    /* height: 30vh; */
-    height: 30vh;
-    width: 20vw;
+
     justify-content: center;
     border-radius: 8px;
 }
@@ -137,11 +140,16 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 }
 
-.modal-btn a {
+.modal-btn button {
     text-decoration: none;
     text-align: center;
+    background: none;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .modal-btn a:nth-child(1){

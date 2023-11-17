@@ -16,9 +16,10 @@
             <div class="sessao">
                 {% if request.user.is_authenticated %}
                 <div class="search-container">
-                    <form action="search.html">
+                    <form action="{% url 'buscar' %}" method="get">
+                        {% csrf_token %}
                         <div class="search">
-                            <input type="text" name="search-value" id="search-value">
+                            <input type="text" name="nome" id="nome">
                             <img src="{% static './img/search-icon.svg'%} " alt="">
                         </div>
                     </form>

@@ -99,8 +99,44 @@
     align-items: center;
 }
 
-.task span {
+.task .checkbox-task{
+    display: none;
+    position: relative;
+}
+
+.checkbox-personalizado {
+    height: 20px;
+    width: 20px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkbox-task:not(:checked) + .checkbox-personalizado{
+
+    border-radius: 0.1rem;
+    background-color: #121314;
+}
+
+.checkbox-task:checked + .checkbox-personalizado::after {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #121314;
+    background-color: #121314;
+    border-radius: 0.1rem;
+    content: '\2713';
+    color: #9779FB;
+    text-align: center;
+    font-weight: bold;
+    line-height: 14px;
+    position: absolute;
+}
+
+.task p {
+    text-align: left;
     font-size: 0.9rem;
+    color: #ffffff;
 }
 
 /* trilha submit */

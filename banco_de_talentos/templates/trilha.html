@@ -32,12 +32,12 @@
                 <div class="trilha-tasks">
                     <form action="?">
                         {% csrf_token %}
-                        
                             {% for tarefa in modulo.tarefas.all %}
-                                <label for="{{ tarefa.id }}">
+                                <label for="tarefa_{{ tarefa.id }}">
                                     <div class="task">
-                                        <input type="checkbox" name="tasks" id="{{ tarefa.id }}">
-                                        <span>{{ tarefa.nome }}</span>
+                                        <input type="checkbox" id="tarefa_{{ tarefa.id }}" name="tasks" class="checkbox-task">
+                                        <label for="tarefa_{{ tarefa.id }}" class="checkbox-personalizado"></label>
+                                        <p>{{ tarefa.nome }}</p>
                                     </div>
                                 </label>
                             {% endfor %}

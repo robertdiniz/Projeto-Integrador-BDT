@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from banco_de_talentos.models import Trilha, Modulo
+from banco_de_talentos.models import Trilha, Modulo, Tarefa
 
 
 class Aluno(models.Model):
@@ -35,3 +35,11 @@ class Aluno(models.Model):
 
     def __str__(self):
         return self.nome_completo
+
+class ConclusaoTarefa(models.Model):
+    aluno = models.ForeignKey(Aluno, null=True, on_delete=models.SET_NULL)
+    tarefa = models.ForeignKey(Tarefa, null=True, on_delete=models.SET_NULL)
+    concluida = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.aluno.nome_completo} - {self.tarefa.nome}'

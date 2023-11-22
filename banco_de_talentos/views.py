@@ -37,10 +37,12 @@ def trilha(request):
 
 def teste(request):
     
-    tarefas = Tarefa.objects.all()
+    user = request.user
 
-    if request.method == "POST":
-        atv = request.POST.get('submit_tarefa')
-        print(atv)
+    trilha = user.aluno.trilha_atual
+    modulos = trilha.modulos.all()
+    
+    for modulo in modulos:
+        print(modulo.tarefas.all())
 
-    return render(request, "teste.html", {'tarefas': tarefas})
+    return render(request, "teste.html", {'trilha': trilha, 'modulos': modulos})

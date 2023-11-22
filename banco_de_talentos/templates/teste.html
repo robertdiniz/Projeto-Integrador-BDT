@@ -1,6 +1,75 @@
-<form action="{% url 'teste' %}" method="post">
-    {% csrf_token %}
-{% for tarefa in tarefas %}
-<button type="submit" name="submit_tarefa" value="{{ tarefa.id }}" >{{ tarefa.nome }}</button>
-{% endfor %}
-</form>
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/trilha.css' %}">
+{% endblock %}
+{% block content %}
+
+    <!-- Header -->
+    {% include 'header.html' %}
+    <!-- end header -->
+
+    {{ trilha }}
+
+    {{ modulos }}
+
+    <main class="main-trilha">
+        <div class="main-trilha-container">
+            <span class="span-trilha-container">
+                <h1>Trilha {{ trilha.nome }}</h1>
+                <p>Quando finalizar alguma tarefa marque como feito e ganhe selos exclusivos para seu perfil!</p>
+            </span>
+
+            {% for modulo in modulos %}
+            <div class="checklist-trilha">
+                <div class="trilha-header">
+                    <h1>{{ modulo.nome }}</h1>
+                    <div class="selos">
+                        <img src="{% static './img/git-locked.svg' %}" alt="">
+                        <img src="{% static './img/github-locked.svg' %}" alt="">
+                    </div>
+                </div>
+                <div class="trilha-tasks">
+                    <form action="?">
+                        {% csrf_token %}
+                            {% for tarefa in modulo.tarefas.all %}
+                                <label for="tarefa_{{ tarefa.id }}">
+                                    <div class="task">
+                                        <input type="checkbox" id="tarefa_{{ tarefa.id }}" name="tasks" class="checkbox-task">
+                                        <label for="tarefa_{{ tarefa.id }}" class="checkbox-personalizado"></label>
+                                        <span>{{ tarefa.nome }}</span>
+                                    </div>
+                                </label>
+                            {% endfor %}
+                    </form>
+                </div>
+                <div class="trilha-submit">
+                    <a onclick="enviarRepositorio()">Enviar Repositório</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="fade" onclick="enviarRepositorio()"></div>
+        <div class="modal">
+            <div id="modal-container-form">
+                <h2>Enviar Repositório</h2>
+                <form action="?" class="form-submit-rep">
+                    <label for="submit">
+                        <div class="submit-url">
+                            <img src="./img/github-normal.svg" alt="">
+                            <input type="url" for="submit-rep" id="submit-rep" placeholder="Insira a URL do repositório...">
+                        </div>
+                        <div class="submit">
+                            <input type="submit" value="">
+                            <a onclick="enviarRepositorio()">Enviar</a>
+                            <a onclick="enviarRepositorio()">Cancelar</a>
+                        </div>
+                    </label>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="{% static '/scripts/enviarRepositorio.js' %}"></script>
+
+{% endblock %}

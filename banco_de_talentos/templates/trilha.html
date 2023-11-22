@@ -39,13 +39,22 @@
                                         <label for="tarefa_{{ tarefa.id }}" class="checkbox-personalizado"></label>
                                         <p>{{ tarefa.nome }}</p>
                                     </div>
+                                    {% if tarefa.descricao %}
+                                        <li>{{ tarefa.descricao }}</li>
+                                    {% endif %}
                                 </label>
                             {% endfor %}
                     </form>
                 </div>
-                <div class="trilha-submit">
-                    <a onclick="enviarRepositorio()">Enviar Repositório</a>
-                </div>
+                    {% if modulo.requer_projeto %}
+                    <div class="trilha-submit">
+                        <button onclick="enviarRepositorio('{{modulo.nome}}')">Enviar Repositório</button>
+                    </div>
+                    {% else %}
+                    <div class="trilha-submit">
+                        <p>Marcar como concluído</p>
+                    </div>
+                    {% endif %}
             </div>
             {% endfor %}
         </div>
@@ -53,18 +62,18 @@
         <div class="modal">
             <div id="modal-container-form">
                 <h2>Enviar Repositório</h2>
-                <form action="?" class="form-submit-rep">
-                    <label for="submit">
+                <form action="{% url 'trilha' %}" method="post" class="form-submit-rep">
+                    {% csrf_token %} 
                         <div class="submit-url">
-                            <img src="./img/github-normal.svg" alt="">
-                            <input type="url" for="submit-rep" id="submit-rep" placeholder="Insira a URL do repositório...">
+                            <img src="{% static './img/github-normal.svg' %}" alt="">
+                            <input type="hidden" id="modulo_selecionado" name="modulo_selecionado" value="">
+                            <input type="url" id="url-rep" placeholder="Insira a URL do repositório...">
                         </div>
                         <div class="submit">
-                            <input type="submit" value="">
-                            <a onclick="enviarRepositorio()">Enviar</a>
+                            <input type="submit" id="submit-rep">
+                            <button type="submit">Enviar</button>
                             <a onclick="enviarRepositorio()">Cancelar</a>
                         </div>
-                    </label>
                 </form>
             </div>
         </div>

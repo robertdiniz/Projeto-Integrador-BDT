@@ -43,3 +43,14 @@ class ConclusaoTarefa(models.Model):
 
     def __str__(self):
         return f'{self.aluno.nome_completo} - {self.tarefa.nome}'
+
+class Projeto(models.Model):
+    aluno = models.OneToOneField(Aluno, on_delete=models.CASCADE)
+    modulo = models.ForeignKey(Modulo, on_delete=models.CASCADE)
+    url_projeto = models.URLField(null=True, blank=True)
+
+    class Meta:
+        unique_together = ['aluno', 'modulo']
+
+    def __str__(self):
+        return f"Projeto de {self.aluno} para o módulo {self.modulo}"

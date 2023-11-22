@@ -152,7 +152,7 @@
 }
 
 /* incomplete tasks */
-.trilha-submit a {
+.trilha-submit button {
     text-decoration: none;
     border: none;
     padding: 0.4rem;

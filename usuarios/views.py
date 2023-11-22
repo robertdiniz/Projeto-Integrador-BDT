@@ -8,10 +8,11 @@ from .forms import (
     AlunoChangePasswordForm,
 )
 from .models import Aluno
+from banco_de_talentos.models import Trilha
 from django.contrib.auth import authenticate, update_session_auth_hash
 from django.contrib.auth import login as login_sistema
 from django.contrib.auth import logout as logout_sistema
-from pprint import pprint
+
 
 
 def login(request):
@@ -109,7 +110,7 @@ def tregister(request):
 def perfil(request, id):
     user = request.user
     aluno = Aluno.objects.get(id=id)
-
+    trilhas = Trilha.objects.all()
     busca = request.POST.get("nome")
 
     if busca:

@@ -86,34 +86,24 @@
             <div class="perfil-trilhas">
                 <h2>Trilhas realizadas</h2>
                 <div class="trilhas-container">
-                    <div class="trilha-card">
-                        <span>
-                        <img src="{% static './img/backend-icon.svg' %}" alt="">
-                        <p>Trilha back-end</p>    
-                        </span>
-                        <p class="trilha-status">Em progresso...</p>
-                    </div>
-                    <div class="trilha-card">
-                        <span>
-                        <img src="{% static './img/front-locked.svg' %}" alt="">
-                        <p>Trilha front-end</p>    
-                        </span>
-                        <p class="trilha-status">Em progresso...</p>
-                    </div>
-                    <div class="trilha-card">
-                        <span>
-                        <img src="{% static './img/mobile-locked.svg' %}" alt="">
-                        <p>Trilha Mobile</p>    
-                        </span>
-                        <p class="trilha-status">Em progresso...</p>
-                    </div>
-                    <div class="trilha-card">
-                        <span>
-                        <img src="{% static './img/design-locked.svg' %}" alt="">
-                        <p>Trilha Design System</p>    
-                        </span>
-                        <p class="trilha-status">Em progresso...</p>
-                    </div>
+
+                    {% if aluno.trilhas.all  %}
+
+                        {% for trilha in aluno.trilhas.all %}
+                            <div class="trilha-card">
+                                <span>
+                                <img src="{% static './img/backend-icon.svg' %}" alt="">
+                                <p>Trilha {{ trilha.nome }}</p>    
+                                </span>
+                                <p class="trilha-status">Em progresso...</p>
+                            </div>
+                        {% endfor %}
+
+                        {% else %}
+
+                            <h3>Não possui nenhuma trilha concluída</h3>
+                            
+                    {% endif %}
                 </div>
             </div>
         </div>

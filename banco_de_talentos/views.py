@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from .models import Trilha, Tarefa
-from usuarios.models import Projeto, Modulo
+from usuarios.models import ModuloAluno, Modulo
+from .forms import ModuloRepositorioForm, ModuloConcluidoForm
 
 def index(request):
     return render(request, "index.html")
@@ -19,24 +20,34 @@ def trilhas(request):
         return redirect("trilha")
     else:
         trilhas = Trilha.objects.all()
+
         return render(request, "trilhas.html", {"trilhas": trilhas})
 
 
 def trilha(request):
 
     user = request.user
-
     trilha = user.aluno.trilha_atual
     modulos = trilha.modulos.all()
-    
-    if request.method == "POST":
-        nome_modulo = request.POST.get('modulo_selecionado')
-        modulo = Modulo.objects.get(nome=nome_modulo)
-        url = request.POST.get('url-rep')
-        print(url)
-        projeto = Projeto.objects.create(aluno=user.aluno, modulo=modulo, url_projeto=url)
+    form = ModuloRepositorioForm()
+    form_concluido = ModuloConcluidoForm()
 
-    return render(request, "trilha.html", {'trilha': trilha, 'modulos': modulos})
+    if request.method == "POST":
+        
+        if 'modulo_selecionado' in request.POST:
+            nome_modulo = request.POST.get('modulo_selecionado')
+            modulo = Modulo.objects.get(nome=nome_modulo)
+            url = request.POST.get('url_projeto')
+            modulo_aluno = ModuloAluno.objects.create(aluno=user.aluno, modulo=modulo, url_projeto=url, concluido=True)
+            modulo_aluno.save()
+        elif 'modulo_concluir' in request.POST:
+            nome_modulo = request.POST.get('modulo_concluir')
+            modulo = Modulo.objects.get(nome=nome_modulo)
+            modulo_aluno = ModuloAluno.objects.create(aluno=user.aluno, modulo=modulo, concluido=True)
+            modulo_aluno.save()
+
+    return render(request, "trilha.html", {'trilha': trilha, 'modulos': modulos, 'form': form, 'form_concluido': form_concluido})
+
 
 
 def teste(request):

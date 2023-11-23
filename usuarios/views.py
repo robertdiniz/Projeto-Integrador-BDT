@@ -95,18 +95,6 @@ def settings(request):
     return render(request, "settings.html", context)
 
 
-def tregister(request):
-    if str(request.method) == "POST":
-        form = AlunoForm(request.POST)
-        if form.is_valid():
-            return redirect("login")
-    else:
-        form = AlunoForm()
-        print(dir(form))
-
-    return render(request, "tregister.html", {"form": form})
-
-
 def perfil(request, id):
     user = request.user
     aluno = Aluno.objects.get(id=id)
@@ -172,4 +160,5 @@ def buscar(request):
         context = {"perfis": perfis}
 
         return render(request, "search.html", context)
+
 

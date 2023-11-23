@@ -9,9 +9,7 @@
     {% include 'header.html' %}
     <!-- end header -->
 
-    {{ trilha }}
-
-    {{ modulos }}
+    {{ user.aluno.moduloaluno_set.filter }}
 
     <main class="main-trilha">
         <div class="main-trilha-container">
@@ -47,13 +45,17 @@
                     </form>
                 </div>
                     {% if modulo.requer_projeto %}
-                    <div class="trilha-submit">
-                        <button onclick="enviarRepositorio('{{modulo.nome}}')">Enviar Repositório</button>
-                    </div>
+                        <div class="trilha-submit">
+                            <button onclick="enviarRepositorio('{{modulo.nome}}')">Enviar Repositório</button>
+                        </div>
                     {% else %}
-                    <div class="trilha-submit">
-                        <p>Marcar como concluído</p>
-                    </div>
+                        <div class="trilha-submit">
+                            <form action="{% url 'trilha' %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="modulo_concluir" value="{{modulo.nome}}">
+                                <button type="submit">Marcar como concluído</button>
+                            </form>
+                        </div>
                     {% endif %}
             </div>
             {% endfor %}
@@ -67,7 +69,7 @@
                         <div class="submit-url">
                             <img src="{% static './img/github-normal.svg' %}" alt="">
                             <input type="hidden" id="modulo_selecionado" name="modulo_selecionado" value="">
-                            <input type="url" id="url-rep" placeholder="Insira a URL do repositório...">
+                            {{ form.url_projeto }}
                         </div>
                         <div class="submit">
                             <input type="submit" id="submit-rep">

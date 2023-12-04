@@ -2,7 +2,7 @@
 <header>
     <div class="header-container">
         <nav>
-            <a href="index.html"><img src="{% static './img/nadic.BDT.svg'%} " alt="Logo" class="logo"></a>
+            <a href="{% url 'trilha' %}"><img src="{% static './img/nadic.BDT.svg'%} " alt="Logo" class="logo"></a>
             <img src="{% static './img/menu-burguer.svg'%} " alt="Menu" class="menu-burger" onclick="toggleMenu()">
             <div class="pages">
                 <ul>
@@ -32,8 +32,8 @@
                         <li><a href="{% url 'login' %}">Entrar</a></li>
                         <li><a href="{% url 'register' %}" class="register">Registrar-se</a></li>
                     {% else %}
-                        <li class="links-mobile"><a href="trilha.html">Trilha</a></li>
-                        <li class="links-mobile"><a href="search.html">Buscar</a></li>
+                        <li class="links-mobile"><a href="{% url 'trilha' %}">Trilha</a></li>
+                        <li class="links-mobile"><a href="{% url 'buscar' %}">Buscar</a></li>
                         <li><a href="{% url 'perfil' user.aluno.id %}">Meu perfil</a></li>
                         <li class="links-mobile"><a href="{% url 'settings' %}">Configurações</a></li>
                         <li><a href="{% url 'logout' %}">Sair</a></li>

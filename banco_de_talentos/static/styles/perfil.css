@@ -147,6 +147,7 @@
     background-color: #202024;
     padding: 2rem 1rem 4rem 1rem;
     border-radius: 0.5rem;
+    width: 100%;
 }
 
 .perfil-bio p{
@@ -299,6 +300,7 @@
     }
 
     .perfil-selos {
+        width: 280px;
         height: 15em;
         justify-content: flex-start;
         gap: 1rem;
@@ -307,6 +309,10 @@
 
     .perfil-selos h2 {
         font-size: 1.3rem;
+    }
+
+    .perfil-selos p {
+        font-weight: bold;
     }
 
     .aluno-dados h1 {

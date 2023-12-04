@@ -6,6 +6,7 @@ from .forms import (
     AlunoBioGrafiaForm,
     AlunoChangeEmailForm,
     AlunoChangePasswordForm,
+    AlunoChangePerfilVisibility
 )
 from .models import Aluno
 from banco_de_talentos.models import Trilha
@@ -80,7 +81,7 @@ def settings(request):
             if form_change_email.is_valid():
                 form_change_email.save()
                 return HttpResponse("E-mail alterado com sucesso!")
-        elif "submit_change_password" in request.POST:
+        if "submit_change_password" in request.POST:
             form_change_password = AlunoChangePasswordForm(request.POST)
 
             if form_change_password.is_valid():
@@ -90,15 +91,33 @@ def settings(request):
                 user.save()
                 update_session_auth_hash(request, user)
                 return HttpResponse("Senha alterada com sucesso!")
+        if "submit_change_visibility" in request.POST:
+            form_change_visibility = AlunoChangePerfilVisibility(request.POST, instance=user.aluno)
+            if form_change_visibility.is_valid():
+                form_change_visibility.save()
+                return redirect('settings')
 
-    context = {"id_atual": user.id, "form_change_password": AlunoChangePasswordForm()}
+
+    print(AlunoChangePerfilVisibility)
+
+    context = {
+        "id_atual": user.id,
+        "form_change_password": AlunoChangePasswordForm(),
+        "form_change_visibility": AlunoChangePerfilVisibility(instance=user.aluno)
+    }
+    
     return render(request, "settings.html", context)
 
 
 def perfil(request, id):
+
     user = request.user
     aluno = Aluno.objects.get(id=id)
-    trilhas = Trilha.objects.all()
+
+    # Verificação da visibilidade do perfil do aluno e comparação se o aluno é o atual.
+    if aluno.perfil_privado and user.aluno.id != aluno.id:
+        return HttpResponse(f"O perfil {aluno.nome_completo} é privado!")
+    
     busca = request.POST.get("nome")
 
     if busca:
@@ -149,16 +168,28 @@ def buscar(request):
     nome = request.GET.get("nome")
 
     if nome:
-        perfis = Aluno.objects.filter(nome_completo__icontains=nome).all()
+        perfis = Aluno.objects.filter(nome_completo__icontains=nome, user__is_active=True).all()
 
         context = {"perfis": perfis}
 
         return render(request, "search.html", context)
     else:
-        perfis = Aluno.objects.all()
+        perfis = Aluno.objects.filter(user__is_active=True).all()
 
         context = {"perfis": perfis}
 
         return render(request, "search.html", context)
 
 
+def pedidos_cadastro(request):
+
+    usuarios = User.objects.filter(is_active=False)
+    email = request.POST.get('active-account')
+
+    if email:
+        usuario = User.objects.get(email=email)
+        usuario.is_active = True
+        usuario.save()
+        return redirect('pedidos_cadastro')
+
+    return render(request, 'requests.html', {"usuarios": usuarios})

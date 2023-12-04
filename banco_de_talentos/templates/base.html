@@ -11,7 +11,9 @@
         <!-- iOS Safari -->
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    
+
+        <link rel="shortcut icon" href="{% static 'img/nadic.BDT.svg' %}" type="image/x-icon">
+
         {% block title %}
             <title>Banco de Talentos - Nadic</title>
         {% endblock %}
@@ -37,6 +39,16 @@
     {% block content %}
 
     {% endblock %}
+
+    {% if user.is_superuser %}
+        <a href="{% url 'pedidos_cadastro' %}">
+            <div class="panel-staff">
+                <div class="panel-container">
+                    <img src="{% static 'img/panel-request.svg' %}" class="img-panel" alt="">
+                </div>
+            </div>
+        </a>
+    {% endif %}
 
     <script src="{% static './scripts/button.js' %}"></script>
  

@@ -16,7 +16,7 @@
                     <img {% if aluno.foto %} src="{{ aluno.foto.url }}" {% else %} src="{% static 'img/aluno-normal.svg' %}" {% endif %} alt="" width="150px" height="150px">
                     <span class="aluno-dados">
                         <h1>{{ aluno.nome_completo|upper }}</h1>
-                        <p>Back-end</p>
+                        <p>{{ aluno.trilha_atual }}</p>
                         <p>Nível 1 - Back-End</p>
                         <div class="progresso">
                             <div class="level"></div>
@@ -66,21 +66,13 @@
             <div class="perfil-selos">
                 <h2>Selos</h2>
                 <div class="perfil-selos-container">
-                    <img src="{% static './img/git.svg' %}" alt="" width="32px" height="32px">
-                    <img src="{% static './img/github.svg' %}" alt="" width="32px" height="32px">
-                    <img src="{% static './img/mysql-locked.svg' %}" alt="" width="32px" height="32px">
-                    <img src="{% static './img/postgre-locked.svg' %}" alt="" width="32px" height="32px">
-                    <img src="{% static './img/python-locked.svg' %}" alt="" width="32px" height="32px">
-                    <img src="{% static './img/git-locked.svg' %}" alt="" width="32px" height="32px">
-                    <img src="{% static './img/github-locked.svg' %}" alt="" width="32px" height="32px">
-                    <img src="{% static './img/mysql-locked.svg' %}" alt="" width="32px" height="32px">
-                    <img src="{% static './img/postgre-locked.svg' %}" alt="" width="32px" height="32px"> 
-                    <img src="{% static './img/python-locked.svg' %}" alt="" width="32px" height="32px">
-                    <img src="{% static './img/git-locked.svg' %}" alt="" width="32px" height="32px">
-                    <img src="{% static './img/github-locked.svg' %}" alt="" width="32px" height="32px">
-                    <img src="{% static './img/mysql-locked.svg' %}" alt="" width="32px" height="32px">
-                    <img src="{% static './img/postgre-locked.svg' %}" alt="" width="32px" height="32px">
-                    <img src="{% static './img/python-locked.svg' %}" alt="" width="32px" height="32px">
+                    {% if aluno.selos.exists %}
+                        {% for selo in aluno.selos.all %}
+                            <img src="{{ selo.selo_normal.url }}" alt="" width="32px" height="32px">
+                        {% endfor %}
+                        {% else %}
+                            <p>Não tem selos!</p>
+                    {% endif %}
                 </div>
             </div>
             <div class="perfil-trilhas">

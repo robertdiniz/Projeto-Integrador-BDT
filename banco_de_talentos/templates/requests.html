@@ -1,188 +1,66 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Theme Color Meta -->
-    <meta name="theme-color" content="#9779FB" />
-    <!-- Windows Phone -->
-    <meta name="msapplication-navbutton-color" content="#9779FB" />
-    <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Banco de Talentos - Nadic</title>
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="styles/header.css">
-    <link rel="stylesheet" href="styles/perfil.css">
-    <link rel="stylesheet" href="styles/edit-perfil.css">
-    <link rel="stylesheet" href="styles/search.css">
-    <link rel="stylesheet" href="styles/requests.css">
-    <link rel="stylesheet" href="styles/header-login.css">
+{% extends 'base.html' %}
+{% load static %}
 
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/search.css'%}">
+    <link rel="stylesheet" href="{% static 'styles/requests.css' %}">
+{% endblock %}
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;700&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;700&family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+{% block content %}
 
-</head>
-<body>
-    
-    <header>
-        <div class="header-container">
-            <nav>
-                <a href="index.html"><img src="./img/nadic.BDT.svg" alt="Logo" class="logo"></a>
-                <img src="./img/menu-burguer.svg" alt="Menu" class="menu-burger" onclick="toggleMenu()">
-                <div class="pages">
-                    <ul>
-                        <li><a href="index.html">Início</a></li>
-                        <li><a href="trilha.html">Trilha</a></li>
-                    </ul>
-                </div>
-                <div class="sessao">
-                    <div class="search-container">
-                        <form action="search.html">
-                            <div class="search">
-                                <input type="text" name="search-value" id="search-value">
-                                <img src="./img/search-icon.svg" alt="">
-                            </div>
-                        </form>
-                    </div>
-                    <img src="./img/perfil-icon.svg" alt="ícone de perfil">
-                    <ul>
-                        <li><a href="login.html">Entrar</a></li>
-                        <li><a href="register.html" class="register">Registrar-se</a></li>
-                        <li><a href="trilha.html">Trilha</a></li>
-                        <li><a href="search.html">Buscar</a></li>
-                        <li><a href="perfil.html">Meu perfil</a></li>
-                        <li><a href="settings.html">Configurações</a></li>
-                        <li><a href="index.html">Sair</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </header>
+<!-- header -->
+{% include 'header.html' %}
+<!-- end header-->
 
     <main class="main-search">
         <div class="main-search-container">
             <h1>Pedidos de Registros</h1>
-            <button class="btn-mostrar-aluno" onclick="mostrarDadosAluno()">
-                <div class="card-aluno">
-                    <img src="./img/aluno-normal.svg" alt="">
-                    <div class="aluno-data">
-                        <h2>NOME COMPLETO DO ALUNO</h2>
-                        <p>Back-end</p>
-                        <p>Nível 1 - Back-end</p>
-                        <div class="progresso">
-                            <div class="level"></div>
+            {% for usuario in usuarios %}
+                <button class="btn-mostrar-aluno" onclick="mostrarDadosAluno('{{usuario.username}}', '{{usuario.aluno.nome_completo|upper}}', '{{usuario.email}}', '{{usuario.aluno.matricula.url}}')">
+                    <div class="card-aluno">
+                        <img src="{% static './img/aluno-normal.svg'%}" alt="">
+                        <div class="aluno-data">    
+                            <p>{{ usuario.aluno.nome_completo|upper }}</p>
+                            <p>{{ usuario.email }}</p>
                         </div>
                     </div>
-                </div>
-            </button>
-            <button class="btn-mostrar-aluno" onclick="mostrarDadosAluno()">
-                <div class="card-aluno">
-                    <img src="./img/aluno-normal.svg" alt="">
-                    <div class="aluno-data">
-                        <h2>NOME COMPLETO DO ALUNO</h2>
-                        <p>Back-end</p>
-                        <p>Nível 1 - Back-end</p>
-                        <div class="progresso">
-                            <div class="level"></div>
-                        </div>
-                    </div>
-                </div>
-            </button>
-            <button class="btn-mostrar-aluno" onclick="mostrarDadosAluno()">
-                <div class="card-aluno">
-                    <img src="./img/aluno-normal.svg" alt="">
-                    <div class="aluno-data">
-                        <h2>NOME COMPLETO DO ALUNO</h2>
-                        <p>Back-end</p>
-                        <p>Nível 1 - Back-end</p>
-                        <div class="progresso">
-                            <div class="level"></div>
-                        </div>
-                    </div>
-                </div>
-            </button>
-            <button class="btn-mostrar-aluno" onclick="mostrarDadosAluno()">
-                <div class="card-aluno">
-                    <img src="./img/aluno-normal.svg" alt="">
-                    <div class="aluno-data">
-                        <h2>NOME COMPLETO DO ALUNO</h2>
-                        <p>Back-end</p>
-                        <p>Nível 1 - Back-end</p>
-                        <div class="progresso">
-                            <div class="level"></div>
-                        </div>
-                    </div>
-                </div>
-            </button>
-            <button class="btn-mostrar-aluno" onclick="mostrarDadosAluno()">
-                <div class="card-aluno">
-                    <img src="./img/aluno-normal.svg" alt="">
-                    <div class="aluno-data">
-                        <h2>NOME COMPLETO DO ALUNO</h2>
-                        <p>Back-end</p>
-                        <p>Nível 1 - Back-end</p>
-                        <div class="progresso">
-                            <div class="level"></div>
-                        </div>
-                    </div>
-                </div>
-            </button>
-            <button class="btn-mostrar-aluno" onclick="mostrarDadosAluno()">
-                <div class="card-aluno">
-                    <img src="./img/aluno-normal.svg" alt="">
-                    <div class="aluno-data">
-                        <h2>NOME COMPLETO DO ALUNO</h2>
-                        <p>Back-end</p>
-                        <p>Nível 1 - Back-end</p>
-                        <div class="progresso">
-                            <div class="level"></div>
-                        </div>
-                    </div>
-                </div>
-            </button>
+                </button>
+            {% endfor %}
         </div>
-        <div class="fade" onclick="mostrarDadosAluno()"></div>
+        <div class="fade"></div>
         <div class="modal">
             <div id="modal-container-aluno">
-                <img src="./img/aluno-normal.svg" alt="">
-                <h1>Informações do Aluno</h1>
+                <img src="{% static './img/aluno-normal.svg' %}" alt="">
+                <h1 class="title-modal-aluno"></h1>
                 <span>
-                    <h2>Nome completo do Aluno</h2>
-                    <p>John Doe Teixeira Almeida Oliveira Pereira</p>
+                    <h2>Nome completo</h2>
+                    <p class="nome-completo-aluno"></p>
                     <h2>Email</h2>
-                    <p>johndoe@gmail.com</p>
+                    <p class="email-aluno"></p>
                     <h2>Matrícula do Aluno</h2>
                     <span class="matricula">
-                        <img src="./img/download-icon.svg" alt="" width="24px" height="24px">
-                        <a href="./img/aluno-normal.svg" download>Download da matrícula</a>
+                        <a href="./img/aluno-normal.svg" class="matricula-aluno-request" download>
+                            <img src="{% static './img/download-icon.svg' %}" alt="" width="24px" height="24px">
+                            Download da matrícula
+                        </a>
                     </span>
                 </span>
-                <form action="?" class="confirm-account">
+                <form action="{% url 'pedidos_cadastro' %}" class="confirm-account" method="post">
+                    {% csrf_token %}
                     <label for="accept">
-                        <div class="accept-container" onclick="mostrarDadosAluno()">
-                            <img src="./img/accept-icon.svg" alt="">
-                        </div>
+                        <button class="btn-accept-student">
+                            <input type="hidden" name="active-account" value="" class="active-account">
+                            <img src="{% static './img/accept-icon.svg' %}" alt="">
+                        </button>
                     </label>
-                    <label for="reject">
-                        <div class="reject" onclick="mostrarDadosAluno()">
-                            <img src="./img/reject.svg" alt="">
-                        </div>
-                    </label>
+                    <div class="reject" onclick="mostrarDadosAluno()">
+                        <img src="{% static './img/reject.svg' %}" alt="">
+                    </div>
                 </form>
             </div>
         </div>
     </main>
 
-    <script src="./scripts/button.js"></script>
-    <script src="./scripts/mostrarDadosAluno.js"></script>
+    <script src="{% static './scripts/mostrarDadosAluno.js'%}"></script>
 
-
-</body>
-</html>
+{% endblock %}

@@ -88,9 +88,9 @@
                     <div class="private-perfil">
                         <h2>Perfil privado</h2>
                         <p>Se a opção perfil privado estiver ativa, apenas professores vão poder visulizar seu perfil.</p>
-                        <label for="private">
+                        <label for="{{ form.perfil_privado.id_for_label }}">
                             <div class="private-section">
-                                <input type="checkbox" name="private" id="private">
+                                {{ form_change_visibility.perfil_privado }}
                                 <span class="checkbox-private">Privar meu perfil</span>
                             </div>
                         </label>

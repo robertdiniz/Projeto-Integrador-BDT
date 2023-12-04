@@ -1,0 +1,65 @@
+.progresso {
+    max-width: 150px;
+    width: 70%;
+    height: 1.1rem;
+    border-radius: 5rem;
+    background-color: #121314;
+    position: relative;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.level {
+    width: 8%;
+    height: 0.5rem;
+    border-radius: 5rem;
+    background-color: #9779FB;
+    position: absolute;
+    left: 0.4rem;
+}
+
+.level-20 {
+    width: 20%;
+    height: 0.5rem;
+    border-radius: 5rem;
+    background-color: #9779FB;
+    position: absolute;
+    left: 0.4rem;
+}
+
+.level-40 {
+    width: 40%;
+    height: 0.5rem;
+    border-radius: 5rem;
+    background-color: #9779FB;
+    position: absolute;
+    left: 0.4rem;
+}
+
+.level-60 {
+    width: 60%;
+    height: 0.5rem;
+    border-radius: 5rem;
+    background-color: #9779FB;
+    position: absolute;
+    left: 0.4rem;
+}
+
+.level-80 {
+    width: 80%;
+    height: 0.5rem;
+    border-radius: 5rem;
+    background-color: #9779FB;
+    position: absolute;
+    left: 0.4rem;
+}
+
+.level-100 {
+    width: 92%;
+    height: 0.5rem;
+    border-radius: 5rem;
+    background-color: #9779FB;
+    position: absolute;
+    left: 0.4rem;
+}

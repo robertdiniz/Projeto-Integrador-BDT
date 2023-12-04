@@ -1,7 +1,8 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from .models import Trilha, Tarefa
 from usuarios.models import ModuloAluno, Modulo
 from .forms import ModuloRepositorioForm, ModuloConcluidoForm
+
 
 def index(request):
     return render(request, "index.html")
@@ -31,6 +32,14 @@ def trilha(request):
     modulos = trilha.modulos.all()
     form = ModuloRepositorioForm()
     form_concluido = ModuloConcluidoForm()
+    modulos_aluno = []
+
+
+    for modulo in modulos:
+        modulo_concluido = ModuloAluno.objects.filter(aluno=user.aluno, modulo=modulo, concluido=True).exists()
+        if modulo_concluido:
+            modulo_concluido = Modulo.objects.get(nome=modulo.nome)
+            modulos_aluno.append(modulo_concluido)
 
     if request.method == "POST":
         
@@ -40,13 +49,19 @@ def trilha(request):
             url = request.POST.get('url_projeto')
             modulo_aluno = ModuloAluno.objects.create(aluno=user.aluno, modulo=modulo, url_projeto=url, concluido=True)
             modulo_aluno.save()
+            selos_do_modulo = modulo.selos.all()
+            user.aluno.selos.add(*selos_do_modulo)
+            return redirect('trilha')
         elif 'modulo_concluir' in request.POST:
             nome_modulo = request.POST.get('modulo_concluir')
             modulo = Modulo.objects.get(nome=nome_modulo)
             modulo_aluno = ModuloAluno.objects.create(aluno=user.aluno, modulo=modulo, concluido=True)
             modulo_aluno.save()
+            selos_do_modulo = modulo.selos.all()
+            user.aluno.selos.add(*selos_do_modulo)
+            return redirect('trilha')
 
-    return render(request, "trilha.html", {'trilha': trilha, 'modulos': modulos, 'form': form, 'form_concluido': form_concluido})
+    return render(request, "trilha.html", {'trilha': trilha, 'modulos': modulos, 'form': form, 'form_concluido': form_concluido, "modulos_concluidos": modulos_aluno})
 
 
 
@@ -61,3 +76,7 @@ def teste(request):
         print(modulo.tarefas.all())
 
     return render(request, "teste.html", {'trilha': trilha, 'modulos': modulos})
+
+
+def not_found(request):
+    return render(request, '404.html')

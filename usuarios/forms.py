@@ -69,3 +69,9 @@ class AlunoChangePasswordForm(forms.Form):
     confirm_password = forms.CharField(
         widget=forms.PasswordInput(attrs={"placeholder": "Confirmar senha..."})
     )
+
+
+class AlunoChangePerfilVisibility(forms.ModelForm):
+    class Meta:
+        model = Aluno
+        fields = ["perfil_privado"]

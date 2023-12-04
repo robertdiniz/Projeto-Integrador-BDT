@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/progress.css' %}">
+{% endblock %}
+{% block content %}
+
+    <!-- Header -->
+    {% include 'header.html' %}
+    <!-- end header -->
+
+    <div style="background-color: white;">
+        <div class="progresso">
+            <div class="level"></div>
+        </div>
+        <div class="progresso">
+            <div class="level-20"></div>
+        </div>
+        <div class="progresso">
+            <div class="level-40"></div>
+        </div>
+        <div class="progresso">
+            <div class="level-60"></div>
+        </div>
+        <div class="progresso">
+            <div class="level-80"></div>
+        </div>
+        <div class="progresso">
+            <div class="level-100"></div>
+        </div>
+    </div>
+    
+
+{% endblock %}

@@ -1,8 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
-from banco_de_talentos.models import Trilha, Modulo, Tarefa
+from banco_de_talentos.models import Trilha, Modulo, Tarefa, Selo
 
-
+# Alterar para Perfil
 class Aluno(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     nome_completo = models.CharField(
@@ -15,6 +15,8 @@ class Aluno(models.Model):
         "Imagem de Perfil: ", upload_to="perfis", null=True, default="img/aluno.svg"
     )
     matricula = models.FileField("Matrícula", upload_to="matriculas")
+    perfil_privado = models.BooleanField("Perfil privado", default=False)
+    selos = models.ManyToManyField(Selo, blank=True)
     linkedin = models.URLField("Linkedin:", blank=True, null=True, default="")
     github = models.URLField("Github:", blank=True, null=True, default="")
     discord = models.CharField(
@@ -24,14 +26,12 @@ class Aluno(models.Model):
     whatsapp = models.CharField(
         "Whatsapp:", blank=True, null=True, default="", max_length=10
     )
-
     trilhas = models.ManyToManyField(
         Trilha, related_name="alunos", default="", blank=True
     )
-
     trilha_atual = models.ForeignKey(Trilha, related_name="alunos_em_andamento", blank=True, null=True, on_delete=models.SET_NULL)
-
     modulos_concluidos = models.ManyToManyField(Modulo, related_name="modulos_concluidos",  blank=True)
+
 
     def __str__(self):
         return self.nome_completo
@@ -52,3 +52,4 @@ class ModuloAluno(models.Model):
 
     def __str__(self):
         return f"{self.modulo} - {self.aluno}"
+

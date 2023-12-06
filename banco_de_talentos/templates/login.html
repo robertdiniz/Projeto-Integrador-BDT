@@ -7,11 +7,22 @@
 
 {% block content %}
 
+
+
 <!-- header -->
 {% include 'header.html' %}
 <!-- end header-->
 <main class="main-login">
+    {% if messages %}
+        
+            {% for message in messages %}
+            <div class="message {{message.tags}}">
+                {{ message }}
+            </div>
+            {% endfor %}
+    {% endif %}
     <div class="main-container-login">
+
         <h1>Entrar</h1>
         <div class="login-container">
             <img src="{% static './img/aluno.svg' %}" alt="Imagem ilustrativa de aluno">

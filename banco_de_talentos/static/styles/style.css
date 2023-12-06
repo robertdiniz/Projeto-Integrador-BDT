@@ -43,3 +43,42 @@ body {
     height: 24px;
 }
 
+/* Messages */
+
+.message {
+    padding: 0.5rem;
+    background-color: #9779fb3f;
+    border: 2px solid #9779fb71;
+    border-radius: 0.5em;
+    max-width: 450px;
+    width: 450px;
+    margin: 0 auto;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 1em;
+}
+
+.message-error {
+    background-color: #29030073;
+    border: 2px solid #fe2f2071;
+    color: #fe6055cb;
+}
+
+.message-sucess {
+    background-color: #12401777;
+    border: 2px solid #35c04591;
+    color: #63D471;
+}
+
+
+
+.message:hover {
+    transform: translate(0, -2px);
+    transition: 0.6s;
+}
+
+@media (max-width: 768px){
+    .message {
+        max-width: 90%;
+    }
+}

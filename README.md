@@ -1,7 +1,10 @@
 # Projeto-Integrador-BDT
 
 ## Descrição
-Esté projeto tem como objetivo ajudar alunos a desenvolverem o seu aprendizado com a programação, através de trilhas de conhecimento fornecidas por professores de uma instituição, guiando o aluno para aprender uma stack com projetos.
+Este projeto tem como objetivo ajudar alunos a desenvolverem o seu aprendizado com a programação, através de trilhas de conhecimento fornecidas por professores de uma instituição, guiando o aluno para aprender uma stack com projetos.
+
+## Tabela de Conteúdo
+- [Status do Projeto](#status-do-projeto)
 
 ## Status do Projeto
 Em Desenvolvimento

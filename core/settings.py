@@ -136,5 +136,9 @@ MESSAGE_TAGS = {
     constants.INFO: 'message-info',
     constants.SUCCESS: 'message-sucess',
     constants.WARNING: 'message-warning',
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> 006ea2afc55be41354039d63c2e13e62f7b6c239

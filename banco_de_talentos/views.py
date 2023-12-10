@@ -29,11 +29,14 @@ def trilha(request):
 
     user = request.user
     trilha = user.aluno.trilha_atual
+
+    if trilha is None:
+        return redirect('trilhas')
+
     modulos = trilha.modulos.all()
     form = ModuloRepositorioForm()
     form_concluido = ModuloConcluidoForm()
     modulos_aluno = []
-
 
     for modulo in modulos:
         modulo_concluido = ModuloAluno.objects.filter(aluno=user.aluno, modulo=modulo, concluido=True).exists()
@@ -52,6 +55,7 @@ def trilha(request):
             selos_do_modulo = modulo.selos.all()
             user.aluno.selos.add(*selos_do_modulo)
             return redirect('trilha')
+        
         elif 'modulo_concluir' in request.POST:
             nome_modulo = request.POST.get('modulo_concluir')
             modulo = Modulo.objects.get(nome=nome_modulo)
@@ -60,8 +64,16 @@ def trilha(request):
             selos_do_modulo = modulo.selos.all()
             user.aluno.selos.add(*selos_do_modulo)
             return redirect('trilha')
+        
+    context = {
+        'trilha': trilha, 
+        'modulos': modulos, 
+        'form': form, 
+        'form_concluido': form_concluido, 
+        "modulos_concluidos": modulos_aluno
+    }
 
-    return render(request, "trilha.html", {'trilha': trilha, 'modulos': modulos, 'form': form, 'form_concluido': form_concluido, "modulos_concluidos": modulos_aluno})
+    return render(request, "trilha.html", context)
 
 
 

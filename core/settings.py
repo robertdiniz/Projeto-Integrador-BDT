@@ -137,3 +137,4 @@ MESSAGE_TAGS = {
     constants.SUCCESS: 'message-sucess',
     constants.WARNING: 'message-warning',
 }
+

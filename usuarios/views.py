@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.models import User
+from django.contrib import messages
 from .forms import (
     AlunoForm,
     AlunoRedesSociaisForm,
@@ -29,9 +30,11 @@ def login(request):
                 user = authenticate(request, username=usuario.username, password=senha)
                 if user is not None:
                     login_sistema(request, user)
-                    return HttpResponse(f"Usuário logado!<br>")
+                    messages.success(request, "Você logou!")
+                    return redirect("trilha")
             else:
                 return HttpResponse(f"Usuário não existe<br>{existe}")
+
 
     return render(request, "login.html")
 
@@ -60,7 +63,8 @@ def register(request):
         if form.is_valid():
             user.save()
             aluno.save()
-            return redirect("register")
+            messages.success(request, "Conta criada, faça seu login!")
+            return redirect("login")
     else:
         form = AlunoForm()
     return render(request, "register.html", {"form": form})

@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from banco_de_talentos.models import Trilha, Modulo, Tarefa, Selo
 
+
 # Alterar para Perfil
 class Aluno(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -32,6 +33,19 @@ class Aluno(models.Model):
     trilha_atual = models.ForeignKey(Trilha, related_name="alunos_em_andamento", blank=True, null=True, on_delete=models.SET_NULL)
     modulos_concluidos = models.ManyToManyField(Modulo, related_name="modulos_concluidos",  blank=True)
 
+    xp = models.IntegerField("Pontuação de XP", default=0)
+    nivel = models.IntegerField("Nível", default=0)
+
+    def aumentar_xp(self, quantidade):
+        self.xp += quantidade
+        self.verificar_nivel()
+    
+    def verificar_nivel(self):
+        xp_next_level = 100
+        if self.xp >= xp_next_level:
+            self.nivel += 1
+            self.xp -= xp_next_level
+            self.save()
 
     def __str__(self):
         return self.nome_completo

@@ -10,6 +10,13 @@
     <!-- end header -->
 
     <main class="main-trilha">
+        {% if messages %}
+                {% for message in messages %}
+                <div class="message {{message.tags}}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+        {% endif %}
         <div class="main-trilha-container">
             <span class="span-trilha-container">
                 <h1>Trilha {{ trilha.nome }}</h1>

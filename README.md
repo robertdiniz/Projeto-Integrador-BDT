@@ -14,9 +14,9 @@ Em Desenvolvimento
 ## Instalação
 Como instalar esse projeto:
 
-- Clone de Respositorio: 'git clone https://github.com/robertdiniz/Projeto-Integrador-BDT.git'
-- Acesse o seu Diretorio: ```'cd nome-do-projeto'```
-- Crie o Ambiente Virtual: 'python -m venv venv'
-- Ativar Ambiente Virtual: [Windows] '.\venv\Scripts\activate' [Linux/Mac] 'source venv/bin/activate'
-- Instale as Dependencias: 'pip install -r requirements.txt'
+- Clone de Respositorio: ```git clone https://github.com/robertdiniz/Projeto-Integrador-BDT.git```
+- Acesse o seu Diretorio: ```cd nome-do-projeto```
+- Crie o Ambiente Virtual: ```python -m venv venv```
+- Ativar Ambiente Virtual: ```[Windows] .\venv\Scripts\activate``` ```[Linux/Mac] source venv/bin/activate```
+- Instale as Dependencias: ```pip install -r requirements.txt```
   

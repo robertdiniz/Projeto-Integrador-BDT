@@ -3,6 +3,9 @@
 {% block css %}
     <link rel="stylesheet" href="{% static 'styles/trilha.css' %}">
 {% endblock %}
+
+{% block title %} Trilha {{ trilha.nome }} {% endblock %}
+
 {% block content %}
 
     <!-- Header -->
@@ -12,7 +15,7 @@
     <main class="main-trilha">
         {% if messages %}
                 {% for message in messages %}
-                <div class="message {{message.tags}}">
+                <div class="message {{message.tags}}" onclick="fecharMessage()">
                     {{ message }}
                 </div>
                 {% endfor %}
@@ -79,9 +82,23 @@
                 {% endif %}
             </div>
             {% endfor %}
+            {% if not todos_modulos_concluidos %}
+
+                    <div class="trail-not-completed">
+                        <p>Finalizar Trilha</p>
+                    </div>
+                
+                {% else %}
+
+                    <form action="{% url 'trilha' %}" method="post">
+                        {% csrf_token %}
+                        <button class="trail-finish" name="trilha_concluir" type="submit">Finalizar trilha</button>
+                    </form>
+
+            {% endif %}
         </div>
 
-        
+
 
         <div class="fade" onclick="enviarRepositorio()"></div>
         <div class="modal">
@@ -105,5 +122,7 @@
     </main>
 
     <script src="{% static '/scripts/enviarRepositorio.js' %}"></script>
+    <script src="{% static '/scripts/fecharMessage.js' %}"></script>
+    
 
 {% endblock %}

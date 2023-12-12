@@ -3,6 +3,9 @@
 {% block css %}
     <link rel="stylesheet" href="{% static 'styles/trilhas.css' %}">
 {% endblock %}
+
+{% block title %} Trilhas {% endblock %}
+
 {% block content %}
 
     <!-- Header -->
@@ -11,10 +14,15 @@
 
 <main class="main-trilhas">
     <div class="main-trilhas-container">
+        {% if trilhas_disponiveis %}
         <h1>Seja bem vindo, {{ user.username|upper }}!</h1>
         <p>Escolha uma trilha de estudos que você deseja fazer...</p>
+        {% else %}
+        <h1>Parabéns {{ user.username|upper }}!</h1>
+        <p>Você concluiu todas as trilhas de estudos!</p>
+        {% endif %}
         <div class="trilhas-container">
-            {% for trilha in trilhas %}
+            {% for trilha in trilhas_disponiveis %}
             <button class="btn-trilhas" onclick="escolherTrilha('{{ trilha.nome }}')">
                 <div class="trilha-card">
                     <img {% if trilha.imagem %} 

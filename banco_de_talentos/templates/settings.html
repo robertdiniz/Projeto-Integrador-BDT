@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="{% static 'styles/settings.css' %}">
 {% endblock %}
 
+{% block title %} Configurações da Conta {% endblock %}
+
 {% block content %}
 
     <!-- Header -->
@@ -108,17 +110,25 @@
                     {% csrf_token %}
                     <div class="trilha-select">
                         <label for="trilha-select">Minha trilha</label>
+                        {% if aluno.trilhas %}
                         <p>Exibe em seu perfil a trilha que tem mais afinidade.</p>
-                        <select name="trilha-select" id="trilha-select">
-                            <option value="backend">Back-End</option>
-                            <option value="frontend">Front-End</option>
-                            <option value="mobile">Mobile</option>
-                            <option value="design-system">Design System</option>
-                        </select>
+                            <select name="trilha-select" id="trilha-select">
+                                {% for trilha in aluno.trilhas %}
+                                    <option value="{{ trilha.id }}">{{ trilha.nome }}</option>
+                                {% endfor %}
+                            </select>
+                        {% else %}
+                            <br>
+                            <p> {{ user.username }} parece que você não fez nenhuma trilha ainda! </p>
+                        {% endif %}
                     </div>
                     <div class="btn-social">
-                        <button type="submit" name="submit_change_trail" class="btn-social-confirm" >Salvar</button>
-                        <a onclick="modalTrail()" class="btn-social-cancel" >Cancelar</a>
+                        {% if aluno.trilhas %}
+                            <button type="submit" name="submit_change_trail" class="btn-social-confirm" >Salvar</button>
+                            <a onclick="modalTrail()" class="btn-social-cancel" >Cancelar</a>
+                        {% else %}
+                            <a onclick="modalTrail()" class="btn-social-cancel" >Fechar</a>
+                        {% endif  %}
                     </div>
                 </form>
             </div>

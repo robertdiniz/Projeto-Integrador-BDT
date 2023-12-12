@@ -32,19 +32,29 @@
     gap: 1.5rem;
 }
 
+.close-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    cursor: pointer;
+}
+
 .btn-mostrar-aluno {
     border: none;
     background: none;
     cursor: pointer;
 }
 
-#modal-container-aluno span {
+#modal-container-aluno div {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
-#modal-container-aluno span p {
+#modal-container-aluno div p {
     color: #4D4D56;
     font-weight: bold;
     background: #121214;
@@ -52,7 +62,7 @@
     padding: 0.5rem;
 }
 
-#modal-container-aluno span a {
+#modal-container-aluno div a {
     text-decoration: none;
     color: #fff;
     font-weight: bold;

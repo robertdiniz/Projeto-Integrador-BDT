@@ -2,30 +2,74 @@
 {% load static %}
 {% block css %}
     <link rel="stylesheet" href="{% static 'styles/perfil.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/progress.css' %}">
 {% endblock %}
+
+{% block title %} {{ aluno.nome_completo|capfirst }} {% endblock %}
+
 {% block content %}
 
     <!-- Header -->
     {% include 'header.html' %}
     <!-- end header -->
 
+
     <main class="main-perfil">
         <div class="main-container-perfil">
             <div class="perfil-header">
                 <span class="foto-dados">
-                    <img {% if aluno.foto %} src="{{ aluno.foto.url }}" {% else %} src="{% static 'img/aluno-normal.svg' %}" {% endif %} alt="" width="150px" height="150px">
+                    {% if aluno.foto %}
+                        <img src="{{ aluno.foto.url }}" alt="" width="150px" height="150px">
+                    {% else %}
+                        <img src="{% static 'img/aluno-normal.svg' %}" alt="" width="150px" height="150px">
+                    {% endif %}
                     <span class="aluno-dados">
                         <h1>{{ aluno.nome_completo|upper }}</h1>
-                        <p>{{ aluno.trilha_atual }}</p>
-                        <p>Nível 1 - Back-End</p>
-                        <div class="progresso">
-                            <div class="level"></div>
+                        {% if aluno.trilha_atual %}
+                            <p>{{ aluno.trilha_atual }}</p>
+                        {% else %}
+                            <p></p>
+                        {% endif %}
+                        <p> Nível {{aluno.nivel}} </p>
+                        <div class="progresso" title="{{aluno.user.username}} possui {{aluno.xp}} de XP!">
+                            <div class="
+                            {% if aluno.xp == 0 %} 
+                            
+                            {% elif aluno.xp <= 100 %}
+
+                            level
+
+                            {% elif aluno.xp <= 200 %}
+
+                            level-20
+
+                            {% elif aluno.xp <= 300 %}
+
+                            level-40
+
+                            {% elif aluno.xp <= 400 %}
+
+                            level-60
+
+                            {% elif aluno.xp <= 500 %}
+
+                            level-80
+
+                            {% elif aluno.xp >= 600 %}
+
+                            level-100
+
+
+                            {% endif %}
+                            "></div>
                         </div>
                     </span>
                 </span>
                 <span class="aluno-redes">
-                    <a href="{% url 'edit' %}" class="btn-edit-perfil">Editar perfil</a>
-                    <a href="{% url 'settings' %}" class="btn-edit-perfil">Configurar Conta</a>
+                    {% if proprio_perfil %}
+                        <a href="{% url 'edit' %}" class="btn-edit-perfil">Editar perfil</a>
+                        <a href="{% url 'settings' %}" class="btn-edit-perfil">Configurar Conta</a>
+                    {% endif %}
                     <ul>
                         <li>
                             <a {% if aluno.linkedin %} href="{{ aluno.linkedin }}" target="_blank" {% endif %}>
@@ -78,23 +122,29 @@
             <div class="perfil-trilhas">
                 <h2>Trilhas realizadas</h2>
                 <div class="trilhas-container">
-
-                    {% if aluno.trilhas.all  %}
-
-                        {% for trilha in aluno.trilhas.all %}
-                            <div class="trilha-card">
-                                <span>
+                    {% if aluno.trilha_atual %}
+                        <div class="trilha-card">
+                            <div>
                                 <img src="{% static './img/backend-icon.svg' %}" alt="">
-                                <p>Trilha {{ trilha.nome }}</p>    
-                                </span>
-                                <p class="trilha-status">Em progresso...</p>
+                                <p>Trilha {{ aluno.trilha_atual.nome }}</p>    
                             </div>
+                            <p class="trilha-status">Em andamento...</p>
+                        </div>
+                    {% endif %}
+                    {% if trilhas_concluidas_aluno %}
+                        {% for trilha in trilhas_concluidas_aluno %}
+                                <div class="trilha-card">
+                                    <div>
+                                    <img src="{% static './img/backend-icon.svg' %}" alt="">
+                                    <p>Trilha {{ trilha.trilha.nome }}</p>    
+                                    </div>
+                                    {% if trilha.concluido %}
+                                        <p class="trilha-status">Concluída</p>
+                                    {% else %}
+                                        <p class="trilha-status">Em progresso...</p>
+                                    {% endif %}
+                                </div>
                         {% endfor %}
-
-                        {% else %}
-
-                            <h3>Não possui nenhuma trilha concluída</h3>
-                            
                     {% endif %}
                 </div>
             </div>

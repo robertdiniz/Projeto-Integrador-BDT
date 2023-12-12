@@ -13,7 +13,7 @@ class Aluno(models.Model):
         "Biografia:", max_length=150, null=True, default="", blank=True
     )
     foto = models.ImageField(
-        "Imagem de Perfil: ", upload_to="perfis", null=True, default="img/aluno.svg"
+        "Imagem de Perfil: ", upload_to="perfis", null=True, blank=True
     )
     matricula = models.FileField("Matrícula", upload_to="matriculas")
     perfil_privado = models.BooleanField("Perfil privado", default=False)
@@ -41,14 +41,15 @@ class Aluno(models.Model):
         self.verificar_nivel()
     
     def verificar_nivel(self):
-        xp_next_level = 100
+        xp_next_level = 600
         if self.xp >= xp_next_level:
             self.nivel += 1
             self.xp -= xp_next_level
-            self.save()
+        self.save()
 
     def __str__(self):
         return self.nome_completo
+    
 
 class ConclusaoTarefa(models.Model):
     aluno = models.ForeignKey(Aluno, null=True, on_delete=models.SET_NULL)
@@ -67,3 +68,10 @@ class ModuloAluno(models.Model):
     def __str__(self):
         return f"{self.modulo} - {self.aluno}"
 
+class ConclusaoTrilha(models.Model):
+    aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
+    trilha = models.ForeignKey(Trilha, on_delete=models.CASCADE)
+    concluido = models.BooleanField("Trilha concluída", default=False)
+
+    def __str__(self):
+        return f"{self.trilha} - {self.aluno}"

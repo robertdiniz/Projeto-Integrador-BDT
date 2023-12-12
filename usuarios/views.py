@@ -14,7 +14,8 @@ from banco_de_talentos.models import Trilha
 from django.contrib.auth import authenticate, update_session_auth_hash
 from django.contrib.auth import login as login_sistema
 from django.contrib.auth import logout as logout_sistema
-
+from django.contrib.auth.decorators import login_required
+from usuarios.models import ConclusaoTrilha
 
 
 def login(request):
@@ -75,7 +76,7 @@ def register(request):
     - Validar as senhas (?)
 """
 
-
+@login_required(login_url='login')
 def settings(request):
     user = request.user
 
@@ -101,25 +102,26 @@ def settings(request):
                 form_change_visibility.save()
                 return redirect('settings')
 
-
-    print(AlunoChangePerfilVisibility)
-
     context = {
         "id_atual": user.id,
         "form_change_password": AlunoChangePasswordForm(),
-        "form_change_visibility": AlunoChangePerfilVisibility(instance=user.aluno)
+        "form_change_visibility": AlunoChangePerfilVisibility(instance=user.aluno),
+        "trilhas": user.aluno.trilhas
     }
     
     return render(request, "settings.html", context)
 
-
+@login_required(login_url='login')
 def perfil(request, id):
 
     user = request.user
     aluno = Aluno.objects.get(id=id)
+    trilhas_concluidas_aluno = ConclusaoTrilha.objects.filter(aluno=aluno)
+
+    proprio_perfil = user.is_authenticated and user.aluno.id == aluno.id
 
     # Verificação da visibilidade do perfil do aluno e comparação se o aluno é o atual.
-    if aluno.perfil_privado and user.aluno.id != aluno.id:
+    if aluno.perfil_privado and not proprio_perfil:
         return HttpResponse(f"O perfil {aluno.nome_completo} é privado!")
     
     busca = request.POST.get("nome")
@@ -127,11 +129,16 @@ def perfil(request, id):
     if busca:
         return redirect("buscar")
 
-    context = {"perfil": perfil, "aluno": aluno}
+    context = {
+        "perfil": perfil, 
+        "aluno": aluno, 
+        "proprio_perfil": proprio_perfil,
+        "trilhas_concluidas_aluno": trilhas_concluidas_aluno
+    }
 
     return render(request, "perfil.html", context)
 
-
+@login_required(login_url='login')
 def edit(request):
     user = request.user
 
@@ -167,7 +174,7 @@ def edit(request):
             {"form_rede_social": form_redes_sociais, "form_biografia": form_biografia},
         )
 
-
+@login_required(login_url='login')
 def buscar(request):
     nome = request.GET.get("nome")
 
@@ -184,7 +191,25 @@ def buscar(request):
 
         return render(request, "search.html", context)
 
+@login_required(login_url='login')
+def busca_filtrada(request):
+        
+    nome = request.GET.get("nome")
 
+    if nome:
+        perfis = Aluno.objects.filter(nome_completo__icontains=nome, user__is_active=True).all()
+
+        context = {"perfis": perfis}
+
+        return render(request, "search.html", context)
+    else:
+        perfis = Aluno.objects.filter(user__is_active=True).all()
+
+        context = {"perfis": perfis}
+
+        return render(request, "search.html", context)
+
+@login_required(login_url='login')
 def pedidos_cadastro(request):
 
     usuarios = User.objects.filter(is_active=False)

@@ -3,8 +3,14 @@ from .models import Trilha, Tarefa
 from usuarios.models import ModuloAluno, Modulo, ConclusaoTrilha
 from .forms import ModuloRepositorioForm, ModuloConcluidoForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 def index(request):
+
+    if request.user.is_authenticated:
+        messages.success(request, 'você tá doido é?')
+        return redirect("trilha")
+
     return render(request, "index.html")
 
 @login_required(login_url='login')

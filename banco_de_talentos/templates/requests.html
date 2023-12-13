@@ -63,9 +63,15 @@
                             <img src="{% static './img/accept-icon.svg' %}" alt="">
                         </button>
                     </label>
-                    <div class="reject" onclick="mostrarDadosAluno()">
+                    <label for="reject">
+                        <button class="btn-accept-student">
+                            <input type="hidden" name="reject-account" value="" class="reject-account">
+                            <img src="{% static './img/reject.svg' %}" alt="">
+                        </button>
+                    </label>
+                    {% comment %} <div class="reject" onclick="mostrarDadosAluno()">
                         <img src="{% static './img/reject.svg' %}" alt="">
-                    </div>
+                    </div> {% endcomment %}
                 </form>
             </div>
         </div>

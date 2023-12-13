@@ -4,6 +4,7 @@ nome_completo_p = document.querySelector('.nome-completo-aluno');
 email_aluno_p = document.querySelector('.email-aluno');
 matricula_aluno_img = document.querySelector('.matricula-aluno-request');
 active_account = document.querySelector('.active-account');
+reject_account = document.querySelector('.reject-account');
 titulo_modal = document.querySelector('.title-modal-aluno');
 
 function mostrarDadosAluno(nome_usuario, nome_aluno, email_aluno, matricula_aluno){

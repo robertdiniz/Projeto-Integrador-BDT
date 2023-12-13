@@ -12,8 +12,14 @@
 <!-- header -->
 {% include 'header.html' %}
 <!-- end header-->
-
     <main class="main-register">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="message {{message.tags}}" onclick="fecharMessage()">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+        {% endif %}
         <div class="main-container-register">
             <h1>Criar Conta</h1>
             <div class="register-container">

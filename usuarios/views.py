@@ -16,11 +16,12 @@ from django.contrib.auth import login as login_sistema
 from django.contrib.auth import logout as logout_sistema
 from django.contrib.auth.decorators import login_required
 from usuarios.models import ConclusaoTrilha
+import re
 
 
 def login(request):
     if request.user.is_authenticated:
-        return redirect("index")
+        return redirect("trilha")
     else:
         if str(request.method) == "POST":
             email = request.POST.get("email")
@@ -29,12 +30,16 @@ def login(request):
             if existe:
                 usuario = User.objects.get(email=email)
                 user = authenticate(request, username=usuario.username, password=senha)
-                if user is not None:
+                
+                if user is not None and user.is_active:
                     login_sistema(request, user)
-                    messages.success(request, "Você logou!")
                     return redirect("trilha")
+                else:
+                    messages.error(request, "Sua conta não tem acesso ao sistema.")
+                    return redirect("login")
             else:
-                return HttpResponse(f"Usuário não existe<br>{existe}")
+                messages.error(request, "Esse usuário não existe!")
+                return redirect('login')
 
 
     return render(request, "login.html")
@@ -47,7 +52,7 @@ def logout(request):
 
 def register(request):
     if request.user.is_authenticated:
-        return redirect("index")
+        return redirect("trilha")
     if str(request.method) == "POST":
         form = AlunoForm(request.POST, request.FILES)
         nome_usuario = request.POST["nome_usuario"]
@@ -55,8 +60,29 @@ def register(request):
         email = request.POST["email"]
         senha = request.POST["senha"]
         matricula = request.FILES["matricula"]
+
+        # Validar nome de usuário
+        def validar_nome_usuario(nome_usuario):
+            if not re.match("^[a-zA-Z0-9_-]+$", nome_usuario):
+                return False, "O nome de usuário pode conter apenas letras, números, underscores (_) e hifens (-)."
+            return True, ""
+            
+        nome_usuario_valido, mensagem_erro = validar_nome_usuario(nome_usuario)
+
+        if not nome_usuario_valido:
+            messages.error(request, mensagem_erro)
+            return redirect('register')
+
+        # Verificar se já existe nome de usuário ou email
+        nome_de_usuario_existe = User.objects.filter(username=nome_usuario).exists()
+        email_existe = User.objects.filter(username=nome_usuario).exists()
+
+        if nome_de_usuario_existe or email_existe:
+            messages.error(request, "Nome de usuário ou email já existe!")
+            return redirect('register')
+
         user = User.objects.create_user(
-            username=nome_usuario, email=email, password=senha, is_staff=True
+            username=nome_usuario, email=email, password=senha, is_active=False
         )
         aluno = Aluno.objects.create(
             nome_completo=nome_completo, user=user, matricula=matricula
@@ -64,7 +90,7 @@ def register(request):
         if form.is_valid():
             user.save()
             aluno.save()
-            messages.success(request, "Conta criada, faça seu login!")
+            messages.success(request, "Conta criada! Aguarde seu acesso ser liberado ;)")
             return redirect("login")
     else:
         form = AlunoForm()
@@ -216,11 +242,24 @@ def pedidos_cadastro(request):
 
     usuarios = User.objects.filter(is_active=False)
     email = request.POST.get('active-account')
+    reject = request.POST.get('reject-account')
 
     if email:
         usuario = User.objects.get(email=email)
         usuario.is_active = True
         usuario.save()
         return redirect('pedidos_cadastro')
+    elif reject:
+        pass
 
     return render(request, 'requests.html', {"usuarios": usuarios})
+
+def testando(request):
+    
+    if request.method == "POST":
+        matricula = request.FILES['matricula']
+        print(matricula)
+
+    form = AlunoForm()
+
+    return render(request, "teste.html", {"form": form})

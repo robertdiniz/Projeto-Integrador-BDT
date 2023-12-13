@@ -55,10 +55,9 @@
 
                             level-80
 
-                            {% elif aluno.xp >= 600 %}
+                            {% elif aluno.xp <= 600 %}
 
                             level-100
-
 
                             {% endif %}
                             "></div>
@@ -100,28 +99,31 @@
                 </span>
             </div>
             <div class="perfil-bio">
-                <h2>Sobre mim</h2>
+                    <h2>Sobre mim</h2>
                 {% if aluno.bio %}
                     <p>{{ aluno.bio }}</p>
                 {% else %}
-                <p>Esse usuário não tem descrição!</p>
+                    <p>Esse usuário não tem descrição!</p>
                 {% endif %}
             </div>
             <div class="perfil-selos">
                 <h2>Selos</h2>
-                <div class="perfil-selos-container">
-                    {% if aluno.selos.exists %}
-                        {% for selo in aluno.selos.all %}
-                            <img src="{{ selo.selo_normal.url }}" alt="" width="32px" height="32px">
-                        {% endfor %}
-                        {% else %}
-                            <p>Não tem selos!</p>
-                    {% endif %}
-                </div>
+                {% if not aluno.selos.exists %}
+                    <p>Não tem selos!</p>
+                    {% else %}
+                    <div class="perfil-selos-container">
+                            {% for selo in aluno.selos.all %}
+                                <img src="{{ selo.selo_normal.url }}" alt="" width="32px" height="32px">
+                            {% endfor %}
+                        </div>
+                {% endif %}
             </div>
             <div class="perfil-trilhas">
                 <h2>Trilhas realizadas</h2>
                 <div class="trilhas-container">
+                    {% if not aluno.trilha_atual and not trilhas_concluidas_aluno %}
+                    <p>O aluno ainda não concluiu nenhuma trilha.</p>
+                {% else %}
                     {% if aluno.trilha_atual %}
                         <div class="trilha-card">
                             <div>
@@ -133,19 +135,20 @@
                     {% endif %}
                     {% if trilhas_concluidas_aluno %}
                         {% for trilha in trilhas_concluidas_aluno %}
-                                <div class="trilha-card">
-                                    <div>
+                            <div class="trilha-card">
+                                <div>
                                     <img src="{% static './img/backend-icon.svg' %}" alt="">
                                     <p>Trilha {{ trilha.trilha.nome }}</p>    
-                                    </div>
-                                    {% if trilha.concluido %}
-                                        <p class="trilha-status">Concluída</p>
-                                    {% else %}
-                                        <p class="trilha-status">Em progresso...</p>
-                                    {% endif %}
                                 </div>
+                                {% if trilha.concluido %}
+                                    <p class="trilha-status">Concluída</p>
+                                {% else %}
+                                    <p class="trilha-status">Em progresso...</p>
+                                {% endif %}
+                            </div>
                         {% endfor %}
                     {% endif %}
+                {% endif %}
                 </div>
             </div>
         </div>

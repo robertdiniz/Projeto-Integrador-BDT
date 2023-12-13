@@ -153,8 +153,7 @@
 
 .perfil-bio p{
     width: 90%;
-    font-weight: bold;
-    font-size-adjust: calc(90%);
+    text-align: center;
 }
 
 /* PERFIL SELOS */
@@ -187,11 +186,13 @@
     background-color: #202024;
     padding: 2rem 2rem 4rem 2rem;
     border-radius: 0.5rem;
-    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 2rem;
     align-items: center;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .trilhas-container {
@@ -293,10 +294,6 @@
 
     .perfil-selos h2 {
         font-size: 1.3rem;
-    }
-
-    .perfil-selos p {
-        font-weight: bold;
     }
 
     .aluno-dados h1 {

@@ -120,6 +120,8 @@ def perfil(request, id):
 
     proprio_perfil = user.is_authenticated and user.aluno.id == aluno.id
 
+    user.aluno.aumentar_xp(100)
+
     # Verificação da visibilidade do perfil do aluno e comparação se o aluno é o atual.
     if aluno.perfil_privado and not proprio_perfil:
         return HttpResponse(f"O perfil {aluno.nome_completo} é privado!")

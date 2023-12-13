@@ -14,6 +14,13 @@
     <!-- end header -->
 
     <main class="main-perfil">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="message {{message.tags}}" onclick="fecharMessage()">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
         <div class="main-container-perfil">
             <div class="perfil-header">
                 <span class="foto-dados" onclick="modalPhoto()">

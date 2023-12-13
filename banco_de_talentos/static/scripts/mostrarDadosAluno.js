@@ -14,5 +14,9 @@ function mostrarDadosAluno(nome_usuario, nome_aluno, email_aluno, matricula_alun
     email_aluno_p.textContent = email_aluno;
     matricula_aluno_img.href = matricula_aluno;
     active_account.value = email_aluno;
+    reject_account.value = email_aluno;
     titulo_modal.textContent = `Dados do usuário ${nome_usuario}`;
 }
+
+
+

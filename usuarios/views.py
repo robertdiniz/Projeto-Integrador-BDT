@@ -176,6 +176,7 @@ def edit(request):
             aluno = Aluno.objects.get(nome_completo=user.aluno.nome_completo)
             aluno.foto = photo
             aluno.save()
+            messages.success(request, "Foto alterada!")
             return redirect("edit")
 
         if "submit_redes_sociais" in request.POST:
@@ -184,12 +185,14 @@ def edit(request):
             )
             if form_redes_sociais.is_valid():
                 form_redes_sociais.save()
+                messages.success(request, "Redes sociais alteradas!")
                 return redirect("edit")
 
         if "submit_biografia" in request.POST:
             form_biografia = AlunoBioGrafiaForm(request.POST, instance=user.aluno)
             if form_biografia.is_valid():
                 form_biografia.save()
+                messages.success(request, "Biografia alterada!")
                 return redirect("edit")
 
     else:
@@ -241,16 +244,22 @@ def busca_filtrada(request):
 def pedidos_cadastro(request):
 
     usuarios = User.objects.filter(is_active=False)
-    email = request.POST.get('active-account')
-    reject = request.POST.get('reject-account')
+    active = request.POST.get('accept')
+    reject = request.POST.get('reject')
+    email_active = request.POST.get('active-account')
+    email_reject = request.POST.get('reject-account')
 
-    if email:
-        usuario = User.objects.get(email=email)
+    if active:
+        usuario = User.objects.get(email=email_active)
         usuario.is_active = True
         usuario.save()
+        messages.success(request, f"{usuario.username} liberado acesso!")
         return redirect('pedidos_cadastro')
     elif reject:
-        pass
+        usuario = User.objects.get(email=email_reject)
+        messages.success(request, f"{usuario.username} apagado!")
+        usuario.delete()
+        return redirect('pedidos_cadastro')
 
     return render(request, 'requests.html', {"usuarios": usuarios})
 

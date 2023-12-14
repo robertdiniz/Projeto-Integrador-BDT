@@ -14,9 +14,7 @@
 
         <link rel="shortcut icon" href="{% static 'img/nadic.BDT.svg' %}" type="image/x-icon">
 
-        {% block title %}
-            <title>Banco de Talentos - Nadic</title>
-        {% endblock %}
+        <title>{% block title %}{% endblock %}</title>
     
         <link rel="stylesheet" href="{% static 'styles/style.css'%} ">
         <link rel="stylesheet" href="{% static 'styles/header.css'%} ">
@@ -51,6 +49,7 @@
     {% endif %}
 
     <script src="{% static './scripts/button.js' %}"></script>
+    <script src="{% static './scripts/fecharMessage.js' %}"></script>
  
 </body>
 </html>

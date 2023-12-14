@@ -5,9 +5,9 @@
     <link rel="stylesheet" href="{% static 'styles/login.css' %}">
 {% endblock %}
 
+{% block title %} Entrar {% endblock %}
+
 {% block content %}
-
-
 
 <!-- header -->
 {% include 'header.html' %}
@@ -16,7 +16,7 @@
     {% if messages %}
         
             {% for message in messages %}
-            <div class="message {{message.tags}}">
+            <div class="message {{message.tags}}" onclick="fecharMessage()">
                 {{ message }}
             </div>
             {% endfor %}
@@ -47,4 +47,6 @@
 </main>
 
 <script src="./scripts/button.js"></script>
+
+
 {% endblock %}

@@ -267,17 +267,37 @@
     display: none;
 }
 
-.submit a{
+.submit a, button{
     text-decoration: none;
     padding: 0.5rem 1rem;
     font-weight: bold;
     cursor: pointer;
+    background: none;
+    border: none;
 }
 
 .submit a:nth-child(3) {
     background-color: #9779FB;
     border-radius: 0.5rem;
     color: #ffffff;
+}
+
+.trail-not-completed {
+    padding: 1.5rem 0;
+    background-color: #1D1D20;
+    border-radius: 0.5em;
+}
+
+.trail-not-completed p {
+    text-align: center;
+    color: #4D4D56;
+}
+
+.trail-finish {
+    width: 50vw;
+    padding: 1em 0;
+    border-radius: 0.5em;
+    background-color: #9779FB;
 }
 
 @media (max-width: 768px){
@@ -291,6 +311,10 @@
 
     .modal {
         width: 50%;
+    }
+
+    .trail-finish {
+        width: 90vw;
     }
 }
 

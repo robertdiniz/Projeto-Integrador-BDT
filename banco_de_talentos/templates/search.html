@@ -3,6 +3,9 @@
 {% block css %}
     <link rel="stylesheet" href="{% static 'styles/search.css' %}">
 {% endblock %}
+
+{% block title %} Buscar Perfis {% endblock %}
+
 {% block content %}
 
     <!-- Header -->
@@ -31,8 +34,13 @@
                     <img {% if perfil.foto %} src="{{ perfil.foto.url }}" {% else %} src="{% static 'img/aluno-normal.svg' %}" {% endif %} alt="" width="150px" height="150px">
                     <div class="aluno-data">
                         <h2>{{ perfil.nome_completo|upper }}</h2>
-                        <p>Back-end</p>
-                        <p>Nível 1 - Back-end</p>
+                        <p> Nível {{perfil.nivel}} </p>
+                        {% if perfil.trilha_atual %}
+                            <p>{{ perfil.trilha_atual }}</p>
+                        {% else %}
+                            <p></p>
+                        {% endif %}
+                        
                         <div class="progresso">
                             <div class="level"></div>
                         </div>

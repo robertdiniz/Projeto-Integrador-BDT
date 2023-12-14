@@ -1,16 +1,23 @@
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from .models import Trilha, Tarefa
-from usuarios.models import ModuloAluno, Modulo
+from usuarios.models import ModuloAluno, Modulo, ConclusaoTrilha
 from .forms import ModuloRepositorioForm, ModuloConcluidoForm
-
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 def index(request):
+
+    if request.user.is_authenticated:
+        messages.success(request, 'você tá doido é?')
+        return redirect("trilha")
+
     return render(request, "index.html")
 
-
+@login_required(login_url='login')
 def trilhas(request):
 
     user = request.user
+
 
     if request.method == "POST":
         trilha = request.POST.get("trilha")
@@ -20,11 +27,20 @@ def trilhas(request):
         user.aluno.save()
         return redirect("trilha")
     else:
+        if user.aluno.trilha_atual:
+            return redirect('trilha')
+        trilhas_concluidas = ConclusaoTrilha.objects.filter(aluno=user.aluno, concluido=True).values_list('trilha', flat=True)
+        trilhas_disponiveis = Trilha.objects.exclude(id__in=trilhas_concluidas)
         trilhas = Trilha.objects.all()
 
-        return render(request, "trilhas.html", {"trilhas": trilhas})
+        context = {
+            "trilhas": trilhas,
+            "trilhas_disponiveis": trilhas_disponiveis
+        }
 
+        return render(request, "trilhas.html", context)
 
+@login_required(login_url='login')
 def trilha(request):
 
     user = request.user
@@ -44,6 +60,8 @@ def trilha(request):
             modulo_concluido = Modulo.objects.get(nome=modulo.nome)
             modulos_aluno.append(modulo_concluido)
 
+    todos_modulos_concluidos = ModuloAluno.objects.filter(aluno=user.aluno, modulo__in=modulos, concluido=True).count() == modulos.count()
+
     if request.method == "POST":
         
         if 'modulo_selecionado' in request.POST:
@@ -54,6 +72,7 @@ def trilha(request):
             modulo_aluno.save()
             selos_do_modulo = modulo.selos.all()
             user.aluno.selos.add(*selos_do_modulo)
+            user.aluno.aumentar_xp(100)
             return redirect('trilha')
         
         elif 'modulo_concluir' in request.POST:
@@ -63,32 +82,27 @@ def trilha(request):
             modulo_aluno.save()
             selos_do_modulo = modulo.selos.all()
             user.aluno.selos.add(*selos_do_modulo)
+            user.aluno.aumentar_xp(100)
             return redirect('trilha')
+        
+        elif 'trilha_concluir' in request.POST:
+            trilha_concluida = ConclusaoTrilha.objects.create(aluno=user.aluno, trilha=trilha, concluido=True)
+            trilha_concluida.save()
+            user.aluno.trilha_atual = None
+            user.aluno.aumentar_xp(1500)
+            return redirect('trilhas')
         
     context = {
         'trilha': trilha, 
         'modulos': modulos, 
         'form': form, 
         'form_concluido': form_concluido, 
-        "modulos_concluidos": modulos_aluno
+        "modulos_concluidos": modulos_aluno,
+        "todos_modulos_concluidos": todos_modulos_concluidos
     }
 
     return render(request, "trilha.html", context)
 
-
-
-def teste(request):
-    
-    user = request.user
-
-    trilha = user.aluno.trilha_atual
-    modulos = trilha.modulos.all()
-    
-    for modulo in modulos:
-        print(modulo.tarefas.all())
-
-    return render(request, "teste.html", {'trilha': trilha, 'modulos': modulos})
-
-
 def not_found(request):
     return render(request, '404.html')
+

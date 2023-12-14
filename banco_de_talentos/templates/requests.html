@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="{% static 'styles/requests.css' %}">
 {% endblock %}
 
+{% block title %} Pedidos de Acesso {% endblock %}
+
 {% block content %}
 
 <!-- header -->
@@ -14,48 +16,66 @@
 
     <main class="main-search">
         <div class="main-search-container">
-            <h1>Pedidos de Registros</h1>
-            {% for usuario in usuarios %}
-                <button class="btn-mostrar-aluno" onclick="mostrarDadosAluno('{{usuario.username}}', '{{usuario.aluno.nome_completo|upper}}', '{{usuario.email}}', '{{usuario.aluno.matricula.url}}')">
-                    <div class="card-aluno">
-                        <img src="{% static './img/aluno-normal.svg'%}" alt="">
-                        <div class="aluno-data">    
-                            <p>{{ usuario.aluno.nome_completo|upper }}</p>
-                            <p>{{ usuario.email }}</p>
-                        </div>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="message {{message.tags}}" onclick="fecharMessage()">
+                        {{ message }}
                     </div>
-                </button>
-            {% endfor %}
+                {% endfor %}
+            {% endif %}
+            {% if usuarios %}
+            <h1>Pedidos de Registros</h1>
+                {% for usuario in usuarios %}
+                    <button class="btn-mostrar-aluno" onclick="mostrarDadosAluno('{{usuario.username}}', '{{usuario.aluno.nome_completo|upper}}', '{{usuario.email}}', '{{usuario.aluno.matricula.url}}')">
+                        <div class="card-aluno">
+                            <img src="{% static './img/aluno-normal.svg'%}" alt="">
+                            <div class="aluno-data">    
+                                <p>{{ usuario.aluno.nome_completo|upper }}</p>
+                                <p>{{ usuario.email }}</p>
+                            </div>
+                        </div>
+                    </button>
+                {% endfor %}
+                {% else %}
+                    <h2>Não há pedidos de acesso ;)</h2>
+            {% endif %}
+            
         </div>
         <div class="fade"></div>
         <div class="modal">
             <div id="modal-container-aluno">
+                <div class="close-menu" onclick="mostrarDadosAluno()">
+                    <img src="{% static 'img/reject.svg' %}" alt="">
+                </div>
                 <img src="{% static './img/aluno-normal.svg' %}" alt="">
                 <h1 class="title-modal-aluno"></h1>
-                <span>
+                <div>
                     <h2>Nome completo</h2>
                     <p class="nome-completo-aluno"></p>
                     <h2>Email</h2>
                     <p class="email-aluno"></p>
                     <h2>Matrícula do Aluno</h2>
-                    <span class="matricula">
+                    <div class="matricula">
                         <a href="./img/aluno-normal.svg" class="matricula-aluno-request" download>
                             <img src="{% static './img/download-icon.svg' %}" alt="" width="24px" height="24px">
                             Download da matrícula
                         </a>
-                    </span>
-                </span>
+                    </div>
+                </div>
                 <form action="{% url 'pedidos_cadastro' %}" class="confirm-account" method="post">
                     {% csrf_token %}
-                    <label for="accept">
-                        <button class="btn-accept-student">
+                    <label for="active">
+                        <button class="btn-accept-student" onclick="aceitar()">
                             <input type="hidden" name="active-account" value="" class="active-account">
                             <img src="{% static './img/accept-icon.svg' %}" alt="">
                         </button>
                     </label>
-                    <div class="reject" onclick="mostrarDadosAluno()">
-                        <img src="{% static './img/reject.svg' %}" alt="">
-                    </div>
+                    <label for="reject">
+                        <button class="btn-accept-student" onclick="rejeitar()">
+                            <input type="hidden" name="reject-account" value="" class="reject-account">
+                            <img src="{% static './img/reject.svg' %}" alt="">
+                        </button>
+                    </label>
                 </form>
             </div>
         </div>

@@ -128,6 +128,7 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / "media"
 
 MESSAGE_TAGS = {
@@ -136,9 +137,5 @@ MESSAGE_TAGS = {
     constants.INFO: 'message-info',
     constants.SUCCESS: 'message-sucess',
     constants.WARNING: 'message-warning',
-<<<<<<< HEAD
 }
 
-=======
-}
->>>>>>> 006ea2afc55be41354039d63c2e13e62f7b6c239

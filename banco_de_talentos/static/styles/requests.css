@@ -147,6 +147,11 @@
     height: 20px;
 }
 
+#form-modal {
+    display: flex;
+    flex-direction: column;
+}
+
 @media (max-width: 768px) {
     .modal {
         width: 90vw;

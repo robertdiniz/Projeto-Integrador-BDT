@@ -1,7 +1,34 @@
-<form action="{% url 'testando' %}" method="post">
-    {% csrf_token %}
 
-    <input type="file" name="matricula" id="">
-    <button type="submit">envie essa pica</button>
+{% for usuario in usuarios %}
+
+    <p class="buceta" onclick="testando('{{usuario.email}}')">{{ usuario.username }}</p>
+
+{% endfor %}
+
+<form action="{% url 'testando' %}" method="post" class="myForm">
+    {% csrf_token %}
+    <input type="submit" name="accept-email" class="accept-email">
+    <button type="submit" name="accept" value="aceitado" class="accept">Aceitar</button>
+    <button type="submit" name="reject" value="rejeitado" class="reject">Rejeitar</button>
 
 </form>
+
+<script> 
+
+    accept_email = document.querySelector('.accept-email');
+    buceta = document.querySelector('.buceta');
+    accept = document.querySelector('.accept');
+    reject = document.querySelector('.reject');
+    myForm = document.querySelector('.myForm');
+
+
+    function testando(email){
+        accept_email.value = email;
+    }
+
+    accept.addEventListener('click', function() {
+        event.preventDefault();
+        myForm.submit();
+    });
+
+</script>

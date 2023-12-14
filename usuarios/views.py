@@ -244,31 +244,23 @@ def busca_filtrada(request):
 def pedidos_cadastro(request):
 
     usuarios = User.objects.filter(is_active=False)
-    active = request.POST.get('accept')
-    reject = request.POST.get('reject')
-    email_active = request.POST.get('active-account')
-    email_reject = request.POST.get('reject-account')
 
-    if active:
-        usuario = User.objects.get(email=email_active)
-        usuario.is_active = True
-        usuario.save()
-        messages.success(request, f"{usuario.username} liberado acesso!")
-        return redirect('pedidos_cadastro')
-    elif reject:
-        usuario = User.objects.get(email=email_reject)
-        messages.success(request, f"{usuario.username} apagado!")
-        usuario.delete()
-        return redirect('pedidos_cadastro')
-
+    if request.method == "POST":
+        if 'active-account' in request.POST and request.POST['active-account']:
+            email = request.POST.get('active-account')
+            if email:
+                usuario = User.objects.get(email=email)
+                usuario.is_active=True
+                usuario.save()
+                messages.success(request, f"{usuario.username} recebeu acesso ao sistema!")
+                return redirect('pedidos_cadastro')
+        elif 'reject-account' in request.POST and request.POST['reject-account']:
+            email = request.POST.get('reject-account')
+            if email:
+                print('existe!')
+                usuario = User.objects.get(email=email)
+                messages.success(request, f"{usuario.username} foi rejeitado(a) do sistema!")
+                usuario.delete()
+                return redirect('pedidos_cadastro')
     return render(request, 'requests.html', {"usuarios": usuarios})
 
-def testando(request):
-    
-    if request.method == "POST":
-        matricula = request.FILES['matricula']
-        print(matricula)
-
-    form = AlunoForm()
-
-    return render(request, "teste.html", {"form": form})

@@ -16,6 +16,13 @@
 
     <main class="main-search">
         <div class="main-search-container">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="message {{message.tags}}" onclick="fecharMessage()">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
             {% if usuarios %}
             <h1>Pedidos de Registros</h1>
                 {% for usuario in usuarios %}
@@ -57,14 +64,14 @@
                 </div>
                 <form action="{% url 'pedidos_cadastro' %}" class="confirm-account" method="post">
                     {% csrf_token %}
-                    <label for="accept">
-                        <button class="btn-accept-student">
+                    <label for="active">
+                        <button class="btn-accept-student" onclick="aceitar()">
                             <input type="hidden" name="active-account" value="" class="active-account">
                             <img src="{% static './img/accept-icon.svg' %}" alt="">
                         </button>
                     </label>
                     <label for="reject">
-                        <button class="btn-accept-student">
+                        <button class="btn-accept-student" onclick="rejeitar()">
                             <input type="hidden" name="reject-account" value="" class="reject-account">
                             <img src="{% static './img/reject.svg' %}" alt="">
                         </button>

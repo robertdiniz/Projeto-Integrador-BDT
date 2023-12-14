@@ -103,21 +103,6 @@ def trilha(request):
 
     return render(request, "trilha.html", context)
 
-
-
-def teste(request):
-    
-    user = request.user
-
-    trilha = user.aluno.trilha_atual
-    modulos = trilha.modulos.all()
-    
-    for modulo in modulos:
-        print(modulo.tarefas.all())
-
-    return render(request, "teste.html", {'trilha': trilha, 'modulos': modulos})
-
-
 def not_found(request):
     return render(request, '404.html')
 

@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from .models import Trilha, Tarefa
-from usuarios.models import ModuloAluno, Modulo, ConclusaoTrilha
+from usuarios.models import ModuloAluno, Modulo, ConclusaoTrilha, ConclusaoTarefa
 from .forms import ModuloRepositorioForm, ModuloConcluidoForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -8,7 +8,6 @@ from django.contrib import messages
 def index(request):
 
     if request.user.is_authenticated:
-        messages.success(request, 'você tá doido é?')
         return redirect("trilha")
 
     return render(request, "index.html")
@@ -61,6 +60,17 @@ def trilha(request):
             modulos_aluno.append(modulo_concluido)
 
     todos_modulos_concluidos = ModuloAluno.objects.filter(aluno=user.aluno, modulo__in=modulos, concluido=True).count() == modulos.count()
+    
+    # Tarefas concluidas pelo aluno
+    tarefas_concluidas_aluno = []
+
+    todas_tarefas_concluidas = ConclusaoTarefa.objects.filter(aluno=user.aluno, concluida=True)
+
+    for tarefa in todas_tarefas_concluidas:
+        tarefa_concluida = Tarefa.objects.get(id=tarefa.tarefa.id) 
+        tarefas_concluidas_aluno.append(tarefa_concluida)
+
+
 
     if request.method == "POST":
         
@@ -72,9 +82,26 @@ def trilha(request):
             modulo_aluno.save()
             selos_do_modulo = modulo.selos.all()
             user.aluno.selos.add(*selos_do_modulo)
-            user.aluno.aumentar_xp(100)
+            user.aluno.aumentar_xp(500)
             return redirect('trilha')
         
+        elif 'task-concluida' in request.POST:
+            tarefa_enviada = request.POST.getlist('task-concluida')
+            tarefa_id = tarefa_enviada[0]
+            tarefa = Tarefa.objects.get(id=tarefa_id)
+            existe_tarefa_concluida = ConclusaoTarefa.objects.filter(aluno=user.aluno, tarefa=tarefa, concluida=True).exists()
+            if existe_tarefa_concluida:
+                tarefa_concluida = ConclusaoTarefa.objects.get(aluno=user.aluno, tarefa=tarefa, concluida=True)
+                tarefa_concluida.delete()
+                user.aluno.xp -= 100
+                user.aluno.save()
+                messages.error(request, 'Você desmarcou a tarefa, perdeu 100 XP!')
+                return redirect('trilha')
+            tarefa_concluida = ConclusaoTarefa.objects.create(aluno=user.aluno, tarefa=tarefa, concluida=True)
+            tarefa_concluida.save()
+            user.aluno.aumentar_xp(100)
+            return redirect('trilha')
+            
         elif 'modulo_concluir' in request.POST:
             nome_modulo = request.POST.get('modulo_concluir')
             modulo = Modulo.objects.get(nome=nome_modulo)
@@ -82,7 +109,7 @@ def trilha(request):
             modulo_aluno.save()
             selos_do_modulo = modulo.selos.all()
             user.aluno.selos.add(*selos_do_modulo)
-            user.aluno.aumentar_xp(100)
+            user.aluno.aumentar_xp(500)
             return redirect('trilha')
         
         elif 'trilha_concluir' in request.POST:
@@ -91,14 +118,16 @@ def trilha(request):
             user.aluno.trilha_atual = None
             user.aluno.aumentar_xp(1500)
             return redirect('trilhas')
-        
+
     context = {
         'trilha': trilha, 
         'modulos': modulos, 
         'form': form, 
         'form_concluido': form_concluido, 
         "modulos_concluidos": modulos_aluno,
-        "todos_modulos_concluidos": todos_modulos_concluidos
+        "todos_modulos_concluidos": todos_modulos_concluidos,
+        "todas_tarefas_concluidas": todas_tarefas_concluidas,
+        "tarefas_concluidas_aluno": tarefas_concluidas_aluno,
     }
 
     return render(request, "trilha.html", context)

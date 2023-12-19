@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/perfil.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/progress.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/perfil-privado.css' %}">
+{% endblock %}
+
+{% block title %} {{ aluno.nome_completo|capfirst }} {% endblock %}
+
+{% block content %}
+
+    <!-- Header -->
+    {% include 'header.html' %}
+    <!-- end header -->
+
+
+    <main class="main-perfil">
+        <div class="main-container-perfil">
+            <div class="perfil-header-privado">
+                <span class="foto-dados">
+                    {% if aluno.foto %}
+                        <img src="{{ aluno.foto.url }}" alt="" width="150px" height="150px" class="aluno-foto">
+                    {% else %}
+                        <img src="{% static 'img/aluno-normal.svg' %}" alt="" width="150px" height="150px" class="aluno-foto">
+                    {% endif %}
+                </span>
+                
+            </div>
+            <div class="perfil-privado-aviso">
+                <img src="{% static 'img/padlock.svg' %}" alt="" class="padlock">
+                <h1> Conta privada</h1>
+            </div>
+        </div>
+    </main>
+
+    <script src="./scripts/button.js"></script>
+{% endblock %}
+

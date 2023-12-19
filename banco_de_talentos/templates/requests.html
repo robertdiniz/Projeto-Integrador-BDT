@@ -24,7 +24,7 @@
                 {% endfor %}
             {% endif %}
             {% if usuarios %}
-            <h1>Pedidos de Registros</h1>
+            <h1>Pedidos de Acesso</h1>
                 {% for usuario in usuarios %}
                     <button class="btn-mostrar-aluno" onclick="mostrarDadosAluno('{{usuario.username}}', '{{usuario.aluno.nome_completo|upper}}', '{{usuario.email}}', '{{usuario.aluno.matricula.url}}')">
                         <div class="card-aluno">
@@ -62,7 +62,7 @@
                         </a>
                     </div>
                 </div>
-                <form action="{% url 'pedidos_cadastro' %}" class="confirm-account" method="post">
+                <form action="{% url 'pedidos_acessos' %}" class="confirm-account" method="post">
                     {% csrf_token %}
                     <label for="active">
                         <button class="btn-accept-student" onclick="aceitar()">

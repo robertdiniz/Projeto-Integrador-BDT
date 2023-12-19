@@ -87,7 +87,7 @@
     padding: 0.5rem;
 }
 
-.trilha-tasks form {
+.trilha-tasks .form-task {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;

@@ -146,11 +146,9 @@ def perfil(request, id):
 
     proprio_perfil = user.is_authenticated and user.aluno.id == aluno.id
 
-    user.aluno.aumentar_xp(100)
-
     # Verificação da visibilidade do perfil do aluno e comparação se o aluno é o atual.
-    if aluno.perfil_privado and not proprio_perfil:
-        return HttpResponse(f"O perfil {aluno.nome_completo} é privado!")
+    if aluno.perfil_privado and not proprio_perfil and user.is_staff is False: 
+        return render(request, "privado.html", {'aluno': aluno})
     
     busca = request.POST.get("nome")
 
@@ -241,7 +239,7 @@ def busca_filtrada(request):
         return render(request, "search.html", context)
 
 @login_required(login_url='login')
-def pedidos_cadastro(request):
+def pedidos_acessos(request):
 
     usuarios = User.objects.filter(is_active=False)
 
@@ -253,7 +251,7 @@ def pedidos_cadastro(request):
                 usuario.is_active=True
                 usuario.save()
                 messages.success(request, f"{usuario.username} recebeu acesso ao sistema!")
-                return redirect('pedidos_cadastro')
+                return redirect('pedidos_acessos')
         elif 'reject-account' in request.POST and request.POST['reject-account']:
             email = request.POST.get('reject-account')
             if email:
@@ -261,6 +259,6 @@ def pedidos_cadastro(request):
                 usuario = User.objects.get(email=email)
                 messages.success(request, f"{usuario.username} foi rejeitado(a) do sistema!")
                 usuario.delete()
-                return redirect('pedidos_cadastro')
+                return redirect('pedidos_acessos')
     return render(request, 'requests.html', {"usuarios": usuarios})
 

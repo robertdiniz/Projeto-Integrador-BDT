@@ -13,14 +13,15 @@
     <!-- end header -->
 
     <main class="main-trilha">
-        {% if messages %}
+                
+        <div class="main-trilha-container">
+            {% if messages %}
                 {% for message in messages %}
                 <div class="message {{message.tags}}" onclick="fecharMessage()">
                     {{ message }}
                 </div>
                 {% endfor %}
         {% endif %}
-        <div class="main-trilha-container">
             <span class="span-trilha-container">
                 <h1>Trilha {{ trilha.nome }}</h1>
                 <p>Quando finalizar alguma tarefa marque como feito e ganhe selos exclusivos para seu perfil!</p>
@@ -44,19 +45,34 @@
                     </div>
                 </div>
                 <div class="trilha-tasks">
-                    <form action="{% url 'trilha' %}" method="post">
+                    <form action="{% url 'trilha' %}" method="post" class="form-task">
                         {% csrf_token %}
                             {% for tarefa in modulo.tarefas.all %}
+                                {% if tarefa in tarefas_concluidas_aluno %}
                                 <label for="tarefa_{{ tarefa.id }}">
                                     <div class="task">
-                                        <input type="checkbox" id="tarefa_{{ tarefa.id }}" name="tasks" class="checkbox-task">
-                                        <label for="tarefa_{{ tarefa.id }}" class="checkbox-personalizado"></label>
+                                        <input type="hidden" name="task-concluida" class="task-concluida">
+                                        <input type="checkbox" id="tarefa_{{ tarefa.id }}" name="tasks" class="checkbox-task" checked>
+                                        <label for="tarefa_{{ tarefa.id }}" onclick="concluirTarefa('{{tarefa.id}}')" class="checkbox-personalizado"></label>
                                         <p>{{ tarefa.nome }}</p>
                                     </div>
                                     {% if tarefa.descricao %}
                                         <li>{{ tarefa.descricao }}</li>
                                     {% endif %}
                                 </label>
+                                {% else %}
+                                <label for="tarefa_{{ tarefa.id }}">
+                                    <div class="task">
+                                        <input type="hidden" name="task-concluida" class="task-concluida">
+                                        <input type="checkbox" id="tarefa_{{ tarefa.id }}" name="tasks" class="checkbox-task">
+                                        <label for="tarefa_{{ tarefa.id }}" onclick="concluirTarefa('{{tarefa.id}}')" class="checkbox-personalizado"></label>
+                                        <p>{{ tarefa.nome }}</p>
+                                    </div>
+                                    {% if tarefa.descricao %}
+                                        <li>{{ tarefa.descricao }}</li>
+                                    {% endif %}
+                                </label>
+                                {% endif %}
                             {% endfor %}
                     </form>
                 </div>  
@@ -122,6 +138,8 @@
     </main>
 
     <script src="{% static '/scripts/enviarRepositorio.js' %}"></script>
+    <script src="{% static '/scripts/tarefaConcluir.js' %}"></script>
+    
     <script src="{% static '/scripts/fecharMessage.js' %}"></script>
     
 

@@ -4,6 +4,7 @@ from usuarios.models import ModuloAluno, Modulo, ConclusaoTrilha, ConclusaoTaref
 from .forms import ModuloRepositorioForm, ModuloConcluidoForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from usuarios.views import usuarios_inativos
 
 def index(request):
 
@@ -34,7 +35,8 @@ def trilhas(request):
 
         context = {
             "trilhas": trilhas,
-            "trilhas_disponiveis": trilhas_disponiveis
+            "trilhas_disponiveis": trilhas_disponiveis,
+            "usuarios_inativos": usuarios_inativos(),
         }
 
         return render(request, "trilhas.html", context)
@@ -130,10 +132,10 @@ def trilha(request):
         "todos_modulos_concluidos": todos_modulos_concluidos,
         "todas_tarefas_concluidas": todas_tarefas_concluidas,
         "tarefas_concluidas_aluno": tarefas_concluidas_aluno,
+        "usuarios_inativos": usuarios_inativos(),
     }
 
     return render(request, "trilha.html", context)
 
-def not_found(request):
-    return render(request, '404.html')
+
 

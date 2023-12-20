@@ -41,7 +41,12 @@
     {% if user.is_superuser %}
         <a href="{% url 'pedidos_acessos' %}">
             <div class="panel-staff">
-                <div class="panel-container">
+                <div class="panel-container" title="há {{usuarios_inativos}} pedidos de acesso!">
+
+                        {% if usuarios_inativos %}
+                            <p class="order-quantity">{{usuarios_inativos}}</p>
+                        {% endif %}
+
                     <img src="{% static 'img/panel-request.svg' %}" class="img-panel" alt="">
                 </div>
             </div>

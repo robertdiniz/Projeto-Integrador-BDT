@@ -45,6 +45,38 @@
                     </div>
                 </div>
                 <div class="trilha-tasks">
+                    {% if modulo not in modulos_concluidos %}
+                        <form action="{% url 'trilha' %}" method="post" class="form-task">
+                            {% csrf_token %}
+                                {% for tarefa in modulo.tarefas.all %}
+                                    {% if tarefa in tarefas_concluidas_aluno %}
+                                    <label for="tarefa_{{ tarefa.id }}">
+                                        <div class="task">
+                                            <input type="hidden" name="task-concluida" class="task-concluida">
+                                            <input type="checkbox" id="tarefa_{{ tarefa.id }}" name="tasks" class="checkbox-task" checked disable>
+                                            <label for="tarefa_{{ tarefa.id }}" onclick="concluirTarefa('{{tarefa.id}}')" class="checkbox-personalizado" disable></label>
+                                            <p>{{ tarefa.nome }}</p>
+                                        </div>
+                                        {% if tarefa.descricao %}
+                                            <li>{{ tarefa.descricao }}</li>
+                                        {% endif %}
+                                    </label>
+                                    {% else %}
+                                    <label for="tarefa_{{ tarefa.id }}">
+                                        <div class="task">
+                                            <input type="hidden" name="task-concluida" class="task-concluida">
+                                            <input type="checkbox" id="tarefa_{{ tarefa.id }}" name="tasks" class="checkbox-task">
+                                            <label for="tarefa_{{ tarefa.id }}" onclick="concluirTarefa('{{tarefa.id}}')" class="checkbox-personalizado"></label>
+                                            <p>{{ tarefa.nome }}</p>
+                                        </div>
+                                        {% if tarefa.descricao %}
+                                            <li>{{ tarefa.descricao }}</li>
+                                        {% endif %}
+                                    </label>
+                                    {% endif %}
+                                {% endfor %}
+                        </form>
+                    {% else %}
                     <form action="{% url 'trilha' %}" method="post" class="form-task">
                         {% csrf_token %}
                             {% for tarefa in modulo.tarefas.all %}
@@ -52,8 +84,8 @@
                                 <label for="tarefa_{{ tarefa.id }}">
                                     <div class="task">
                                         <input type="hidden" name="task-concluida" class="task-concluida">
-                                        <input type="checkbox" id="tarefa_{{ tarefa.id }}" name="tasks" class="checkbox-task" checked>
-                                        <label for="tarefa_{{ tarefa.id }}" onclick="concluirTarefa('{{tarefa.id}}')" class="checkbox-personalizado"></label>
+                                        <input type="checkbox" id="tarefa_{{ tarefa.id }}" name="tasks" class="checkbox-task" checked disable>
+                                        <label for="tarefa_{{ tarefa.id }}" disable class="checkbox-personalizado" disable></label>
                                         <p>{{ tarefa.nome }}</p>
                                     </div>
                                     {% if tarefa.descricao %}
@@ -65,7 +97,7 @@
                                     <div class="task">
                                         <input type="hidden" name="task-concluida" class="task-concluida">
                                         <input type="checkbox" id="tarefa_{{ tarefa.id }}" name="tasks" class="checkbox-task">
-                                        <label for="tarefa_{{ tarefa.id }}" onclick="concluirTarefa('{{tarefa.id}}')" class="checkbox-personalizado"></label>
+                                        <label for="tarefa_{{ tarefa.id }}" disable class="checkbox-personalizado"></label>
                                         <p>{{ tarefa.nome }}</p>
                                     </div>
                                     {% if tarefa.descricao %}
@@ -75,6 +107,7 @@
                                 {% endif %}
                             {% endfor %}
                     </form>
+                    {% endif %}
                 </div>  
                 
                 {% if modulo in modulos_concluidos %}
@@ -99,23 +132,16 @@
             </div>
             {% endfor %}
             {% if not todos_modulos_concluidos %}
-
-                    <div class="trail-not-completed">
-                        <p>Finalizar Trilha</p>
-                    </div>
-                
+                <div class="trail-not-completed">
+                    <p>Finalizar Trilha</p>
+                </div>
                 {% else %}
-
                     <form action="{% url 'trilha' %}" method="post">
                         {% csrf_token %}
                         <button class="trail-finish" name="trilha_concluir" type="submit">Finalizar trilha</button>
                     </form>
-
             {% endif %}
         </div>
-
-
-
         <div class="fade" onclick="enviarRepositorio()"></div>
         <div class="modal">
             <div id="modal-container-form">

@@ -88,7 +88,7 @@
 
 @media (max-width: 800px){
     .main-search-container h1 {
-        width: 90vw;
+        width: 100%;
     }
 
     .search-container-header {
@@ -109,6 +109,14 @@
 
     .main-search-container a .card-aluno{
         width: 90vw;
+    }
+
+    .btn-mostrar-aluno {
+        width: 100%;
+    }
+
+    .card-aluno {
+        width: 100%;
     }
 
 }

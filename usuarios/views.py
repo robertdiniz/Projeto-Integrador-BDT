@@ -30,8 +30,10 @@ def login(request):
             existe = User.objects.filter(email=email).exists()
             if existe:
                 usuario = User.objects.get(email=email)
+                if not len(senha) > 7:
+                    messages.error(request, "Senha deve conter no mínimo 8 dígitos.")
+                    return redirect('login')
                 user = authenticate(request, username=usuario.username, password=senha)
-                
                 if user is not None and user.is_active:
                     login_sistema(request, user)
                     return redirect("trilha")
@@ -82,6 +84,10 @@ def register(request):
             messages.error(request, "Nome de usuário ou email já existe!")
             return redirect('register')
 
+        if not len(senha) > 7:
+            messages.error(request, "Senha com menos de 8 dígitos.")
+            return redirect('register')
+
         user = User.objects.create_user(
             username=nome_usuario, email=email, password=senha, is_active=False
         )
@@ -95,7 +101,7 @@ def register(request):
             return redirect("login")
     else:
         form = AlunoForm()
-    return render(request, "register.html", {"form": form})
+    return render(request, "register.html", {"form": form, "usuarios_inativos": usuarios_inativos()})
 
 
 """
@@ -133,7 +139,8 @@ def settings(request):
         "id_atual": user.id,
         "form_change_password": AlunoChangePasswordForm(),
         "form_change_visibility": AlunoChangePerfilVisibility(instance=user.aluno),
-        "trilhas": user.aluno.trilhas
+        "trilhas": user.aluno.trilhas,
+        "usuarios_inativos": usuarios_inativos(),
     }
     
     return render(request, "settings.html", context)
@@ -163,6 +170,7 @@ def perfil(request, id):
         "proprio_perfil": proprio_perfil,
         "trilhas_concluidas_aluno": trilhas_concluidas_aluno,
         "selos_do_aluno": selos_do_aluno,
+        "usuarios_inativos": usuarios_inativos(),
     }
 
     return render(request, "perfil.html", context)
@@ -203,7 +211,11 @@ def edit(request):
         return render(
             request,
             "edit.html",
-            {"form_rede_social": form_redes_sociais, "form_biografia": form_biografia},
+            {
+                "form_rede_social": form_redes_sociais,
+                "form_biografia": form_biografia,
+                "usuarios_inativos": usuarios_inativos(),
+            },
         )
 
 @login_required(login_url='login')
@@ -234,6 +246,7 @@ def buscar(request):
     context = {
         "perfis": perfis,
         "page_obj": page_obj,
+        "usuarios_inativos": usuarios_inativos(),
     }
 
     return render(request, "search.html", context)
@@ -246,13 +259,19 @@ def busca_filtrada(request):
     if nome:
         perfis = Aluno.objects.filter(nome_completo__icontains=nome, user__is_active=True).all()
 
-        context = {"perfis": perfis}
+        context = {
+            "perfis": perfis,
+            "usuarios_inativos": usuarios_inativos(),
+        }
 
         return render(request, "search.html", context)
     else:
         perfis = Aluno.objects.filter(user__is_active=True).all()
 
-        context = {"perfis": perfis}
+        context = {
+            "perfis": perfis,
+            "usuarios_inativos": usuarios_inativos(),
+        }
 
         return render(request, "search.html", context)
 
@@ -278,7 +297,7 @@ def pedidos_acessos(request):
                 messages.success(request, f"{usuario.username} foi rejeitado(a) do sistema!")
                 usuario.delete()
                 return redirect('pedidos_acessos')
-    return render(request, 'requests.html', {"usuarios": usuarios})
+    return render(request, 'requests.html', {"usuarios": usuarios, "usuarios_inativos": usuarios_inativos()})
 
 @login_required(login_url='login')
 def perfil_selos(request, id):
@@ -288,6 +307,7 @@ def perfil_selos(request, id):
     context = {
         "aluno": aluno,
         "selos_do_aluno": selos_do_aluno,
+        "usuarios_inativos": usuarios_inativos(),
     }
 
     return render(request, 'selos.html', context)
@@ -300,6 +320,12 @@ def trilhas_realizadas(request, id):
     context = {
         "aluno": aluno,
         "trilhas_realizadas": trilhas_realizadas,
+        "usuarios_inativos": usuarios_inativos(),
     }
 
     return render(request, 'aluno-trilhas.html', context)
+
+
+def usuarios_inativos():
+    usuarios_inativos = User.objects.filter(is_active=False).count()
+    return usuarios_inativos

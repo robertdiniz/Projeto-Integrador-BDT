@@ -19,6 +19,7 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
+/* Panel Staff */
 .panel-staff {
     border-radius: 50%;
     background-color: #9779FB;
@@ -41,6 +42,16 @@ body {
 .img-panel {
     width: 24px;
     height: 24px;
+}
+
+.order-quantity {
+    position: absolute;
+    background-color: #E63B2E;
+    border-radius: 100%;
+    padding: 0.1em 0.5em;
+    top: -2px;
+    right: 0;
+    font-size: 14px;
 }
 
 /* Messages */

@@ -1,3 +1,4 @@
+from tkinter import SE
 from django.db import models
 from django.contrib.auth.models import User
 from banco_de_talentos.models import Trilha, Modulo, Tarefa, Selo
@@ -17,7 +18,6 @@ class Aluno(models.Model):
     )
     matricula = models.FileField("Matrícula", upload_to="matriculas")
     perfil_privado = models.BooleanField("Perfil privado", default=False)
-    selos = models.ManyToManyField(Selo, blank=True)
     linkedin = models.URLField("Linkedin:", blank=True, null=True, default="")
     github = models.URLField("Github:", blank=True, null=True, default="")
     discord = models.CharField(
@@ -51,6 +51,17 @@ class Aluno(models.Model):
         return self.nome_completo
     
 
+class SelosAluno(models.Model):
+    aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
+    selo = models.ForeignKey(Selo, on_delete=models.CASCADE)
+    data_conquistada = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.aluno.nome_completo} - {self.selo.nome}'
+    
+    class Meta:
+        unique_together = ('aluno', 'selo')
+
 class ConclusaoTarefa(models.Model):
     aluno = models.ForeignKey(Aluno, null=True, on_delete=models.SET_NULL)
     tarefa = models.ForeignKey(Tarefa, null=True, on_delete=models.SET_NULL)
@@ -58,6 +69,9 @@ class ConclusaoTarefa(models.Model):
 
     def __str__(self):
         return f'{self.aluno.nome_completo} - {self.tarefa.nome}'
+    
+    class Meta:
+        unique_together = ('aluno', 'tarefa')
 
 class ModuloAluno(models.Model):
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
@@ -67,6 +81,9 @@ class ModuloAluno(models.Model):
 
     def __str__(self):
         return f"{self.modulo} - {self.aluno}"
+    
+    class Meta:
+        unique_together = ('aluno', 'modulo')
 
 class ConclusaoTrilha(models.Model):
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
@@ -75,3 +92,6 @@ class ConclusaoTrilha(models.Model):
 
     def __str__(self):
         return f"{self.trilha} - {self.aluno}"
+    
+    class Meta:
+        unique_together = ('aluno', 'trilha')

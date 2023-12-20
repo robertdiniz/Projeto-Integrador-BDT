@@ -2,6 +2,8 @@
 {% load static %}
 {% block css %}
     <link rel="stylesheet" href="{% static 'styles/search.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/pagination.css' %}">
+
 {% endblock %}
 
 {% block title %} Buscar Perfis {% endblock %}
@@ -11,6 +13,7 @@
     <!-- Header -->
     {% include 'header.html' %}
     <!-- end header -->
+
 
     <main class="main-search">
         <div class="main-search-container">
@@ -27,27 +30,31 @@
                 </div>
             </div>
 
-            {% for perfil in perfis %}
+            {% for perfil in page_obj %}
             
-            <a href="{% url 'perfil' id=perfil.id %}">
-                <div class="card-aluno">
-                    <img {% if perfil.foto %} src="{{ perfil.foto.url }}" {% else %} src="{% static 'img/aluno-normal.svg' %}" {% endif %} alt="" width="150px" height="150px">
-                    <div class="aluno-data">
-                        <h2>{{ perfil.nome_completo|upper }}</h2>
-                        <p> Nível {{perfil.nivel}} </p>
-                        {% if perfil.trilha_atual %}
-                            <p>{{ perfil.trilha_atual }}</p>
-                        {% else %}
-                            <p></p>
-                        {% endif %}
-                        
-                        <div class="progresso">
-                            <div class="level"></div>
+                <a href="{% url 'perfil' id=perfil.id %}">
+                    <div class="card-aluno">
+                        <img {% if perfil.foto %} src="{{ perfil.foto.url }}" {% else %} src="{% static 'img/aluno-normal.svg' %}" {% endif %} alt="" width="150px" height="150px">
+                        <div class="aluno-data">
+                            <h2>{{ perfil.nome_completo|upper }}</h2>
+                            <p> Nível {{perfil.nivel}} </p>
+                            {% if perfil.trilha_atual %}
+                                <p>{{ perfil.trilha_atual }}</p>
+                            {% else %}
+                                <p></p>
+                            {% endif %}
+                            
+                            <div class="progresso">
+                                <div class="level"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </a>
+                </a>
+                
             {% endfor %}
+
+            {% include 'pagination.html' %}
+
         </div>
     </main>
 

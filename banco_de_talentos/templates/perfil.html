@@ -76,12 +76,12 @@
                             </a>
                         </li>
                         <li>
-                            <a {% if aluno.github %} href="{{ aluno.github }}"  target="_blank" {% endif %}>
+                            <a {% if aluno.github %} href="{{ aluno.github }}" target="_blank" {% endif %}>
                                 <img src="{% if aluno.github %}{% static './img/github.svg' %}{% else %}{% static './img/github-normal.svg' %}{% endif %}" alt="ícone github" width="24px" height="24px">
                             </a>
                         </li>
                         <li>    
-                            <a {% if aluno.discord %} href="{{ aluno.discord }}" target="_blank" {% endif %}>
+                            <a {% if aluno.discord %} onclick="copiarValor('{{aluno.discord}}')" target="_blank" {% endif %} title="Clique para copiar!" style="cursor: pointer;">
                                 <img src="{% if aluno.discord %}{% static './img/discord.svg' %}{% else %}{% static './img/discord-normal.svg' %}{% endif %}" alt="ícone discord" width="24px" height="24px">
                             </a>
                         </li>
@@ -91,7 +91,7 @@
                             </a>
                         </li>
                         <li>
-                            <a {% if aluno.whatsapp %} href="{{ aluno.wpp }}" target="_blank" {% endif %}>
+                            <a {% if aluno.whatsapp %} onclick="copiarValor('{{aluno.whatsapp}}')" target="_blank" {% endif %} title="Clique para copiar!" style="cursor: pointer;">
                                 <img src="{% if aluno.whatsapp %}{% static './img/wpp.svg' %}{% else %}{% static './img/wpp-normal.svg' %}{% endif %}" alt="ícone whatsapp" width="24px" height="24px">
                             </a>
                         </li>
@@ -107,53 +107,57 @@
                 {% endif %}
             </div>
             <div class="perfil-selos">
-                <h2>Selos</h2>
-                {% if not aluno.selos.exists %}
-                    <p>Não tem selos!</p>
-                    {% else %}
-                    <div class="perfil-selos-container">
-                            {% for selo in aluno.selos.all %}
-                                <img src="{{ selo.selo_normal.url }}" alt="" width="32px" height="32px">
-                            {% endfor %}
-                        </div>
-                {% endif %}
+                <a href="{% url 'perfil_selos' aluno.id %}" class="link-selos" title="Selos do {{user.username}}!">
+                    <h2>Selos</h2>
+                    {% if not selos_do_aluno.exists %}
+                        <p>Não tem selos!</p>
+                        {% else %}
+                        <div class="perfil-selos-container">
+                                {% for selo in selos_do_aluno.all %}
+                                    <img src="{{ selo.selo.selo_normal.url }}" alt="Selo" width="32px" height="32px" title="Selo {{selo.selo.nome}}">
+                                {% endfor %}
+                            </div>
+                    {% endif %}
+                </a>
             </div>
             <div class="perfil-trilhas">
-                <h2>Trilhas realizadas</h2>
-                <div class="trilhas-container">
-                    {% if not aluno.trilha_atual and not trilhas_concluidas_aluno %}
-                    <p>O aluno ainda não concluiu nenhuma trilha.</p>
-                {% else %}
-                    {% if aluno.trilha_atual %}
-                        <div class="trilha-card">
-                            <div>
-                                <img src="{% static './img/backend-icon.svg' %}" alt="">
-                                <p>Trilha {{ aluno.trilha_atual.nome }}</p>    
-                            </div>
-                            <p class="trilha-status">Em andamento...</p>
-                        </div>
-                    {% endif %}
-                    {% if trilhas_concluidas_aluno %}
-                        {% for trilha in trilhas_concluidas_aluno %}
+                <a href="{% url 'trilhas_realizadas' aluno.id %}" class="link-trilhas" title="Histórico de Trilhas de {{ aluno.user.username|capfirst }}">
+                    <h2>Trilhas realizadas</h2>
+                    <div class="trilhas-container">
+                        {% if not aluno.trilha_atual and not trilhas_concluidas_aluno %}
+                        <p>O aluno ainda não concluiu nenhuma trilha.</p>
+                    {% else %}
+                        {% if aluno.trilha_atual %}
                             <div class="trilha-card">
                                 <div>
                                     <img src="{% static './img/backend-icon.svg' %}" alt="">
-                                    <p>Trilha {{ trilha.trilha.nome }}</p>    
+                                    <p>Trilha {{ aluno.trilha_atual.nome }}</p>    
                                 </div>
-                                {% if trilha.concluido %}
-                                    <p class="trilha-status">Concluída</p>
-                                {% else %}
-                                    <p class="trilha-status">Em progresso...</p>
-                                {% endif %}
+                                <p class="trilha-status">Em andamento...</p>
                             </div>
-                        {% endfor %}
+                        {% endif %}
+                        {% if trilhas_concluidas_aluno %}
+                            {% for trilha in trilhas_concluidas_aluno %}
+                                <div class="trilha-card">
+                                    <div>
+                                        <img src="{% static './img/backend-icon.svg' %}" alt="">
+                                        <p>Trilha {{ trilha.trilha.nome }}</p>    
+                                    </div>
+                                    {% if trilha.concluido %}
+                                        <p class="trilha-status">Concluída</p>
+                                    {% else %}
+                                        <p class="trilha-status">Em progresso...</p>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
                     {% endif %}
-                {% endif %}
-                </div>
+                    </div>
+                </a>
             </div>
         </div>
     </main>
 
-    <script src="./scripts/button.js"></script>
+    <script src="{% static './scripts/copyButton.js' %}"></script>
 {% endblock %}
 

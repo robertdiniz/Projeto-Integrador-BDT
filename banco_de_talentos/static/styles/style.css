@@ -70,15 +70,31 @@ body {
     color: #63D471;
 }
 
-
-
 .message:hover {
     transform: translate(0, -2px);
     transition: 0.6s;
 }
 
+/* Return Page Button */
+
+#return-page {
+    width: 50%;
+    background-color: #9779FB;
+    border-radius: 0.5em;
+    padding: 1em;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+}
+
 @media (max-width: 768px){
     .message {
         max-width: 90%;
+    }
+}
+
+@media (max-width: 640px) {
+    #return-page {
+        width: 100%;
     }
 }

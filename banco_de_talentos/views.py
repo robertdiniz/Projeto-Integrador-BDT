@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from .models import Trilha, Tarefa
-from usuarios.models import ModuloAluno, Modulo, ConclusaoTrilha, ConclusaoTarefa
+from usuarios.models import ModuloAluno, Modulo, ConclusaoTrilha, ConclusaoTarefa, SelosAluno
 from .forms import ModuloRepositorioForm, ModuloConcluidoForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -81,7 +81,8 @@ def trilha(request):
             modulo_aluno = ModuloAluno.objects.create(aluno=user.aluno, modulo=modulo, url_projeto=url, concluido=True)
             modulo_aluno.save()
             selos_do_modulo = modulo.selos.all()
-            user.aluno.selos.add(*selos_do_modulo)
+            for selo in selos_do_modulo:
+                SelosAluno.objects.create(aluno=user.aluno, selo=selo)
             user.aluno.aumentar_xp(500)
             return redirect('trilha')
         
@@ -108,7 +109,8 @@ def trilha(request):
             modulo_aluno = ModuloAluno.objects.create(aluno=user.aluno, modulo=modulo, concluido=True)
             modulo_aluno.save()
             selos_do_modulo = modulo.selos.all()
-            user.aluno.selos.add(*selos_do_modulo)
+            for selo in selos_do_modulo:
+                SelosAluno.objects.create(aluno=user.aluno, selo=selo)
             user.aluno.aumentar_xp(500)
             return redirect('trilha')
         

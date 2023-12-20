@@ -210,3 +210,10 @@ nav {
     }
 
 }
+
+
+@media (max-width: 320px) {
+    .header-container {
+        padding: 0;
+    }
+}

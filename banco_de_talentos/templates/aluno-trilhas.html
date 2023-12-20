@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/perfil.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/perfil-privado.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/selos.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/aluno-trilhas.css' %}">
+
+{% endblock %}
+
+{% block title %} {{ aluno.nome_completo|capfirst }} {% endblock %}
+
+{% block content %}
+
+    <!-- Header -->
+    {% include 'header.html' %}
+    <!-- end header -->
+
+
+    <main class="main-perfil">
+        <div class="main-container-perfil">
+            <div class="perfil-header-privado">
+                <span class="foto-dados">
+                    {% if aluno.foto %}
+                        <img src="{{ aluno.foto.url }}" alt="" width="150px" height="150px" class="aluno-foto">
+                    {% else %}
+                        <img src="{% static 'img/aluno-normal.svg' %}" alt="" width="150px" height="150px" class="aluno-foto">
+                    {% endif %}
+                </span>
+                <h1> Histórico de trilhas de {{aluno.user.username|capfirst}} </h1>
+            </div>
+            <div class="perfil-privado-aviso">
+                {% if trilhas_realizadas.exists %}
+                    <div class="trilhas">
+                        {% for trilha in trilhas_realizadas.all %}
+                            <div class="trilha-card">
+                                <div>
+                                    <img src="{% static './img/backend-icon.svg' %}" alt="">
+                                    <p>Trilha {{ trilha.trilha.nome }}</p>    
+                                </div>
+                                {% if trilha.concluido %}
+                                    <p class="trilha-status">Concluída</p>
+                                {% else %}
+                                    <p class="trilha-status">Em progresso...</p>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                        <p class="no-stamps">Não tem trilhas realizadas!</p>
+                    {% endif %}
+            </div>
+            <a href="#" id="return-page">Voltar</a>
+        </div>
+    </main>
+
+    <script src="./scripts/button.js"></script>
+    <script src="{% static './scripts/returnPage.js' %}"></script>
+{% endblock %}
+

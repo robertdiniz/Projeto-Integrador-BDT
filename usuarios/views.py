@@ -1,6 +1,14 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.core.paginator import Paginator
+from django.contrib.auth import authenticate, update_session_auth_hash
+from django.contrib.auth import login as login_sistema
+from django.contrib.auth import logout as logout_sistema
+from django.contrib.auth.decorators import login_required
+from .models import Aluno, SelosAluno
+from banco_de_talentos.models import Trilha
+from usuarios.models import ConclusaoTrilha, SelosAluno
 from .forms import (
     AlunoForm,
     AlunoRedesSociaisForm,
@@ -9,13 +17,6 @@ from .forms import (
     AlunoChangePasswordForm,
     AlunoChangePerfilVisibility
 )
-from .models import Aluno
-from banco_de_talentos.models import Trilha
-from django.contrib.auth import authenticate, update_session_auth_hash
-from django.contrib.auth import login as login_sistema
-from django.contrib.auth import logout as logout_sistema
-from django.contrib.auth.decorators import login_required
-from usuarios.models import ConclusaoTrilha
 import re
 
 
@@ -142,11 +143,12 @@ def perfil(request, id):
 
     user = request.user
     aluno = Aluno.objects.get(id=id)
-    trilhas_concluidas_aluno = ConclusaoTrilha.objects.filter(aluno=aluno)
+    trilhas_concluidas_aluno = ConclusaoTrilha.objects.filter(aluno=aluno)[:2]
+    selos_do_aluno = SelosAluno.objects.filter(aluno=aluno).order_by('-data_conquistada')[:15]
 
     proprio_perfil = user.is_authenticated and user.aluno.id == aluno.id
 
-    # Verificação da visibilidade do perfil do aluno e comparação se o aluno é o atual.
+    # Verificação da visibilidade do perfil do aluno e comparação se o aluno é o atual e se é usuário normal.
     if aluno.perfil_privado and not proprio_perfil and user.is_staff is False: 
         return render(request, "privado.html", {'aluno': aluno})
     
@@ -159,7 +161,8 @@ def perfil(request, id):
         "perfil": perfil, 
         "aluno": aluno, 
         "proprio_perfil": proprio_perfil,
-        "trilhas_concluidas_aluno": trilhas_concluidas_aluno
+        "trilhas_concluidas_aluno": trilhas_concluidas_aluno,
+        "selos_do_aluno": selos_do_aluno,
     }
 
     return render(request, "perfil.html", context)
@@ -205,20 +208,35 @@ def edit(request):
 
 @login_required(login_url='login')
 def buscar(request):
+
     nome = request.GET.get("nome")
 
     if nome:
         perfis = Aluno.objects.filter(nome_completo__icontains=nome, user__is_active=True).all()
 
-        context = {"perfis": perfis}
+        p = Paginator(perfis, 5)
+        page_number = request.GET.get("page")
+        page_obj = p.get_page(page_number)
+
+        context = {
+            "perfis": perfis,
+            "page_obj": page_obj,
+        }
 
         return render(request, "search.html", context)
-    else:
-        perfis = Aluno.objects.filter(user__is_active=True).all()
+    
+    perfis = Aluno.objects.filter(user__is_active=True).all()
 
-        context = {"perfis": perfis}
+    p = Paginator(perfis, 5)
+    page_number = request.GET.get("page")
+    page_obj = p.get_page(page_number)
 
-        return render(request, "search.html", context)
+    context = {
+        "perfis": perfis,
+        "page_obj": page_obj,
+    }
+
+    return render(request, "search.html", context)
 
 @login_required(login_url='login')
 def busca_filtrada(request):
@@ -262,3 +280,26 @@ def pedidos_acessos(request):
                 return redirect('pedidos_acessos')
     return render(request, 'requests.html', {"usuarios": usuarios})
 
+@login_required(login_url='login')
+def perfil_selos(request, id):
+    aluno = Aluno.objects.get(id=id)
+    selos_do_aluno = SelosAluno.objects.filter(aluno=aluno)
+
+    context = {
+        "aluno": aluno,
+        "selos_do_aluno": selos_do_aluno,
+    }
+
+    return render(request, 'selos.html', context)
+
+@login_required(login_url='login')
+def trilhas_realizadas(request, id):
+    aluno = Aluno.objects.get(id=id)
+    trilhas_realizadas = ConclusaoTrilha.objects.filter(aluno=aluno)
+
+    context = {
+        "aluno": aluno,
+        "trilhas_realizadas": trilhas_realizadas,
+    }
+
+    return render(request, 'aluno-trilhas.html', context)

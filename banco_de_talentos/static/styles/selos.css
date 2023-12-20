@@ -1,0 +1,41 @@
+.perfil-header-privado {
+    width: 50%;
+}
+
+.perfil-privado-aviso {
+    width: 50%;
+}
+
+.selos {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1em;
+}
+
+.perfil-privado-aviso .no-stamps {
+    font-weight: normal;
+    color: #fff;
+}
+
+@media (max-width: 640px) {
+    .perfil-header-privado {
+        width: 100%;
+    }
+    
+    .perfil-privado-aviso {
+        width: 100%;
+    }
+
+    .selos {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media (max-width: 350px) {
+
+    .selos {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

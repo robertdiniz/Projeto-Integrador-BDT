@@ -1,0 +1,9 @@
+.trilhas {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.trilha-card p {
+    color: #9779FB;
+}

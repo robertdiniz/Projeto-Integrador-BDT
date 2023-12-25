@@ -103,6 +103,7 @@ def trilha(request):
             tarefa_concluida = ConclusaoTarefa.objects.create(perfil=user.perfil, tarefa=tarefa, concluida=True)
             tarefa_concluida.save()
             user.perfil.aumentar_xp(100)
+            messages.success(request, 'Você ganhou 100 de XP!')
             return redirect('trilha')
             
         elif 'modulo_concluir' in request.POST:

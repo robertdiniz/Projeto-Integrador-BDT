@@ -32,7 +32,7 @@
                 {% if selos_do_aluno.exists %}
                     <div class="selos">
                         {% for selo in selos_do_aluno.all %}
-                            <img src="{{ selo.selo.selo_normal.url }}" alt="" width="32px" height="32px">
+                            <img src="{{ selo.selo.selo_normal.url }}" alt="imagem do selo {{selo.selo.nome}}!" title="Selo {{selo.selo.nome}}" width="32px" height="32px">
                         {% endfor %}
                     </div>
                     {% else %}

@@ -15,7 +15,7 @@ from .forms import (
     AlunoBioGrafiaForm,
     AlunoChangeEmailForm,
     AlunoChangePasswordForm,
-    AlunoChangePerfilVisibility
+    AlunoChangePerfilVisibility,
 )
 import re
 
@@ -108,11 +108,6 @@ def register(request):
     return render(request, "register.html", {"form": form, "usuarios_inativos": usuarios_inativos()})
 
 
-"""
-    -*-* Settings -*-*
-    - Validar as senhas (?)
-"""
-
 @login_required(login_url='login')
 def settings(request):
     user = request.user
@@ -151,6 +146,7 @@ def settings(request):
     
     return render(request, "settings.html", context)
 
+
 @login_required(login_url='login')
 def perfil(request, id):
 
@@ -180,6 +176,7 @@ def perfil(request, id):
     }
 
     return render(request, "perfil.html", context)
+
 
 @login_required(login_url='login')
 def edit(request):
@@ -224,6 +221,7 @@ def edit(request):
             },
         )
 
+
 @login_required(login_url='login')
 def buscar(request):
 
@@ -257,29 +255,6 @@ def buscar(request):
 
     return render(request, "search.html", context)
 
-@login_required(login_url='login')
-def busca_filtrada(request):
-        
-    nome = request.GET.get("nome")
-
-    if nome:
-        perfis = Perfil.objects.filter(nome_completo__icontains=nome, user__is_active=True).all()
-
-        context = {
-            "perfis": perfis,
-            "usuarios_inativos": usuarios_inativos(),
-        }
-
-        return render(request, "search.html", context)
-    else:
-        perfis = Perfil.objects.filter(user__is_active=True).all()
-
-        context = {
-            "perfis": perfis,
-            "usuarios_inativos": usuarios_inativos(),
-        }
-
-        return render(request, "search.html", context)
 
 @login_required(login_url='login')
 def pedidos_acessos(request):
@@ -305,6 +280,7 @@ def pedidos_acessos(request):
                 return redirect('pedidos_acessos')
     return render(request, 'requests.html', {"usuarios": usuarios, "usuarios_inativos": usuarios_inativos()})
 
+
 @login_required(login_url='login')
 def perfil_selos(request, id):
     aluno = Perfil.objects.get(id=id)
@@ -317,6 +293,7 @@ def perfil_selos(request, id):
     }
 
     return render(request, 'selos.html', context)
+
 
 @login_required(login_url='login')
 def trilhas_realizadas(request, id):

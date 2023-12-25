@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.core.paginator import Paginator
@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, update_session_auth_hash
 from django.contrib.auth import login as login_sistema
 from django.contrib.auth import logout as logout_sistema
 from django.contrib.auth.decorators import login_required
-from .models import Aluno, SelosAluno
+from .models import Perfil, SelosAluno
 from banco_de_talentos.models import Trilha
 from usuarios.models import ConclusaoTrilha, SelosAluno
 from .forms import (
@@ -64,6 +64,10 @@ def register(request):
         senha = request.POST["senha"]
         matricula = request.FILES["matricula"]
 
+        if matricula and not matricula.name.lower().endswith('.pdf'):
+            messages.error(request, 'Matrícula deve ser no formato ".pdf".')
+            return redirect('register')
+
         # Validar nome de usuário
         def validar_nome_usuario(nome_usuario):
             if not re.match("^[a-zA-Z0-9_-]+$", nome_usuario):
@@ -91,7 +95,7 @@ def register(request):
         user = User.objects.create_user(
             username=nome_usuario, email=email, password=senha, is_active=False
         )
-        aluno = Aluno.objects.create(
+        aluno = Perfil.objects.create(
             nome_completo=nome_completo, user=user, matricula=matricula
         )
         if form.is_valid():
@@ -118,7 +122,8 @@ def settings(request):
             form_change_email = AlunoChangeEmailForm(request.POST, instance=user)
             if form_change_email.is_valid():
                 form_change_email.save()
-                return HttpResponse("E-mail alterado com sucesso!")
+                messages.success(request, 'Email alterado com sucesso!')
+                return redirect("settings")
         if "submit_change_password" in request.POST:
             form_change_password = AlunoChangePasswordForm(request.POST)
 
@@ -128,9 +133,10 @@ def settings(request):
                 user.set_password(new_password)
                 user.save()
                 update_session_auth_hash(request, user)
-                return HttpResponse("Senha alterada com sucesso!")
+                messages.success(request, "Senha alterada com sucesso!")
+                return redirect("settings")
         if "submit_change_visibility" in request.POST:
-            form_change_visibility = AlunoChangePerfilVisibility(request.POST, instance=user.aluno)
+            form_change_visibility = AlunoChangePerfilVisibility(request.POST, instance=user.perfil)
             if form_change_visibility.is_valid():
                 form_change_visibility.save()
                 return redirect('settings')
@@ -138,8 +144,8 @@ def settings(request):
     context = {
         "id_atual": user.id,
         "form_change_password": AlunoChangePasswordForm(),
-        "form_change_visibility": AlunoChangePerfilVisibility(instance=user.aluno),
-        "trilhas": user.aluno.trilhas,
+        "form_change_visibility": AlunoChangePerfilVisibility(instance=user.perfil),
+        "trilhas": user.perfil.trilhas,
         "usuarios_inativos": usuarios_inativos(),
     }
     
@@ -149,11 +155,11 @@ def settings(request):
 def perfil(request, id):
 
     user = request.user
-    aluno = Aluno.objects.get(id=id)
-    trilhas_concluidas_aluno = ConclusaoTrilha.objects.filter(aluno=aluno)[:2]
-    selos_do_aluno = SelosAluno.objects.filter(aluno=aluno).order_by('-data_conquistada')[:15]
+    aluno = Perfil.objects.get(id=id)
+    trilhas_concluidas_aluno = ConclusaoTrilha.objects.filter(perfil=aluno)[:2]
+    selos_do_aluno = SelosAluno.objects.filter(perfil=aluno).order_by('-data_conquistada')[:15]
 
-    proprio_perfil = user.is_authenticated and user.aluno.id == aluno.id
+    proprio_perfil = user.is_authenticated and user.perfil.id == aluno.id
 
     # Verificação da visibilidade do perfil do aluno e comparação se o aluno é o atual e se é usuário normal.
     if aluno.perfil_privado and not proprio_perfil and user.is_staff is False: 
@@ -182,7 +188,7 @@ def edit(request):
     if str(request.method) == "POST":
         if "photo" in request.FILES:
             photo = request.FILES["photo"]
-            aluno = Aluno.objects.get(nome_completo=user.aluno.nome_completo)
+            aluno = Perfil.objects.get(nome_completo=user.perfil.nome_completo)
             aluno.foto = photo
             aluno.save()
             messages.success(request, "Foto alterada!")
@@ -190,7 +196,7 @@ def edit(request):
 
         if "submit_redes_sociais" in request.POST:
             form_redes_sociais = AlunoRedesSociaisForm(
-                request.POST, instance=user.aluno
+                request.POST, instance=user.perfil
             )
             if form_redes_sociais.is_valid():
                 form_redes_sociais.save()
@@ -198,15 +204,15 @@ def edit(request):
                 return redirect("edit")
 
         if "submit_biografia" in request.POST:
-            form_biografia = AlunoBioGrafiaForm(request.POST, instance=user.aluno)
+            form_biografia = AlunoBioGrafiaForm(request.POST, instance=user.perfil)
             if form_biografia.is_valid():
                 form_biografia.save()
                 messages.success(request, "Biografia alterada!")
                 return redirect("edit")
 
     else:
-        form_redes_sociais = AlunoRedesSociaisForm(instance=user.aluno)
-        form_biografia = AlunoBioGrafiaForm(instance=user.aluno)
+        form_redes_sociais = AlunoRedesSociaisForm(instance=user.perfil)
+        form_biografia = AlunoBioGrafiaForm(instance=user.perfil)
 
         return render(
             request,
@@ -224,7 +230,7 @@ def buscar(request):
     nome = request.GET.get("nome")
 
     if nome:
-        perfis = Aluno.objects.filter(nome_completo__icontains=nome, user__is_active=True).all()
+        perfis = Perfil.objects.filter(nome_completo__icontains=nome, user__is_active=True).all()
 
         p = Paginator(perfis, 5)
         page_number = request.GET.get("page")
@@ -237,7 +243,7 @@ def buscar(request):
 
         return render(request, "search.html", context)
     
-    perfis = Aluno.objects.filter(user__is_active=True).all()
+    perfis = Perfil.objects.filter(user__is_active=True).all()
 
     p = Paginator(perfis, 5)
     page_number = request.GET.get("page")
@@ -257,7 +263,7 @@ def busca_filtrada(request):
     nome = request.GET.get("nome")
 
     if nome:
-        perfis = Aluno.objects.filter(nome_completo__icontains=nome, user__is_active=True).all()
+        perfis = Perfil.objects.filter(nome_completo__icontains=nome, user__is_active=True).all()
 
         context = {
             "perfis": perfis,
@@ -266,7 +272,7 @@ def busca_filtrada(request):
 
         return render(request, "search.html", context)
     else:
-        perfis = Aluno.objects.filter(user__is_active=True).all()
+        perfis = Perfil.objects.filter(user__is_active=True).all()
 
         context = {
             "perfis": perfis,
@@ -301,8 +307,8 @@ def pedidos_acessos(request):
 
 @login_required(login_url='login')
 def perfil_selos(request, id):
-    aluno = Aluno.objects.get(id=id)
-    selos_do_aluno = SelosAluno.objects.filter(aluno=aluno)
+    aluno = Perfil.objects.get(id=id)
+    selos_do_aluno = SelosAluno.objects.filter(perfil=aluno)
 
     context = {
         "aluno": aluno,
@@ -314,8 +320,8 @@ def perfil_selos(request, id):
 
 @login_required(login_url='login')
 def trilhas_realizadas(request, id):
-    aluno = Aluno.objects.get(id=id)
-    trilhas_realizadas = ConclusaoTrilha.objects.filter(aluno=aluno)
+    aluno = Perfil.objects.get(id=id)
+    trilhas_realizadas = ConclusaoTrilha.objects.filter(perfil=aluno)
 
     context = {
         "aluno": aluno,

@@ -15,7 +15,7 @@
 
     <main class="main-settings">
         <div class="main-container-settings">
-            <img {% if user.aluno.foto %} src="{{ user.aluno.foto.url }}" {% else %} src="{% static 'img/aluno-normal.svg' %}" {% endif %} alt="" width="150px" height="150px">
+            <img {% if user.perfil.foto %} src="{{ user.perfil.foto.url }}" {% else %} src="{% static 'img/aluno-normal.svg' %}" {% endif %} alt="" width="150px" height="150px">
             <h1>Configurações da conta</h1>
             <div class="change-container">
                 <div class="change" onclick="modalEmail()">
@@ -32,12 +32,6 @@
                     <img src="{% static 'img/visibility.svg' %}" class="img-change" alt="">
 
                     <h2>Perfil privado</h2>
-
-                </div>
-                <div class="change" onclick="modalTrail()">
-                    <img src="{% static 'img/dev.svg' %}" class="img-change" alt="">
-
-                    <h2>Minha trilha</h2>
 
                 </div>
             </div>
@@ -100,35 +94,6 @@
                     <div class="btn-social">
                         <button type="submit" name="submit_change_visibility" class="btn-social-confirm" >Salvar</button>
                         <a onclick="modalVisibility()" class="btn-social-cancel" >Cancelar</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="modal-trail">
-            <div id="modal-container-form-trail">
-                <form action="{% url 'settings' %}" method="post" class="form-settings">
-                    {% csrf_token %}
-                    <div class="trilha-select">
-                        <label for="trilha-select">Minha trilha</label>
-                        {% if aluno.trilhas %}
-                        <p>Exibe em seu perfil a trilha que tem mais afinidade.</p>
-                            <select name="trilha-select" id="trilha-select">
-                                {% for trilha in aluno.trilhas %}
-                                    <option value="{{ trilha.id }}">{{ trilha.nome }}</option>
-                                {% endfor %}
-                            </select>
-                        {% else %}
-                            <br>
-                            <p> {{ user.username }} parece que você não fez nenhuma trilha ainda! </p>
-                        {% endif %}
-                    </div>
-                    <div class="btn-social">
-                        {% if aluno.trilhas %}
-                            <button type="submit" name="submit_change_trail" class="btn-social-confirm" >Salvar</button>
-                            <a onclick="modalTrail()" class="btn-social-cancel" >Cancelar</a>
-                        {% else %}
-                            <a onclick="modalTrail()" class="btn-social-cancel" >Fechar</a>
-                        {% endif  %}
                     </div>
                 </form>
             </div>

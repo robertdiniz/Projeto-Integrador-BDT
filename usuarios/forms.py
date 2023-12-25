@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Aluno
+from .models import Perfil
 
 
 class AlunoForm(forms.Form):
@@ -28,7 +28,7 @@ class AlunoForm(forms.Form):
 
 class AlunoRedesSociaisForm(forms.ModelForm):
     class Meta:
-        model = Aluno
+        model = Perfil
         fields = ["linkedin", "github", "discord", "instagram", "whatsapp"]
         widgets = {
             "linkedin": forms.TextInput(
@@ -51,7 +51,7 @@ class AlunoRedesSociaisForm(forms.ModelForm):
 
 class AlunoBioGrafiaForm(forms.ModelForm):
     class Meta:
-        model = Aluno
+        model = Perfil
         fields = ["bio"]
 
 
@@ -73,5 +73,5 @@ class AlunoChangePasswordForm(forms.Form):
 
 class AlunoChangePerfilVisibility(forms.ModelForm):
     class Meta:
-        model = Aluno
+        model = Perfil
         fields = ["perfil_privado"]

@@ -26,7 +26,7 @@
                 <span class="foto-dados" onclick="modalPhoto()">
                     <span class="image-edit">
                         <div class="fade-trocar-imagem">Trocar imagem</div>
-                        <img {% if user.aluno.foto %} src="{{ user.aluno.foto.url }}" {% else %} src="{% static 'img/aluno-normal.svg' %}" {% endif %} alt="" width="150px" height="150px">
+                        <img {% if user.perfil.foto %} src="{{ user.perfil.foto.url }}" {% else %} src="{% static 'img/aluno-normal.svg' %}" {% endif %} alt="" width="150px" height="150px">
                     </span>
                 </span>
                 <span class="aluno-redes">
@@ -41,7 +41,7 @@
             </div>
             <div class="perfil-bio">
                 <h2>Sobre mim</h2>
-                <textarea name="bio" id="bio" cols="30" rows="8" maxlength="150" onclick="modalBio()">{{ user.aluno.bio }}</textarea>
+                <textarea name="bio" id="bio" cols="30" rows="8" maxlength="150" onclick="modalBio()">{{ user.perfil.bio }}</textarea>
             </div>
 
             
@@ -89,7 +89,7 @@
                     <label for="photo">
                         <span class="foto-dados">
                             <span class="image-edit" >
-                                <img {% if user.aluno.foto %} src="{{ user.aluno.foto.url }}" {% else %} src="{% static 'img/aluno-normal.svg' %}" {% endif %} alt="" width="150px" height="150px">
+                                <img {% if user.perfil.foto %} src="{{ user.perfil.foto.url }}" {% else %} src="{% static 'img/aluno-normal.svg' %}" {% endif %} alt="" width="150px" height="150px">
                                 <input type="file" name="photo" id="photo" style="display: none;">
                             </span>
                         </span>

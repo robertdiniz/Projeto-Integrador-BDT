@@ -5,7 +5,7 @@ from banco_de_talentos.models import Trilha, Modulo, Tarefa, Selo
 
 
 # Alterar para Perfil
-class Aluno(models.Model):
+class Perfil(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     nome_completo = models.CharField(
         "Nome completo: ", max_length=60, null=False, blank=False
@@ -50,48 +50,55 @@ class Aluno(models.Model):
     def __str__(self):
         return self.nome_completo
     
+    class Meta:
+        verbose_name = "Perfil"
+    
 
 class SelosAluno(models.Model):
-    aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
+    perfil = models.ForeignKey(Perfil, on_delete=models.CASCADE)
     selo = models.ForeignKey(Selo, on_delete=models.CASCADE)
     data_conquistada = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.aluno.nome_completo} - {self.selo.nome}'
+        return f'{self.perfil.nome_completo} - {self.selo.nome}'
     
     class Meta:
-        unique_together = ('aluno', 'selo')
+        unique_together = ('perfil', 'selo')
+        verbose_name = "Selos Aluno"
 
 class ConclusaoTarefa(models.Model):
-    aluno = models.ForeignKey(Aluno, null=True, on_delete=models.SET_NULL)
+    perfil = models.ForeignKey(Perfil, null=True, on_delete=models.SET_NULL)
     tarefa = models.ForeignKey(Tarefa, null=True, on_delete=models.SET_NULL)
     concluida = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'{self.aluno.nome_completo} - {self.tarefa.nome}'
+        return f'{self.perfil.nome_completo} - {self.tarefa.nome}'
     
     class Meta:
-        unique_together = ('aluno', 'tarefa')
+        unique_together = ('perfil', 'tarefa')
+        verbose_name = "Tarefas Aluno"
 
 class ModuloAluno(models.Model):
-    aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
+    perfil = models.ForeignKey(Perfil, on_delete=models.CASCADE)
     modulo = models.ForeignKey(Modulo, on_delete=models.CASCADE)
     url_projeto = models.URLField(null=True, blank=True)
     concluido = models.BooleanField("Módulo Concluído", default=False)
 
     def __str__(self):
-        return f"{self.modulo} - {self.aluno}"
+        return f"{self.modulo} - {self.perfil}"
     
     class Meta:
-        unique_together = ('aluno', 'modulo')
+        unique_together = ('perfil', 'modulo')
+        verbose_name = "Módulos Aluno"
 
 class ConclusaoTrilha(models.Model):
-    aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
+    perfil = models.ForeignKey(Perfil, on_delete=models.CASCADE)
     trilha = models.ForeignKey(Trilha, on_delete=models.CASCADE)
     concluido = models.BooleanField("Trilha concluída", default=False)
 
     def __str__(self):
-        return f"{self.trilha} - {self.aluno}"
+        return f"{self.trilha} - {self.perfil}"
     
     class Meta:
-        unique_together = ('aluno', 'trilha')
+        unique_together = ('perfil', 'trilha')
+        verbose_name = "Trilhas Aluno"

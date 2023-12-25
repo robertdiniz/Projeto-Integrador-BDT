@@ -92,7 +92,7 @@
 }
 
 .modal {
-    max-width: 50%;
+    max-width: 400px;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -150,6 +150,9 @@
     border: none;
     font-weight: bold;
     cursor: pointer;
+    background-color: #9779FB;
+    padding: 1em;
+    border-radius: 0.5em;
 }
 
 .modal-btn a:nth-child(1){
@@ -158,6 +161,8 @@
     cursor: pointer;
     font-weight: bold;
     text-transform: uppercase;
+
+
 }
 
 .modal-btn a:nth-child(1){
@@ -165,7 +170,7 @@
 }
 
 .modal-btn a:nth-child(2){
-    background-color: #9779FB;
+
     padding: 1em;
     border-radius: 0.5em;
     border: none;
@@ -276,6 +281,10 @@
 
     .main-trilhas-container p {
         font-size: 1rem;
+    }
+
+    #fazer-trilha {
+        padding: 1em;
     }
 
 }

@@ -26,11 +26,11 @@
             {% if usuarios %}
             <h1>Pedidos de Acesso</h1>
                 {% for usuario in usuarios %}
-                    <button class="btn-mostrar-aluno" onclick="mostrarDadosAluno('{{usuario.username}}', '{{usuario.aluno.nome_completo|upper}}', '{{usuario.email}}', '{{usuario.aluno.matricula.url}}')">
+                    <button class="btn-mostrar-aluno" onclick="mostrarDadosAluno('{{usuario.username}}', '{{usuario.perfil.nome_completo|upper}}', '{{usuario.email}}', '{{usuario.perfil.matricula.url}}')">
                         <div class="card-aluno">
                             <img src="{% static './img/aluno-normal.svg'%}" alt="">
                             <div class="aluno-data">    
-                                <p>{{ usuario.aluno.nome_completo|upper }}</p>
+                                <p>{{ usuario.perfil.nome_completo|upper }}</p>
                                 <p>{{ usuario.email }}</p>
                             </div>
                         </div>

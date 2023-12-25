@@ -22,14 +22,14 @@ def trilhas(request):
     if request.method == "POST":
         trilha = request.POST.get("trilha")
         trilha_escolhida = Trilha.objects.get(nome=trilha)
-        user.aluno.trilhas.add(trilha_escolhida)
-        user.aluno.trilha_atual = trilha_escolhida
-        user.aluno.save()
+        user.perfil.trilhas.add(trilha_escolhida)
+        user.perfil.trilha_atual = trilha_escolhida
+        user.perfil.save()
         return redirect("trilha")
     else:
-        if user.aluno.trilha_atual:
+        if user.perfil.trilha_atual:
             return redirect('trilha')
-        trilhas_concluidas = ConclusaoTrilha.objects.filter(aluno=user.aluno, concluido=True).values_list('trilha', flat=True)
+        trilhas_concluidas = ConclusaoTrilha.objects.filter(perfil=user.perfil, concluido=True).values_list('trilha', flat=True)
         trilhas_disponiveis = Trilha.objects.exclude(id__in=trilhas_concluidas)
         trilhas = Trilha.objects.all()
 
@@ -45,7 +45,7 @@ def trilhas(request):
 def trilha(request):
 
     user = request.user
-    trilha = user.aluno.trilha_atual
+    trilha = user.perfil.trilha_atual
 
     if trilha is None:
         return redirect('trilhas')
@@ -56,17 +56,17 @@ def trilha(request):
     modulos_aluno = []
 
     for modulo in modulos:
-        modulo_concluido = ModuloAluno.objects.filter(aluno=user.aluno, modulo=modulo, concluido=True).exists()
+        modulo_concluido = ModuloAluno.objects.filter(perfil=user.perfil, modulo=modulo, concluido=True).exists()
         if modulo_concluido:
             modulo_concluido = Modulo.objects.get(nome=modulo.nome)
             modulos_aluno.append(modulo_concluido)
 
-    todos_modulos_concluidos = ModuloAluno.objects.filter(aluno=user.aluno, modulo__in=modulos, concluido=True).count() == modulos.count()
+    todos_modulos_concluidos = ModuloAluno.objects.filter(perfil=user.perfil, modulo__in=modulos, concluido=True).count() == modulos.count()
     
     # Tarefas concluidas pelo aluno
     tarefas_concluidas_aluno = []
 
-    todas_tarefas_concluidas = ConclusaoTarefa.objects.filter(aluno=user.aluno, concluida=True)
+    todas_tarefas_concluidas = ConclusaoTarefa.objects.filter(perfil=user.perfil, concluida=True)
 
     for tarefa in todas_tarefas_concluidas:
         tarefa_concluida = Tarefa.objects.get(id=tarefa.tarefa.id) 
@@ -80,47 +80,47 @@ def trilha(request):
             nome_modulo = request.POST.get('modulo_selecionado')
             modulo = Modulo.objects.get(nome=nome_modulo)
             url = request.POST.get('url_projeto')
-            modulo_aluno = ModuloAluno.objects.create(aluno=user.aluno, modulo=modulo, url_projeto=url, concluido=True)
+            modulo_aluno = ModuloAluno.objects.create(perfil=user.perfil, modulo=modulo, url_projeto=url, concluido=True)
             modulo_aluno.save()
             selos_do_modulo = modulo.selos.all()
             for selo in selos_do_modulo:
-                SelosAluno.objects.create(aluno=user.aluno, selo=selo)
-            user.aluno.aumentar_xp(500)
+                SelosAluno.objects.create(perfil=user.perfil, selo=selo)
+            user.perfil.aumentar_xp(500)
             return redirect('trilha')
         
         elif 'task-concluida' in request.POST:
             tarefa_enviada = request.POST.getlist('task-concluida')
             tarefa_id = tarefa_enviada[0]
             tarefa = Tarefa.objects.get(id=tarefa_id)
-            existe_tarefa_concluida = ConclusaoTarefa.objects.filter(aluno=user.aluno, tarefa=tarefa, concluida=True).exists()
+            existe_tarefa_concluida = ConclusaoTarefa.objects.filter(perfil=user.perfil, tarefa=tarefa, concluida=True).exists()
             if existe_tarefa_concluida:
-                tarefa_concluida = ConclusaoTarefa.objects.get(aluno=user.aluno, tarefa=tarefa, concluida=True)
+                tarefa_concluida = ConclusaoTarefa.objects.get(perfil=user.perfil, tarefa=tarefa, concluida=True)
                 tarefa_concluida.delete()
-                user.aluno.xp -= 100
-                user.aluno.save()
+                user.perfil.xp -= 100
+                user.perfil.save()
                 messages.error(request, 'Você desmarcou a tarefa, perdeu 100 XP!')
                 return redirect('trilha')
-            tarefa_concluida = ConclusaoTarefa.objects.create(aluno=user.aluno, tarefa=tarefa, concluida=True)
+            tarefa_concluida = ConclusaoTarefa.objects.create(perfil=user.perfil, tarefa=tarefa, concluida=True)
             tarefa_concluida.save()
-            user.aluno.aumentar_xp(100)
+            user.perfil.aumentar_xp(100)
             return redirect('trilha')
             
         elif 'modulo_concluir' in request.POST:
             nome_modulo = request.POST.get('modulo_concluir')
             modulo = Modulo.objects.get(nome=nome_modulo)
-            modulo_aluno = ModuloAluno.objects.create(aluno=user.aluno, modulo=modulo, concluido=True)
+            modulo_aluno = ModuloAluno.objects.create(perfil=user.perfil, modulo=modulo, concluido=True)
             modulo_aluno.save()
             selos_do_modulo = modulo.selos.all()
             for selo in selos_do_modulo:
-                SelosAluno.objects.create(aluno=user.aluno, selo=selo)
-            user.aluno.aumentar_xp(500)
+                SelosAluno.objects.create(perfil=user.perfil, selo=selo)
+            user.perfil.aumentar_xp(500)
             return redirect('trilha')
         
         elif 'trilha_concluir' in request.POST:
-            trilha_concluida = ConclusaoTrilha.objects.create(aluno=user.aluno, trilha=trilha, concluido=True)
+            trilha_concluida = ConclusaoTrilha.objects.create(perfil=user.perfil, trilha=trilha, concluido=True)
             trilha_concluida.save()
-            user.aluno.trilha_atual = None
-            user.aluno.aumentar_xp(1500)
+            user.perfil.trilha_atual = None
+            user.perfil.aumentar_xp(1500)
             return redirect('trilhas')
 
     context = {

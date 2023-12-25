@@ -1,22 +1,49 @@
 # Projeto-Integrador-BDT
+Sistema de Gerenciamento de Aprendizado.
 
-## Descrição
-Este projeto tem como objetivo ajudar alunos a desenvolverem o seu aprendizado com a programação, através de trilhas de conhecimento fornecidas por professores de uma instituição, guiando o aluno para aprender uma stack com projetos.
-
-## Tabela de Conteúdo
-- [Status do Projeto](#status-do-projeto)
-- [Instalação](#instalacao)
-  
-
-## Status do Projeto
-Em Desenvolvimento
+## Sobre do Projeto
+O sistema se resume a um aplicativo que visa guiar alunos com trilhas de estudos e oferecer oportunidades de projetos. Os alunos podem criar perfis para mostrar seu progresso nas trilhas de estudo, habilidades e competências. Dessa forma, os professores podem acompanhar o desenvolvimento do aluno e considerá-lo para participar de projetos reais, através de um website.
 
 ## Instalação
-Como instalar esse projeto:
 
-- Clone de Respositorio: ```git clone https://github.com/robertdiniz/Projeto-Integrador-BDT.git```
-- Acesse o seu Diretorio: ```cd nome-do-projeto```
-- Crie o Ambiente Virtual: ```python -m venv venv```
-- Ativar Ambiente Virtual: ```[Windows] .\venv\Scripts\activate``` ```[Linux/Mac] source venv/bin/activate```
-- Instale as Dependencias: ```pip install -r requirements.txt```
+### Pré-requisitos
+
+Certifique-se de ter Python e Django instalados em seu ambiente. Caso não tenha, siga as instruções em [Python](https://www.python.org/downloads/) e [Django](https://docs.djangoproject.com/en/4.2/topics/install/).
+
+### Passos para a instalação:
+
+1. Clone de Respositorio:
+```sh
+git clone https://github.com/robertdiniz/Projeto-Integrador-BDT.git
+```
+2. Acesse o seu Diretorio:
+```sh
+cd Projeto-Integrador-BDT
+```
+3. Crie o Ambiente Virtual:
+```sh
+python -m venv venv
+```
+4. Ativar Ambiente Virtual:
+```sh
+[Windows] .\venv\Scripts\activate
+[Linux/Mac] source venv/bin/activate
+```
+5. Instale as Dependencias:
+```sh
+pip install -r requirements.txt
+```
+6. Execute as migrações:
+```sh
+python manage.py makemigrations
+python manage.py migrate
+```
+7. Criar um superuser:
+```sh
+python manage.py createsuperuser
+```
+9. Inicie o servidor:
+```sh
+python manage.py runserver
+```
   

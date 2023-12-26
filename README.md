@@ -1,5 +1,4 @@
 # Projeto-Integrador-BDT
-Sistema de Gerenciamento de Aprendizado.
 
 ## Sobre do Projeto
 O sistema se resume a um aplicativo que visa guiar alunos com trilhas de estudos e oferecer oportunidades de projetos. Os alunos podem criar perfis para mostrar seu progresso nas trilhas de estudo, habilidades e competências. Dessa forma, os professores podem acompanhar o desenvolvimento do aluno e considerá-lo para participar de projetos reais, através de um website.

@@ -276,7 +276,6 @@ def pedidos_acessos(request):
         elif 'reject-account' in request.POST and request.POST['reject-account']:
             email = request.POST.get('reject-account')
             if email:
-                print('existe!')
                 usuario = User.objects.get(email=email)
                 messages.success(request, f"{usuario.username} foi rejeitado(a) do sistema!")
                 usuario.delete()

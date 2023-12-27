@@ -259,6 +259,9 @@ def buscar(request):
 @login_required(login_url='login')
 def pedidos_acessos(request):
 
+    if not request.user.is_superuser:
+        return redirect('trilha')
+
     usuarios = User.objects.filter(is_active=False)
 
     if request.method == "POST":

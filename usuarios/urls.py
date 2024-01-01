@@ -1,11 +1,11 @@
 from django.urls import path
-from .views import login, register, logout, settings, perfil, edit, buscar, pedidos_acessos, perfil_selos, trilhas_realizadas
+from .views import *
 
 urlpatterns = [
-    path("login/", login, name="login"),
-    path("register/", register, name="register"),
+    path("login/", LoginView.as_view(), name="login"),
+    path("register/", RegisterView.as_view(), name="register"),
     path("logout/", logout, name="logout"),
-    path("settings/", settings, name="settings"),
+    path("settings/", SettingsView.as_view(), name="settings"),
     path("perfil/<int:id>", perfil, name="perfil"),
     path("edit/", edit, name="edit"),
     path("buscar/", buscar, name="buscar"),

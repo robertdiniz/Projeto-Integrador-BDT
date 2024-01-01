@@ -1,51 +1,45 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
 from django.contrib import messages
+from django.views import View
+from django.utils.decorators import method_decorator
 from django.core.paginator import Paginator
+from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, update_session_auth_hash
 from django.contrib.auth import login as login_sistema
 from django.contrib.auth import logout as logout_sistema
 from django.contrib.auth.decorators import login_required
 from .models import Perfil, SelosAluno
-from banco_de_talentos.models import Trilha
 from usuarios.models import ConclusaoTrilha, SelosAluno
-from .forms import (
-    AlunoForm,
-    AlunoRedesSociaisForm,
-    AlunoBioGrafiaForm,
-    AlunoChangeEmailForm,
-    AlunoChangePasswordForm,
-    AlunoChangePerfilVisibility,
-)
+from .forms import *
 import re
 
-
-def login(request):
-    if request.user.is_authenticated:
-        return redirect("trilha")
-    else:
-        if str(request.method) == "POST":
-            email = request.POST.get("email")
-            senha = request.POST.get("senha")
-            existe = User.objects.filter(email=email).exists()
-            if existe:
-                usuario = User.objects.get(email=email)
-                if not len(senha) > 7:
-                    messages.error(request, "Senha deve conter no mínimo 8 dígitos.")
-                    return redirect('login')
-                user = authenticate(request, username=usuario.username, password=senha)
-                if user is not None and user.is_active:
-                    login_sistema(request, user)
-                    return redirect("trilha")
-                else:
-                    messages.error(request, "Sua conta não tem acesso ao sistema.")
-                    return redirect("login")
-            else:
-                messages.error(request, "Esse usuário não existe!")
+class LoginView(View):
+    def get(self, request):
+        if request.user.is_authenticated:
+            return redirect('trilhas')
+        return render(request, "usuarios/login.html")
+    
+    def post(self, request):
+        email = request.POST.get("email")
+        senha = request.POST.get("senha")
+        existe = User.objects.filter(email=email).exists()
+        
+        if existe:
+            usuario = User.objects.get(email=email)
+            if not len(senha) > 7:
+                messages.error(request, "Senha deve conter no mínimo 8 dígitos.")
                 return redirect('login')
-
-
-    return render(request, "usuarios/login.html")
+            
+            user = authenticate(request, username=usuario.username, password=senha)
+            if user is not None and user.is_active:
+                login_sistema(request, user)
+                return redirect("trilha")
+            else:
+                messages.error(request, "Sua conta não tem acesso ao sistema.")
+                return redirect("login")
+        else:
+            messages.error(request, "Esse usuário não existe!")
+            return redirect('login')
 
 
 def logout(request):
@@ -53,10 +47,14 @@ def logout(request):
     return redirect("login")
 
 
-def register(request):
-    if request.user.is_authenticated:
-        return redirect("trilha")
-    if str(request.method) == "POST":
+class RegisterView(View):
+    def get(self, request):
+        if request.user.is_authenticated:
+            return redirect('trilhas')
+        form = AlunoForm()
+        return render(request, "usuarios/register.html", {"form": form, "usuarios_inativos": usuarios_inativos()})
+    
+    def post(self, request):
         form = AlunoForm(request.POST, request.FILES)
         nome_usuario = request.POST["nome_usuario"]
         nome_completo = request.POST["nome_completo"]
@@ -92,6 +90,10 @@ def register(request):
             messages.error(request, "Senha com menos de 8 dígitos.")
             return redirect('register')
 
+        if matricula and not matricula.name.lower().endswith('.pdf'):
+            messages.error(request, 'Matrícula deve ser no formato ".pdf".')
+            return redirect('register')
+        
         user = User.objects.create_user(
             username=nome_usuario, email=email, password=senha, is_active=False
         )
@@ -103,25 +105,35 @@ def register(request):
             aluno.save()
             messages.success(request, "Conta criada! Aguarde seu acesso ser liberado ;)")
             return redirect("login")
-    else:
-        form = AlunoForm()
-    return render(request, "usuarios/register.html", {"form": form, "usuarios_inativos": usuarios_inativos()})
+
+        return render(request, "usuarios/register.html", {"form": form, "usuarios_inativos": usuarios_inativos()})
 
 
-@login_required(login_url='login')
-def settings(request):
-    user = request.user
+@method_decorator(login_required(login_url='login'), name='dispatch')
+class SettingsView(View):
+    def get(self, request):
+        user = request.user
+        context = {
+            "id_atual": user.id,
+            "form_change_password": AlunoChangePasswordForm(),
+            "form_change_visibility": AlunoChangePerfilVisibility(instance=user.perfil),
+            "trilhas": user.perfil.trilhas,
+            "usuarios_inativos": usuarios_inativos(),  # Verifique se a função está disponível
+        }
+        return render(request, "perfil/settings.html", context)
 
-    if str(request.method) == "POST":
+    def post(self, request):
+        user = request.user
+        
         if "email" in request.POST:
             form_change_email = AlunoChangeEmailForm(request.POST, instance=user)
             if form_change_email.is_valid():
                 form_change_email.save()
                 messages.success(request, 'Email alterado com sucesso!')
                 return redirect("settings")
+        
         if "submit_change_password" in request.POST:
             form_change_password = AlunoChangePasswordForm(request.POST)
-
             if form_change_password.is_valid():
                 new_password = form_change_password.cleaned_data["new_password"]
                 confirm_password = form_change_password.cleaned_data["confirm_password"]
@@ -130,21 +142,22 @@ def settings(request):
                 update_session_auth_hash(request, user)
                 messages.success(request, "Senha alterada com sucesso!")
                 return redirect("settings")
+        
         if "submit_change_visibility" in request.POST:
             form_change_visibility = AlunoChangePerfilVisibility(request.POST, instance=user.perfil)
             if form_change_visibility.is_valid():
                 form_change_visibility.save()
+                messages.success(request, "Visibilidade do perfil alterada!")
                 return redirect('settings')
 
-    context = {
-        "id_atual": user.id,
-        "form_change_password": AlunoChangePasswordForm(),
-        "form_change_visibility": AlunoChangePerfilVisibility(instance=user.perfil),
-        "trilhas": user.perfil.trilhas,
-        "usuarios_inativos": usuarios_inativos(),
-    }
-    
-    return render(request, "perfil/settings.html", context)
+        context = {
+            "id_atual": user.id,
+            "form_change_password": AlunoChangePasswordForm(),
+            "form_change_visibility": AlunoChangePerfilVisibility(instance=user.perfil),
+            "trilhas": user.perfil.trilhas,
+            "usuarios_inativos": usuarios_inativos(),
+        }
+        return render(request, "perfil/settings.html", context)
 
 
 @login_required(login_url='login')
@@ -211,15 +224,13 @@ def edit(request):
         form_redes_sociais = AlunoRedesSociaisForm(instance=user.perfil)
         form_biografia = AlunoBioGrafiaForm(instance=user.perfil)
 
-        return render(
-            request,
-            "perfil/edit.html",
-            {
-                "form_rede_social": form_redes_sociais,
-                "form_biografia": form_biografia,
-                "usuarios_inativos": usuarios_inativos(),
-            },
-        )
+        context = {
+            "form_rede_social": form_redes_sociais,
+            "form_biografia": form_biografia,
+            "usuarios_inativos": usuarios_inativos(),
+        }
+
+        return render(request, "perfil/edit.html", context)
 
 
 @login_required(login_url='login')

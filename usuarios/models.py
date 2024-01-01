@@ -24,9 +24,7 @@ class Perfil(models.Model):
         "discord:", blank=True, null=True, default="", max_length=50
     )
     instagram = models.URLField("Instagram:", blank=True, null=True, default="")
-    whatsapp = models.CharField(
-        "Whatsapp:", blank=True, null=True, default="", max_length=10
-    )
+    whatsapp = models.CharField("Whatsapp:", blank=True, null=True, default="", max_length=11)
     trilhas = models.ManyToManyField(
         Trilha, related_name="alunos", default="", blank=True
     )

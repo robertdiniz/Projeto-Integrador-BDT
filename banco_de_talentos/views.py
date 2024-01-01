@@ -39,7 +39,7 @@ def trilhas(request):
             "usuarios_inativos": usuarios_inativos(),
         }
 
-        return render(request, "trilhas.html", context)
+        return render(request, "trilhas/trilhas.html", context)
 
 @login_required(login_url='login')
 def trilha(request):
@@ -136,7 +136,7 @@ def trilha(request):
         "usuarios_inativos": usuarios_inativos(),
     }
 
-    return render(request, "trilha.html", context)
+    return render(request, "trilhas/trilha.html", context)
 
 
 

@@ -45,7 +45,7 @@ def login(request):
                 return redirect('login')
 
 
-    return render(request, "login.html")
+    return render(request, "usuarios/login.html")
 
 
 def logout(request):
@@ -105,7 +105,7 @@ def register(request):
             return redirect("login")
     else:
         form = AlunoForm()
-    return render(request, "register.html", {"form": form, "usuarios_inativos": usuarios_inativos()})
+    return render(request, "usuarios/register.html", {"form": form, "usuarios_inativos": usuarios_inativos()})
 
 
 @login_required(login_url='login')
@@ -144,7 +144,7 @@ def settings(request):
         "usuarios_inativos": usuarios_inativos(),
     }
     
-    return render(request, "settings.html", context)
+    return render(request, "perfil/settings.html", context)
 
 
 @login_required(login_url='login')
@@ -159,7 +159,7 @@ def perfil(request, id):
 
     # Verificação da visibilidade do perfil do aluno e comparação se o aluno é o atual e se é usuário normal.
     if aluno.perfil_privado and not proprio_perfil and user.is_staff is False: 
-        return render(request, "privado.html", {'aluno': aluno})
+        return render(request, "perfil/privado.html", {'aluno': aluno})
     
     busca = request.POST.get("nome")
 
@@ -175,7 +175,7 @@ def perfil(request, id):
         "usuarios_inativos": usuarios_inativos(),
     }
 
-    return render(request, "perfil.html", context)
+    return render(request, "perfil/perfil.html", context)
 
 
 @login_required(login_url='login')
@@ -213,7 +213,7 @@ def edit(request):
 
         return render(
             request,
-            "edit.html",
+            "perfil/edit.html",
             {
                 "form_rede_social": form_redes_sociais,
                 "form_biografia": form_biografia,
@@ -239,7 +239,7 @@ def buscar(request):
             "page_obj": page_obj,
         }
 
-        return render(request, "search.html", context)
+        return render(request, "usuarios/search.html", context)
     
     perfis = Perfil.objects.filter(user__is_active=True).all()
 
@@ -253,7 +253,7 @@ def buscar(request):
         "usuarios_inativos": usuarios_inativos(),
     }
 
-    return render(request, "search.html", context)
+    return render(request, "usuarios/search.html", context)
 
 
 @login_required(login_url='login')
@@ -280,7 +280,7 @@ def pedidos_acessos(request):
                 messages.success(request, f"{usuario.username} foi rejeitado(a) do sistema!")
                 usuario.delete()
                 return redirect('pedidos_acessos')
-    return render(request, 'requests.html', {"usuarios": usuarios, "usuarios_inativos": usuarios_inativos()})
+    return render(request, 'usuarios/requests.html', {"usuarios": usuarios, "usuarios_inativos": usuarios_inativos()})
 
 
 @login_required(login_url='login')
@@ -294,7 +294,7 @@ def perfil_selos(request, id):
         "usuarios_inativos": usuarios_inativos(),
     }
 
-    return render(request, 'selos.html', context)
+    return render(request, 'perfil/selos.html', context)
 
 
 @login_required(login_url='login')
@@ -308,7 +308,7 @@ def trilhas_realizadas(request, id):
         "usuarios_inativos": usuarios_inativos(),
     }
 
-    return render(request, 'aluno-trilhas.html', context)
+    return render(request, 'perfil/perfil-trilhas.html', context)
 
 
 def usuarios_inativos():
